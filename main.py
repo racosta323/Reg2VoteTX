@@ -7,7 +7,7 @@ class PdfDoc:
         self.url = url
         self._pdf = pdf
         self._pdf_content = pdf_content
-        self._form_fields = form_fields #dict
+        self._form_fields = form_fields 
 
 
     def request(self):
@@ -25,10 +25,47 @@ class PdfDoc:
     def get_fields(self):
         
         self.request()
-        self.form_fields = fillpdfs.get_form_fields(self.pdf_content)
-        # self.form_fields = list(fillpdfs.get_form_fields(self.pdf_content).keys())
+        self.form_fields = list(fillpdfs.get_form_fields(self.pdf_content).keys())
 
-
+    def data_dict(self, person, data={}):
+        
+        attribute_mapping = {
+            "first_name": self.form_fields[2],
+            "last_name": self.form_fields[1],
+            "middle_name": self.form_fields[3],
+            "former_name": self.form_fields[4],
+            "street_address": self.form_fields[5],
+            "city": self.form_fields[6],
+            "county": self.form_fields[7],
+            "zip_code": self.form_fields[8],
+            "street_address_2": self.form_fields[9],
+            "city_2": self.form_fields[10],
+            "state": self.form_fields[11],
+            "zip_code_2": self.form_fields[12],
+            "former_res": self.form_fields[13],
+            "birth_month": self.form_fields[14],
+            "birth_day": self.form_fields[15],
+            "birth_year": self.form_fields[16],
+            "phone": self.form_fields[17],
+            "phone_2": self.form_fields[18],
+            "phone_3": self.form_fields[19],
+            "license": self.form_fields[20],
+            "ssn": self.form_fields[21],
+            "no_id": self.form_fields[22],
+            "citizenship": self.form_fields[33],
+            "voting_age": self.form_fields[34],
+            "election_worker": self.form_fields[35],
+            "gender": self.form_fields[36],
+        }
+        
+        for attr, field in attribute_mapping.items():
+            if attr in person._attributes and field:
+                data[field] = person._attributes[attr]
+        
+        return data
+        
+    
+    
 
 class Person:
     def __init__(self,**kwargs):
@@ -68,6 +105,12 @@ class Person:
                 raise AttributeError(f'Invalid attribute: {key}')
             
     def __repr__(self):
-            return f'First name: {self._attributes['first_name']}'
+        output = f"""
+        First name: {self._attributes['first_name']}
+        Last name: {self._attributes['last_name']}
+        """
+        return output
+        #     return f'First name: {self._attributes['first_name']}\n
+        # "last_name": {self._attributes['last_name']}'
 
    
