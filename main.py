@@ -3,7 +3,7 @@ from io import BytesIO
 from fillpdf import fillpdfs
 
 class PdfDoc:
-    def __init__(self,url,pdf=None, pdf_content=None, form_fields=[], dict_fields={}):
+    def __init__(self,url,pdf=None, pdf_content=None, form_fields=[]):
         self.url = url
         self._pdf = pdf
         self._pdf_content = pdf_content
@@ -59,7 +59,7 @@ class PdfDoc:
         }
         
         for attr, field in attribute_mapping.items():
-            if attr in person._attributes and field:
+            if attr in person._attributes and person._attributes[attr] is not None:
                 data[field] = person._attributes[attr]
         
         return data
