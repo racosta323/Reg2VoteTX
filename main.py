@@ -64,8 +64,17 @@ class PdfDoc:
         
         return data
         
-    
-    
+    def write_pdf(self, person):
+        
+        self.get_fields()
+        
+        input_pdf_path = self.pdf
+        output_pdf_path = f'{person._attributes['first_name']} TX voter reg.pdf'
+        data_dict = self.data_dict(person)
+        
+        fillpdfs.write_fillable_pdf(input_pdf_path=input_pdf_path, output_pdf_path=output_pdf_path, data_dict=data_dict)
+        
+        
 
 class Person:
     def __init__(self,**kwargs):
