@@ -2,7 +2,7 @@ import requests
 from io import BytesIO
 from fillpdf import fillpdfs
 
-class PdfDoc():
+class PdfDoc:
     def __init__(self,url,pdf=None, pdf_content=None, form_fields=[], dict_fields={}):
         self.url = url
         self._pdf = pdf
@@ -30,7 +30,7 @@ class PdfDoc():
 
 
 
-class Person():
+class Person:
     def __init__(self,**kwargs):
         self._attributes = {
             "first_name":None,
@@ -61,11 +61,13 @@ class Person():
             "gender":None,
         }
 
-
         for key, value in kwargs.items():
             if key in self._attributes:
                 self._attributes[key] = value
             else:
                 raise AttributeError(f'Invalid attribute: {key}')
+            
+    def __repr__(self):
+            return f'First name: {self._attributes['first_name']}'
 
    
