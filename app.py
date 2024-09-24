@@ -2,6 +2,7 @@ import ipdb
 from prompts import prompts, mailing_address_prompts
 
 space = ' '
+ast = '*'
 
 def exit_program():
     print(f"\n{space*10}Your changes are not saved. Goodbye.\n")
@@ -12,9 +13,10 @@ def edit_entries(user_info):
     while True:
         # for prompt in prompts:
         #     print(f"{prompts.index(prompt)+1}{space*10}{prompt}")
+        
+        print(f"\n{space*10}{ast*50}\n")
+        print(f"{space*10}Please review your entries:\n")
 
-        print(f"\n{space*10}Please review your entries:\n")
-        ipdb.set_trace()
         if user_info:
             for key, value in user_info.items():    
                 print(f"{space*10}{key}. {prompts[key-1]}: {value}")
@@ -22,15 +24,15 @@ def edit_entries(user_info):
             for prompt in prompts:
                 print(f'{space*10}{prompts.index(prompt)+1}. {prompt}')
 
-
+        print(f"\n{space*10}{ast*50}\n")
         edit = input(f"\n{space*10}Would you like to edit any of your entries? (Y or N): ").strip().upper()
         if edit == 'Y':
-            key_to_edit = input(f"{space*10}\nWhich entry would you like to edit? (Enter the associated number): ")
+            key_to_edit = int(input(f"\n{space*10}Which entry would you like to edit? \n{space*10}(Enter the associated number): "))
             if key_to_edit in user_info:
-                new_value = input(f"{space*10}Enter the new value for {key_to_edit}: ")
+                new_value = input(f"\n{space*10}Enter the new value for '{prompts[key_to_edit-1]}': ")
                 user_info[key_to_edit] = new_value
             else:
-                print(f"{space*10}Invalid key. Please enter a valid key.")
+                print(f"\n{space*10}Invalid key. Please enter a valid key.")
         else:
             break
         

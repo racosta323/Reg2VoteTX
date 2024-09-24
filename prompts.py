@@ -41,7 +41,7 @@ prompts = [
         # 'What is your phone number? ',
         # 'What is your TX driver\'s license number OR TX Personal ID number? ',
         # 'What are the LAST 4 digits of your social security number? ',
-        # 'Are you a United State Citizen (Y or N)? ',
+        # 'Are you a United States Citizen (Y or N)? ',
         # 'Will you be 18 years of age on or before election day? ',
         # 'Are you interested in becoming an election worker (Y or N)? '
 ]
