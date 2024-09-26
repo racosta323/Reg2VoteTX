@@ -1,5 +1,6 @@
 import ipdb
 from prompts import prompts, mailing_address_prompts
+from main import Person
 
 space = ' '
 ast = '*'
@@ -32,21 +33,23 @@ def edit_entries(user_info):
                     user_info[actual_key] = new_value
             except ValueError:
                 print("Invalid input. Please enter a valid number")
-            
-            
-            # key_to_edit = int(input(f"\n{space*10}Which entry would you like to edit? \n{space*10}(Enter the associated number): "))
-            
-            # print(user_info)
-            
-            
-            
-            # if key_to_edit in user_info:
-            #     new_value = input(f"\n{space*10}Enter the new value for '{prompts[key_to_edit-1]}': ")
-            #     user_info[key_to_edit] = new_value
-            # else:
-            #     print(f"\n{space*10}Invalid key. Please enter a valid key.")
         else:
             #what happens if you don't want to edit
+            user_info_keys = user_info.keys()
+            person_info = {}
+            
+            for key, value in user_info.items():
+                if key in user_info_keys:
+                    person_info[prompts[key]] = user_info[key]
+                    
+            person = Person(**person_info)
+                    
+            ipdb.set_trace()
+            
+            # for key in user_info_keys:
+            #     print(prompts(key))
+            
+            
             break
         
 
