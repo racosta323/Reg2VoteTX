@@ -1,6 +1,7 @@
 import requests
 from io import BytesIO
 from fillpdf import fillpdfs
+import ipdb
 
 class PdfDoc:
     def __init__(self,url,pdf=None, pdf_content=None, form_fields=[]):
@@ -8,10 +9,8 @@ class PdfDoc:
         self._pdf = pdf
         self._pdf_content = pdf_content
         self._form_fields = form_fields 
-
-
+        
     def request(self):
-
         try:
             request = requests.get(self.url)
             if request.status_code == 200:
@@ -21,43 +20,34 @@ class PdfDoc:
         except requests.exceptions.RequestException as e:
             raise SystemExit(e)
 
-
     def get_fields(self):
         
         self.request()
         self.form_fields = list(fillpdfs.get_form_fields(self.pdf_content).keys())
 
-    def data_dict(self, person, data={}):
+    def data_dict(self, person, data=None):
         
-        attribute_mapping = {
-            "first_name": self.form_fields[2],
-            "last_name": self.form_fields[1],
-            "middle_name": self.form_fields[3],
-            "former_name": self.form_fields[4],
-            "street_address": self.form_fields[5],
-            "city": self.form_fields[6],
-            "county": self.form_fields[7],
-            "zip_code": self.form_fields[8],
-            "street_address_2": self.form_fields[9],
-            "city_2": self.form_fields[10],
-            "state": self.form_fields[11],
-            "zip_code_2": self.form_fields[12],
-            "former_res": self.form_fields[13],
-            "birth_month": self.form_fields[14],
-            "birth_day": self.form_fields[15],
-            "birth_year": self.form_fields[16],
-            "phone": self.form_fields[17],
-            "phone_2": self.form_fields[18],
-            "phone_3": self.form_fields[19],
-            "license": self.form_fields[20],
-            "ssn": self.form_fields[21],
-            "no_id": self.form_fields[22],
-            "citizenship": self.form_fields[33],
-            "voting_age": self.form_fields[34],
-            "election_worker": self.form_fields[35],
-            "gender": self.form_fields[36],
-        }
+        self.get_fields()
         
+        if data is None:
+            data = {}
+        
+        if not isinstance(person, Person):
+            raise ValueError("The 'person' argument must be an instance of the Person class.")
+        
+        attribute_keys = [
+            "last_name", "first_name", "middle_name", "former_name",
+            "street_address", "city", "county", "zip_code", "street_address_2",
+            "city_2", "state", "zip_code_2", "former_res", "birth_month", "birth_day",
+            "birth_year", "phone", "phone_2", "phone_3", "license", "ssn", "no_id",
+            "citizenship", "voting_age", "election_worker", "gender"
+        ]
+        
+        attribute_mapping = {}
+        
+        for i, key in enumerate(attribute_keys):
+            attribute_mapping[key] = self.form_fields[i+1]
+            
         for attr, field in attribute_mapping.items():
             if attr in person._attributes and person._attributes[attr] is not None:
                 data[field] = person._attributes[attr]
@@ -65,17 +55,12 @@ class PdfDoc:
         return data
         
     def write_pdf(self, person):
-        
-        self.get_fields()
-        
         input_pdf_path = self.pdf
         output_pdf_path = f'{person._attributes['first_name']} TX voter reg.pdf'
         data_dict = self.data_dict(person)
         
         fillpdfs.write_fillable_pdf(input_pdf_path=input_pdf_path, output_pdf_path=output_pdf_path, data_dict=data_dict)
         
-        
-
 class Person:
     def __init__(self,**kwargs):
         self._attributes = {

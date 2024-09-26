@@ -32,4 +32,6 @@ me = Person(
     election_worker=None,
     gender=None)
 
-ipdb.set_trace()
+pdf.write_pdf(me)
+
+# ipdb.set_trace()
