@@ -24,12 +24,27 @@ def edit_entries(user_info):
         print(f"\n{space*10}{ast*50}\n")
         edit = input(f"\n{space*10}Would you like to edit any of your entries? (Y or N): ").strip().upper()
         if edit == 'Y':
-            key_to_edit = int(input(f"\n{space*10}Which entry would you like to edit? \n{space*10}(Enter the associated number): "))
-            if key_to_edit in user_info:
-                new_value = input(f"\n{space*10}Enter the new value for '{prompts[key_to_edit-1]}': ")
-                user_info[key_to_edit] = new_value
-            else:
-                print(f"\n{space*10}Invalid key. Please enter a valid key.")
+            try:
+                entry_number = int(input(f"\n{space*10}Which entry would you like to edit? \n{space*10}(Enter the number): ").strip())
+                if 1 <= entry_number <= len(user_info):
+                    actual_key = list(user_info.keys())[entry_number-1]
+                    new_value = input(f"\n{space*10}Enter the new value for '{actual_key}': ")
+                    user_info[actual_key] = new_value
+            except ValueError:
+                print("Invalid input. Please enter a valid number")
+            
+            
+            # key_to_edit = int(input(f"\n{space*10}Which entry would you like to edit? \n{space*10}(Enter the associated number): "))
+            
+            # print(user_info)
+            
+            
+            
+            # if key_to_edit in user_info:
+            #     new_value = input(f"\n{space*10}Enter the new value for '{prompts[key_to_edit-1]}': ")
+            #     user_info[key_to_edit] = new_value
+            # else:
+            #     print(f"\n{space*10}Invalid key. Please enter a valid key.")
         else:
             #what happens if you don't want to edit
             break
