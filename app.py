@@ -8,6 +8,13 @@ def exit_program():
     print(f"\n{space*10}Your changes are not saved. Goodbye.\n")
     exit()
 
+def preview_changes(user_info):
+    for prompt in prompts:
+        prompt_keys = prompts.index(prompt)
+        user_info_keys = list(user_info.keys())
+        
+        print(f"{space*10}{prompt_keys+1}. {prompt}: {user_info[prompt_keys+1]}")
+        
 
 def edit_entries(user_info):
     while True:
@@ -15,14 +22,10 @@ def edit_entries(user_info):
         #     print(f"{prompts.index(prompt)+1}{space*10}{prompt}")
         
         print(f"\n{space*10}{ast*50}\n")
-        print(f"{space*10}Please review your entries:\n")
-
-        if user_info:
-            for key, value in user_info.items():    
-                print(f"{space*10}{key}. {prompts[key-1]}: {value}")
-        else:
-            for prompt in prompts:
-                print(f'{space*10}{prompts.index(prompt)+1}. {prompt}')
+        print(f"{space*10}PLEASE REVIEW YOUR ENTRIES:\n")
+        
+        preview_changes(user_info)
+                
 
         print(f"\n{space*10}{ast*50}\n")
         edit = input(f"\n{space*10}Would you like to edit any of your entries? (Y or N): ").strip().upper()
@@ -34,10 +37,9 @@ def edit_entries(user_info):
             else:
                 print(f"\n{space*10}Invalid key. Please enter a valid key.")
         else:
+            #what happens if you don't want to edit
             break
         
-        print(user_info)
-
 
 def get_mailing_address():
     mailing_address_info = {}
