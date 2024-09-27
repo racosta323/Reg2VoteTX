@@ -13,7 +13,6 @@ def exit_program():
 def preview_changes(user_info):
     for i, (prompt, value) in enumerate(prompts.items(), start = 1):
         key = prompts[prompt]
-        # ipdb.set_trace()
         print(f"{space*10}{i}. {prompt} {user_info.get(key)}")
         
 def edit_entries(user_info):
@@ -25,6 +24,8 @@ def edit_entries(user_info):
                 
         print(f"\n{space*10}{ast*50}\n")
         edit = input(f"\n{space*10}Would you like to edit any of your entries? (Y or N): ").strip().upper()
+        if edit.lower() == 'q' or edit.lower() == 'exit':
+                exit_program()
         if edit == 'Y':
             try:
                 entry_number = int(input(f"\n{space*10}Which entry would you like to edit? \n{space*10}(Enter the number): ").strip())
@@ -49,7 +50,6 @@ def edit_entries(user_info):
 def write_pdf(user_info):
     person = Person(**user_info)
     pdf_doc = PdfDoc()
-    print()
     pdf_doc.write_pdf(person)
     
         
@@ -59,7 +59,7 @@ def get_mailing_address():
     for prompt in mailing_address_prompts:
         while True:
             response = input(f'{prompts.index(prompt)+1}{prompt}')
-            if response == 'q':
+            if response.lower() == 'q' or response.lower() == 'exit':
                 exit_program()
                 
             if response.strip():
@@ -72,17 +72,17 @@ def get_mailing_address():
 
 def menu():
     menu = """
-        Hi! Welcome.\n
-        Submit 'q' or 'exit' at any time to exit.\n
+        Hi! Welcome.
+        Submit 'q' or 'exit' at any time to exit.
     """
     print(f"\n{space*10}{menu}")
-
+    print(f"{space*10}{ast*50}\n")
     user_info = {}
     
     for prompt, value in prompts.items():
         while True:
             response = input(f'{space*10}{prompt}')
-            
+            # exit
             if response.lower() == 'q' or response.lower() == 'exit':
                 exit_program()
             

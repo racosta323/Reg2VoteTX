@@ -97,5 +97,3 @@ class Person:
         Last name: {self._attributes['last_name']}
         """
         return output
-
-   
