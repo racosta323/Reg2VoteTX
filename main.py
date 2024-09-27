@@ -4,15 +4,14 @@ from fillpdf import fillpdfs
 import ipdb
 
 class PdfDoc:
-    def __init__(self,url,pdf=None, pdf_content=None, form_fields=[]):
-        self.url = url
-        self._pdf = pdf
-        self._pdf_content = pdf_content
-        self._form_fields = form_fields 
-        
+    def __init__(self):
+        self.pdf = None
+        self.pdf_content = None
+       
     def request(self):
         try:
-            request = requests.get(self.url)
+            url = "https://www.sos.state.tx.us/elections/forms/vr-with-receipt.pdf"
+            request = requests.get(url)
             if request.status_code == 200:
                 pdf_doc = request.content
                 self.pdf = pdf_doc.decode('Latin-1')
@@ -21,12 +20,9 @@ class PdfDoc:
             raise SystemExit(e)
 
     def get_fields(self):
-        
-        self.request()
         self.form_fields = list(fillpdfs.get_form_fields(self.pdf_content).keys())
 
-    def data_dict(self, person, data=None):
-        
+    def data_dict(self, person, data=None): 
         self.get_fields()
         
         if data is None:
@@ -55,6 +51,7 @@ class PdfDoc:
         return data
         
     def write_pdf(self, person):
+        self.request()
         input_pdf_path = self.pdf
         output_pdf_path = f'{person._attributes['first_name']} TX voter reg.pdf'
         data_dict = self.data_dict(person)

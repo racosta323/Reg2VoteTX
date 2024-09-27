@@ -37,26 +37,15 @@ def edit_entries(user_info):
                 print("Invalid input. Please enter a valid number")
         else:
             #what happens if you don't want to edit
-            ipdb.set_trace()
-            person = create_person(**user_info)
-            url = "https://www.sos.state.tx.us/elections/forms/vr-with-receipt.pdf"
-            write_pdf(person, url)
-            break
-        
-def create_person(self, user_info):
-    user_info_keys = user_info.keys()
-    person_info = {}
-    
-    for key, value in user_info.items():
-        if key in user_info_keys:
-            person_info[prompts[key]] = user_info[key]
-            
-    person = Person(**person_info)
-    return person
-    
-def write_pdf(self, person, url):
-    pdf = PdfDoc(url)
-    pdf.write_pdf(person)
+            try:
+                write_pdf(user_info)
+            except Exception as e:
+                print(f"\n{space*10}{e}")
+
+def write_pdf(user_info):
+    person = Person(**user_info)
+    pdf_doc = PdfDoc()
+    pdf_doc.write_pdf(person)
         
 def get_mailing_address():
     mailing_address_info = {}
@@ -87,7 +76,6 @@ def menu():
             if response.lower() == 'q':
                 exit_program()
             
-            #need to update this so that keys look like py keys    
             user_info[prompts[prompt]] = response
             break
                 
