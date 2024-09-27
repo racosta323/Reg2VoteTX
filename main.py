@@ -39,15 +39,10 @@ class PdfDoc:
             "citizenship", "voting_age", "election_worker", "gender"
         ]
         
-        attribute_mapping = {}
-        
-        for i, key in enumerate(attribute_keys):
-            attribute_mapping[key] = self.form_fields[i+1]
-            
-        for attr, field in attribute_mapping.items():
-            if attr in person._attributes and person._attributes[attr] is not None:
-                data[field] = person._attributes[attr]
-        
+        for key, field in zip(attribute_keys, self.form_fields[1:]):
+            if key in person._attributes and person._attributes[key] is not None:
+                data[field] = person._attributes[key]
+
         return data
         
     def write_pdf(self, person):

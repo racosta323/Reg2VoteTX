@@ -2,7 +2,8 @@ from main import PdfDoc
 from main import Person
 import ipdb
 
-pdf = PdfDoc("https://www.sos.state.tx.us/elections/forms/vr-with-receipt.pdf")
+pdf = PdfDoc()
+pdf.request()
 
 me = Person(
     first_name="Rene", 
@@ -32,6 +33,8 @@ me = Person(
     election_worker=None,
     gender=None)
 
-pdf.write_pdf(me)
+pdf.data_dict(me)
+
+# pdf.write_pdf(me)
 
 # ipdb.set_trace()
