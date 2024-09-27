@@ -1,5 +1,5 @@
 import ipdb
-from prompts import prompts, mailing_address_prompts
+from prompts import prompts
 from main import Person
 from main import PdfDoc
 
@@ -51,29 +51,13 @@ def write_pdf(user_info):
     person = Person(**user_info)
     pdf_doc = PdfDoc()
     pdf_doc.write_pdf(person)
-    
-        
-def get_mailing_address():
-    mailing_address_info = {}
-    
-    for prompt in mailing_address_prompts:
-        while True:
-            response = input(f'{prompts.index(prompt)+1}{prompt}')
-            if response.lower() == 'q' or response.lower() == 'exit':
-                exit_program()
-                
-            if response.strip():
-                mailing_address_info[prompts.index(prompt)+1] = input(f"{prompt}")
-                break
-            # else:
-            #     print("This field cannot be left blank. Please enter a valid response.")
-
-    return mailing_address_info
-
+            
 def menu():
     menu = """
         Hi! Welcome.
         Submit 'q' or 'exit' at any time to exit.
+        
+        Skip an answer by pressing enter. You will be given a chance to review and edit all entries after submitting responses. 
     """
     print(f"\n{space*10}{menu}")
     print(f"{space*10}{ast*50}\n")
@@ -92,7 +76,6 @@ def menu():
     user_info = edit_entries(user_info)
 
     return user_info
-
 
 if __name__ == "__main__":
     while True:

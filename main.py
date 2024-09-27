@@ -1,6 +1,7 @@
 import requests
 from io import BytesIO
 from fillpdf import fillpdfs
+from prompts import person_attributes
 import ipdb
 
 class PdfDoc:
@@ -35,14 +36,24 @@ class PdfDoc:
         attribute_keys = [
             "last_name", "first_name", "middle_name", "former_name",
             "street_address", "city", "county", "zip_code", "street_address_2",
-            "city_2", "state", "zip_code_2", "former_res", "birth_month", "birth_day",
-            "birth_year", "phone", "phone_2", "phone_3", "license", "ssn", "no_id",
-            "citizenship", "voting_age", "election_worker", "gender"
+            "city_2", "state_2", "zip_code_2", "former_res", "birth_month", "birth_day",
+            "birth_year", "phone", "phone_2", "phone_3", "license", "ssn", "no_id", "date", "deputy", 'secondary_date', "applicant_agent", "receipt", "volunteer", "deputy_no", "date_3", "print", "reset",
+            "citizenship", "voting_age", "election_worker", "gender", "new_application"
         ]
         
+        
         for key, field in zip(attribute_keys, self.form_fields[1:]):
+            # ipdb.set_trace()
             if key in person._attributes and person._attributes[key] is not None:
                 data[field] = person._attributes[key]
+                if key == 'phone':
+                    data['Telephone Number Optional'] = person._attributes[key][0:3]
+                    data['Telephone Number Optional 2'] = person._attributes[key][3:6]
+                    data['Telephone Number Optional 2'] = person._attributes[key][6:10]
+                
+        ipdb.set_trace()
+
+
 
         return data
         
@@ -56,34 +67,36 @@ class PdfDoc:
         
 class Person:
     def __init__(self,**kwargs):
-        self._attributes = {
-            "first_name":None,
-            "last_name":None,
-            "middle_name":None,
-            "former_name":None,
-            "street_address":None,
-            "city":None,
-            "county":None,
-            "zip_code":None,
-            "street_address_2":None,
-            "city_2":None,
-            "state":None,
-            "zip_code_2":None,
-            "former_res":None,
-            "birth_month":None,
-            "birth_day":None,
-            "birth_year":None,
-            "phone":None,
-            "phone_2":None,
-            "phone_3":None,
-            "license":None,
-            "ssn":None,
-            "no_id":None,
-            "citizenship":None,
-            "voting_age":None,
-            "election_worker":None,
-            "gender":None,
-        }
+        # self._attributes = {
+        #     "first_name":None,
+        #     "last_name":None,
+        #     "middle_name":None,
+        #     "former_name":None,
+        #     "street_address":None,
+        #     "city":None,
+        #     "county":None,
+        #     "zip_code":None,
+        #     "street_address_2":None,
+        #     "city_2":None,
+        #     "state":None,
+        #     "zip_code_2":None,
+        #     "former_res":None,
+        #     "birth_month":None,
+        #     "birth_day":None,
+        #     "birth_year":None,
+        #     "phone":None,
+        #     "phone_2":None,
+        #     "phone_3":None,
+        #     "license":None,
+        #     "ssn":None,
+        #     "no_id":None,
+        #     "citizenship":None,
+        #     "voting_age":None,
+        #     "election_worker":None,
+        #     "gender":None,
+        # }
+        
+        self._attributes = person_attributes
 
         for key, value in kwargs.items():
             if key in self._attributes:
