@@ -23,7 +23,6 @@ def edit_entries(user_info):
         
         preview_changes(user_info)
                 
-        # need to work on this:
         print(f"\n{space*10}{ast*50}\n")
         edit = input(f"\n{space*10}Would you like to edit any of your entries? (Y or N): ").strip().upper()
         if edit == 'Y':
@@ -36,16 +35,23 @@ def edit_entries(user_info):
             except ValueError:
                 print("Invalid input. Please enter a valid number")
         else:
-            #what happens if you don't want to edit
+            print(f'\n{space*10}Writing PDF.....')
+            print(f'\n{space*10}.....')
+            print(f'\n{space*10}.....')
             try:
                 write_pdf(user_info)
+                print(f'\n{space*10}PDF generated!!')
+                print(f'\n{space*10}________________\n\n')
+                return
             except Exception as e:
                 print(f"\n{space*10}{e}")
-
+        
 def write_pdf(user_info):
     person = Person(**user_info)
     pdf_doc = PdfDoc()
+    print()
     pdf_doc.write_pdf(person)
+    
         
 def get_mailing_address():
     mailing_address_info = {}
@@ -65,7 +71,11 @@ def get_mailing_address():
     return mailing_address_info
 
 def menu():
-    print(f"\n{space*10}Hi -- Welcome.\n")
+    menu = """
+        Hi! Welcome.\n
+        Submit 'q' or 'exit' at any time to exit.\n
+    """
+    print(f"\n{space*10}{menu}")
 
     user_info = {}
     
@@ -73,7 +83,7 @@ def menu():
         while True:
             response = input(f'{space*10}{prompt}')
             
-            if response.lower() == 'q':
+            if response.lower() == 'q' or response.lower() == 'exit':
                 exit_program()
             
             user_info[prompts[prompt]] = response

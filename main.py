@@ -7,15 +7,16 @@ class PdfDoc:
     def __init__(self):
         self.pdf = None
         self.pdf_content = None
+        self.url = "https://www.sos.state.tx.us/elections/forms/vr-with-receipt.pdf"
        
     def request(self):
         try:
-            url = "https://www.sos.state.tx.us/elections/forms/vr-with-receipt.pdf"
-            request = requests.get(url)
-            if request.status_code == 200:
-                pdf_doc = request.content
-                self.pdf = pdf_doc.decode('Latin-1')
-                self.pdf_content = BytesIO(pdf_doc)
+            response = requests.get(self.url)
+            response.raise_for_status()      
+            pdf_doc = response.content
+            self.pdf_content = BytesIO(pdf_doc)
+            self.pdf = pdf_doc.decode('Latin-1')
+            
         except requests.exceptions.RequestException as e:
             raise SystemExit(e)
 
@@ -96,7 +97,5 @@ class Person:
         Last name: {self._attributes['last_name']}
         """
         return output
-        #     return f'First name: {self._attributes['first_name']}\n
-        # "last_name": {self._attributes['last_name']}'
 
    
