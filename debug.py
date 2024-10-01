@@ -1,5 +1,5 @@
-from main import PdfDoc
-from main import Person
+from models import PdfDoc
+from models import Person
 import ipdb
 
 pdf = PdfDoc()
