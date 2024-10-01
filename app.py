@@ -24,9 +24,9 @@ def edit_entries(user_info):
                 
         print(f"\n{space*10}{ast*50}\n")
         edit = input(f"\n{space*10}Would you like to edit any of your entries? (Y or N): ").strip().upper()
-        if edit.lower() == 'q' or edit.lower() == 'exit':
+        if edit.lower() in['q', 'exit']:
                 exit_program()
-        if edit == 'Y':
+        if edit.lower() in ['y','yes']:
             try:
                 entry_number = int(input(f"\n{space*10}Which entry would you like to edit? \n{space*10}(Enter the number): ").strip())
                 if 1 <= entry_number <= len(user_info):
@@ -52,6 +52,19 @@ def write_pdf(user_info):
     pdf_doc = PdfDoc()
     pdf_doc.write_pdf(person)
             
+def check_purpose():
+    print(f'\n{space*10}Which best describes why you\'re completing this form? (Enter corresponding number.)\n')
+    print(f'{space*10}1. New Application')
+    print(f'{space*10}2. Change of Address, Name or Other Information')
+    print(f'{space*10}3. Request for a replacement card')
+    
+    answer = input(f'\n{space*10}> ')
+    
+    return answer 
+    
+
+
+
 def menu():
     menu = """
         Hi! Welcome.
@@ -72,6 +85,9 @@ def menu():
             
             user_info[prompts[prompt]] = response
             break
+
+    answer = check_purpose()
+    user_info['why'] = answer
                 
     user_info = edit_entries(user_info)
 
