@@ -77,13 +77,20 @@ class PdfDoc:
 
         return data
         
-    def write_pdf(self, person):
+    def write_pdf(self, person, save_to_file=False):
         self.request()
         input_pdf_path = self.pdf
         output_pdf = BytesIO()
         data_dict = self.data_dict(person)
+
+        output_pdf_path = f"{person._attributes['first_name']}_{person._attributes['last_name']}_TX_voter_reg.pdf"
         
         fillpdfs.write_fillable_pdf(input_pdf_path=input_pdf_path, output_pdf_path=output_pdf, data_dict=data_dict)
+        
+        if save_to_file:
+            with open(output_pdf_path, 'wb') as f:
+                f.write(output_pdf.getvalue())
+        
         output_pdf.seek(0)
         return output_pdf
         

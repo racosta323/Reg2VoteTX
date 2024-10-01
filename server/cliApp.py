@@ -50,7 +50,7 @@ def edit_entries(user_info):
 def write_pdf(user_info):
     person = Person(**user_info)
     pdf_doc = PdfDoc()
-    pdf_doc.write_pdf(person)
+    pdf_doc.write_pdf(person, save_to_file=True)
             
 def check_purpose():
     print(f'\n{space*10}Which best describes why you\'re completing this form? (Enter corresponding number.)\n')
