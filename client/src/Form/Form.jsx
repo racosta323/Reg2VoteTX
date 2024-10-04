@@ -6,8 +6,8 @@ import Purpose from "./Purpose"
 
 function Form() {
     return (
-        <form>
-            <div class='p-4 space-y-12 w-screen '>
+        <form class='max-w-fit'>
+            <div class='p-4 space-y-12 max-w-fit'>
                 <Purpose/>
                 <Profile />
                 <Address/>
