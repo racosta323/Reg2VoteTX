@@ -15,10 +15,10 @@ function Purpose() {
                     <div class="mt-6 space-y-6">
                         <div class="relative flex gap-x-3">
                             <div class="flex h-6 items-center">
-                                <input id="new-application" name="new-application" type="checkbox" class="h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                <input id="new-application" name="new-application" type="checkbox" class="h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" />
                             </div>
                             <div class="text-sm leading-6">
-                                <label for="new-application" class="font-medium text-gray-900">
+                                <label for="new-application" class="font-medium text-gray-900 cursor-pointer">
                                     New Application
                                 </label>
                             </div>
@@ -30,10 +30,10 @@ function Purpose() {
                     <div class="mt-6 space-y-6">
                         <div class="relative flex gap-x-3">
                             <div class="flex h-6 items-center">
-                                <input id="change_address" name="change_address" type="checkbox" class="h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                <input id="change_address" name="change_address" type="checkbox" class="h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" />
                             </div>
                             <div class="text-sm leading-6">
-                                <label for="change_address" class="font-medium text-gray-900">
+                                <label for="change_address" class="font-medium text-gray-900 cursor-pointer">
                                     Change of Address, Name, or Other Information
                                 </label>
                             </div>
@@ -45,10 +45,10 @@ function Purpose() {
                     <div class="mt-6 space-y-6">
                         <div class="relative flex gap-x-3">
                             <div class="flex h-6 items-center">
-                                <input id="replacement-card" name="replacement-card" type="checkbox" class="h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                <input id="replacement-card" name="replacement-card" type="checkbox" class="h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" />
                             </div>
                             <div class="text-sm leading-6">
-                                <label for="replacement-card" class="font-medium text-gray-900">
+                                <label for="replacement-card" class="font-medium text-gray-900 cursor-pointer">
                                     Request for a replacement card
                                 </label>
                             </div>

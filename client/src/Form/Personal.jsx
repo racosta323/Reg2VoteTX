@@ -61,20 +61,20 @@ function Personal() {
                             <div class="mt-6 space-y-6">
                                 <div class="relative flex gap-x-3">
                                     <div class="flex h-6 items-center">
-                                        <input id="citizen-yes" name="citizen-yes" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                        <input id="citizen-yes" name="citizen-yes" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" />
                                     </div>
                                     <div class="text-sm leading-6">
-                                        <label for="citizen-yes" class="font-medium text-gray-900">
+                                        <label for="citizen-yes" class="font-medium text-gray-900 cursor-pointer">
                                             Yes
                                         </label>
                                     </div>
                                 </div>
                                 <div class="relative flex gap-x-3">
                                     <div class="flex h-6 items-center">
-                                        <input id="citizen_no" name="citizen_no" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                        <input id="citizen_no" name="citizen_no" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" />
                                     </div>
                                     <div class="text-sm leading-6">
-                                        <label for="citizen_no" class="font-medium text-gray-900">
+                                        <label for="citizen_no" class="font-medium text-gray-900 cursor-pointer">
                                             No
                                         </label>
                                     </div>
@@ -86,10 +86,12 @@ function Personal() {
                             <div class="mt-6 space-y-6">
                                 <div class="relative flex gap-x-3">
                                     <div class="flex h-6 items-center">
-                                        <input id="txid" name="txid" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                        <input id="txid" name="txid" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" />
                                     </div>
                                     <div class="text-sm leading-6">
-                                        <label for="txid" class="font-medium text-gray-900">I have not been issued a Texas Driver's License/Personal Identification Number or Social Security Number.</label>
+                                        <label for="txid" class="font-medium text-gray-900 cursor-pointer">
+                                            I have not been issued a Texas Driver's License/Personal Identification Number or Social Security Number.
+                                        </label>
                                     </div>
                                 </div>
                             </div>

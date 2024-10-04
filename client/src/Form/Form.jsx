@@ -12,8 +12,11 @@ function Form() {
                 <Profile />
                 <Address/>
                 <Personal/>
+                <div class='pr-24'>
+                    <Buttons />
+                </div>
             </div>
-            <Buttons />
+            
         </form>
     )
 }

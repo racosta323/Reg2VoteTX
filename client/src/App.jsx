@@ -8,7 +8,6 @@ function App() {
       <div class="w-full max-w-4xl bg-white shadow-md md:max-w-7xl md:flex rounded "> 
         <Form />      
       </div>
-      
     </div>
   )
 }
