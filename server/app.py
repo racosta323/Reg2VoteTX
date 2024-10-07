@@ -1,6 +1,7 @@
 from flask import Flask, request, send_file, jsonify
 from models import PdfDoc, Person
 from flask_cors import CORS
+import ipdb
 
 app = Flask(__name__)
 CORS(app)
@@ -10,6 +11,8 @@ def generate_pdf():
     print("Request received")
     try:
         data = request.json
+        ipdb.set_trace()
+
         person = Person(**data)
 
         pdf_doc = PdfDoc()
@@ -24,6 +27,12 @@ def generate_pdf():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@app.route('/hello', methods= ['GET'])
+def test():
+
+    return jsonify('hello'), 500
+
     
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

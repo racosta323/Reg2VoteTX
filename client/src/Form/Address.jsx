@@ -10,13 +10,13 @@ function Address({ formData, handleChange }) {
                 <div class='w-full'>
                     <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-3">
-                            <label for="resAddress" class="block text-sm font-medium leading-6 text-gray-900">
+                            <label for="street_address" class="block text-sm font-medium leading-6 text-gray-900">
                                 Residence Address
                             </label>
                             <p class='text-gray-700 text-xs font-normal'>Street Address and Apartment Number. If none, describe where you live. (Do not include P.O. Box, Rural Rt. or Business Address)</p>
                             <div class='mt-2'>
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input type="text" name="resAddress" id="resAddress" autocomplete="resAddress" class="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange = {handleChange}/>
+                                    <input type="text" name="street_address" id="street_address" autocomplete="street_address" class="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange = {handleChange}/>
                                 </div>
                             </div>
                         </div>
@@ -44,9 +44,9 @@ function Address({ formData, handleChange }) {
                         </div>
 
                         <div class="sm:col-span-1">
-                            <label for="zipCode" class="block text-sm font-medium leading-6 text-gray-900">Zip code</label>
+                            <label for="zip_code" class="block text-sm font-medium leading-6 text-gray-900">Zip code</label>
                             <div class="mt-2">
-                                <input id="zipCode" name="zipCode" type="text" autocomplete="given_name" class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" onChange = {handleChange}/>
+                                <input id="zip_code" name="zip_code" type="text" autocomplete="given_name" class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" onChange = {handleChange}/>
                             </div>
                         </div>
 
