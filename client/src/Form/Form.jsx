@@ -52,6 +52,7 @@ function Form() {
 
             if (response.ok){
                 const blob = await response.blob()
+                console.log(blob)
 
             } else {
                 console.log("Failed to download file.", response.statusText)

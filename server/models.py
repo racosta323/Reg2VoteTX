@@ -42,8 +42,8 @@ class PdfDoc:
         if not isinstance(person, Person):
             raise ValueError("The 'person' argument must be an instance of the Person class.")
         
+
         for key, field in zip(attribute_keys, self.form_fields[0:]):
-            # ipdb.set_trace()
             if key in person._attributes and person._attributes[key] is not None:
                 data[field] = person._attributes[key]
                 if key == 'phone':
@@ -68,11 +68,11 @@ class PdfDoc:
                         data[field] = 'Yes'
 
                 if key == 'why':
-                    if int(person._attributes[key]) == 1:
+                    if person._attributes[key] == "1":
                         data[field] = 'New Application'
-                    if int(person._attributes[key]) == 2:
+                    if person._attributes[key] == "2":
                         data[field] = 'Change of Address, Name, or Other Information'
-                    if int(person._attributes[key]) == 3:
+                    if person._attributes[key] == "3":
                         data[field] = 'Request for a Replacement Card'
 
         return data
