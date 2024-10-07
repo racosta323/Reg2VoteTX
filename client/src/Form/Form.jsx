@@ -14,17 +14,70 @@ function Form() {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value,
-        }))
+
+        if (name == 'dob') {
+            const [year, month, day] = value.split('-')
+
+            setFormData(prevData => ({
+                ...prevData,
+                'birth_month': month,
+                'birth_day': day,
+                'birth_year': year,
+            }))
+
+        } else if (name !== 'dob') {
+            setFormData(prevData => ({
+                ...prevData,
+                [name]: value,
+            }))
+
+        }
+
+
     }
 
-    // console.log(JSON.stringify(formData, null, 2));
+    function checkboxHandler(e) {
+        let value = ''
+        let citizen = ''
+        let id = ''
+
+        if (e.target.checked) {
+            if (e.target.id == 'new-application') {
+                value = "1"
+            }
+            if (e.target.id == 'change-address') {
+                value = "2"
+            }
+            if (e.target.id == 'replacement-card') {
+                value = "3"
+            }
+            if (e.target.id == 'citizen-yes') {
+                citizen = 'yes'
+            }
+            if (e.target.id == 'citizen_no') {
+                citizen = 'no'
+            }
+            if (e.target.id == 'no_id') {
+                id = 'no'
+            }
+        }
+
+        setFormData(prevData => ({
+            ...prevData,
+            'why': value,
+            'citizenship': citizen,
+            'no_id': id
+        }))
+
+    }
+
+
+
+    console.log(JSON.stringify(formData, null, 2));
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        
+
         try {
             const response = await fetch('http://127.0.0.1:8000/generate_pdf', {
                 method: 'POST',
@@ -35,14 +88,15 @@ function Form() {
 
             })
 
-            if (response.ok){
+            if (response.ok) {
                 const blob = await response.blob()
 
                 setUrl(window.URL.createObjectURL(blob))
-                
+
                 const link = document.createElement('a')
                 link.href = url
-                link.download = 'rene.pdf'
+                console.log(formData)
+                link.download = `${formData.last_name}, ${formData.first_name} - voter registration form.pdf`
                 link.click()
                 link.remove()
 
@@ -53,9 +107,6 @@ function Form() {
         } catch (error) {
             console.log(error)
         }
-        // console.log(JSON.stringify(formData, null, 2));
-
-
     }
 
 
@@ -63,15 +114,15 @@ function Form() {
     return (
         <form class='max-w-fit' onSubmit={handleSubmit}>
             <div class='p-4 space-y-12 max-w-fit'>
-                <Purpose formData={formData} handleChange={handleInputChange}/>
-                <Profile formData={formData} handleChange={handleInputChange}/>
-                <Address formData={formData} handleChange={handleInputChange}/>
-                <Personal formData={formData} handleChange={handleInputChange}/>
+                <Purpose formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
+                <Profile formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
+                <Address formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
+                <Personal formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
                 <div class='pr-24'>
-                    <Buttons type='submit'/>
+                    <Buttons type='submit' />
                 </div>
             </div>
-            
+
         </form>
     )
 }

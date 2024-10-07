@@ -1,4 +1,4 @@
-function Personal({ handleChange }) {
+function Personal({ formData, handleChange, checkboxHandler }) {
     return (
         <div class='p-4 space-y-12'>
             <div class='border-b border-gray-900/10 pb-12 w-5/6 flex space-x-20'>
@@ -20,7 +20,7 @@ function Personal({ handleChange }) {
                             <p class='text-gray-700 text-xs font-normal'>(xxx)-xxx-xxxx</p>
                             <div class='mt-2'>
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input type="tel" name="phone" id="phone" autocomplete="tel" class="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="(xxx)-xxx-xxxx" onChange = {handleChange}/>
+                                    <input type="tel" name="phone" id="phone" autocomplete="tel" class="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="(xxx)-xxx-xxxx" onChange = {handleChange} value = {formData.phone}/>
                                 </div>
                             </div>
                         </div>
@@ -47,10 +47,10 @@ function Personal({ handleChange }) {
 
                                 <label for="ssn" class="block text-sm font-medium leading-6 text-gray-900 mt-6">SSN</label>
                                 <p class='text-gray-700 text-xs font-normal'>
-                                    xxx-xxx-xxxx
+                                    last 4 digits only
                                 </p>
                                 <div class="mt-2">
-                                    <input id="ssn" name="ssn" type="text" autocomplete="ssn" class="block w-11/12 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" placeholder="xxx-xxx-xxxx" onChange = {handleChange}/>
+                                    <input id="ssn" name="ssn" type="text" autocomplete="ssn" class="block w-11/12 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" placeholder="xxxx" onChange = {handleChange}/>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@ function Personal({ handleChange }) {
                             <div class="mt-6 space-y-6">
                                 <div class="relative flex gap-x-3">
                                     <div class="flex h-6 items-center">
-                                        <input id="citizen-yes" name="citizen-yes" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" />
+                                        <input id="citizen-yes" name="citizen-yes" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" onChange={(e) => checkboxHandler(e)}/>
                                     </div>
                                     <div class="text-sm leading-6">
                                         <label for="citizen-yes" class="font-medium text-gray-900 cursor-pointer">
@@ -71,7 +71,7 @@ function Personal({ handleChange }) {
                                 </div>
                                 <div class="relative flex gap-x-3">
                                     <div class="flex h-6 items-center">
-                                        <input id="citizen_no" name="citizen_no" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" />
+                                        <input id="citizen_no" name="citizen_no" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" onChange={(e) => checkboxHandler(e)}/>
                                     </div>
                                     <div class="text-sm leading-6">
                                         <label for="citizen_no" class="font-medium text-gray-900 cursor-pointer">
@@ -86,7 +86,7 @@ function Personal({ handleChange }) {
                             <div class="mt-6 space-y-6">
                                 <div class="relative flex gap-x-3">
                                     <div class="flex h-6 items-center">
-                                        <input id="no_id" name="no_id" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" />
+                                        <input id="no_id" name="no_id" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" onChange={(e) => checkboxHandler(e)}/>
                                     </div>
                                     <div class="text-sm leading-6">
                                         <label for="no_id" class="font-medium text-gray-900 cursor-pointer">

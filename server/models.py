@@ -42,14 +42,20 @@ class PdfDoc:
         if not isinstance(person, Person):
             raise ValueError("The 'person' argument must be an instance of the Person class.")
         
+        
 
         for key, field in zip(attribute_keys, self.form_fields[0:]):
             if key in person._attributes and person._attributes[key] is not None:
                 data[field] = person._attributes[key]
                 if key == 'phone':
-                    data['Telephone Number Optional'] = person._attributes[key][0:3]
-                    data['Telephone Number Optional 2'] = person._attributes[key][3:6]
-                    data['Telephone Number Optional 3'] = person._attributes[key][6:10]
+                    try:
+                        data['Telephone Number Optional'] = person._attributes[key][0:3]
+                        data['Telephone Number Optional 2'] = person._attributes[key][3:6]
+                        data['Telephone Number Optional 3'] = person._attributes[key][6:10]
+                    except Exception as e:
+                        print("not enought nubmers", e)
+               
+               
                     
                 if key in ['citizenship', 'voting_age', 'election_worker']:
                     if person._attributes[key].lower() in ['y', 'yes']:
@@ -68,12 +74,15 @@ class PdfDoc:
                         data[field] = 'Yes'
 
                 if key == 'why':
-                    if person._attributes[key] == "1":
-                        data[field] = 'New Application'
-                    if person._attributes[key] == "2":
-                        data[field] = 'Change of Address, Name, or Other Information'
-                    if person._attributes[key] == "3":
-                        data[field] = 'Request for a Replacement Card'
+                    try:
+                        if person._attributes[key] == "1":
+                            data[field] = 'New Application'
+                        if person._attributes[key] == "2":
+                            data[field] = 'Change of Address, Name, or Other Information'
+                        if person._attributes[key] == "3":
+                            data[field] = 'Request for a Replacement Card'
+                    except Exception as e:
+                        print('something wrong with why', e)
 
         return data
         
@@ -103,6 +112,8 @@ class Person:
                 self._attributes[key] = value
             else:
                 raise AttributeError(f'Invalid attribute: {key}')
+            
+        
             
     def __repr__(self):
         output = f"""

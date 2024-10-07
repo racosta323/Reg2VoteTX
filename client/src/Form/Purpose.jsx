@@ -1,4 +1,4 @@
-function Purpose() {
+function Purpose({ checkboxHandler }) {
     return (
         <div class='p-4 space-y-12'>
             <div class='border-b border-gray-900/10 pb-12 flex-col space-x-20'>
@@ -15,7 +15,7 @@ function Purpose() {
                     <div class="mt-6 space-y-6">
                         <div class="relative flex gap-x-3">
                             <div class="flex h-6 items-center">
-                                <input id="new-application" name="new-application" type="checkbox" class="h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" />
+                                <input id="new-application" name="new-application" type="checkbox" class="h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" onChange={(e) => checkboxHandler(e)}/>
                             </div>
                             <div class="text-sm leading-6">
                                 <label for="new-application" class="font-medium text-gray-900 cursor-pointer">
@@ -30,10 +30,10 @@ function Purpose() {
                     <div class="mt-6 space-y-6">
                         <div class="relative flex gap-x-3">
                             <div class="flex h-6 items-center">
-                                <input id="change_address" name="change_address" type="checkbox" class="h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" />
+                                <input id="change-address" name="change-address" type="checkbox" class="h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" onChange={(e) => checkboxHandler(e)}/>
                             </div>
                             <div class="text-sm leading-6">
-                                <label for="change_address" class="font-medium text-gray-900 cursor-pointer">
+                                <label for="change-address" class="font-medium text-gray-900 cursor-pointer">
                                     Change of Address, Name, or Other Information
                                 </label>
                             </div>
@@ -45,7 +45,7 @@ function Purpose() {
                     <div class="mt-6 space-y-6">
                         <div class="relative flex gap-x-3">
                             <div class="flex h-6 items-center">
-                                <input id="replacement-card" name="replacement-card" type="checkbox" class="h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" />
+                                <input id="replacement-card" name="replacement-card" type="checkbox" class="h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" onChange={(e) => checkboxHandler(e)}/>
                             </div>
                             <div class="text-sm leading-6">
                                 <label for="replacement-card" class="font-medium text-gray-900 cursor-pointer">

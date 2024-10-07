@@ -11,11 +11,11 @@ def generate_pdf():
     print("Request received")
     try:
         data = request.json
+        ipdb.set_trace()
 
         person = Person(**data)
 
         pdf_doc = PdfDoc()
-        # ipdb.set_trace()
         filled_pdf = pdf_doc.write_pdf(person)
 
         return send_file(
