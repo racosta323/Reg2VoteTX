@@ -8,11 +8,11 @@ const dataKeys = {
     "city":"",
     "county":"",
     "zip_code":"",
-    "street_address_2":"",
-    "city_2":"",
-    "state":"",
-    "zip_code_2":"",
-    "former_res":"",
+    "street_address_2": "", 
+    "city_2":"", 
+    "state":"", 
+    "zip_code_2":"", 
+    "former_res":"", 
     "birth_month":"",
     "birth_day":"",
     "birth_year":"",
@@ -27,15 +27,15 @@ const dataKeys = {
     "secondary_date":"",
     "applicant_agent":"",
     "receipt":"",
-    "volunteer":"",
+    "volunteer":"", /* need to add */
     "deputy_no":"",
     "date_3":"",
     "print":"",
     "reset":"",
     'citizenship':"",
     "voting_age":"",
-    "election_worker":"",
-    "gender":""
+    "election_worker":"", 
+    "gender":"" 
     }
 
 export default dataKeys

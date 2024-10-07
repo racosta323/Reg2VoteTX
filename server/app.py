@@ -11,8 +11,6 @@ def generate_pdf():
     print("Request received")
     try:
         data = request.json
-        ipdb.set_trace()
-
         person = Person(**data)
 
         pdf_doc = PdfDoc()
