@@ -8,24 +8,9 @@ import dataKeys from "./dataKeys"
 
 function Form() {
 
-    const [formData, setFormData] = useState(
-        dataKeys
-        // purpose: "",
-        // firstName: "",
-        // middleName: "",
-        // lastName: "",
-        // formerName: "",
-        // resAddress: "", 
-        // city: "", 
-        // county: "",
-        // zipCode: "",
-        // phone: "",
-        // txId: "",
-        // dob: "",
-        // ssn: "",
-        // citizen: ""
-        
-    )
+    const [formData, setFormData] = useState(dataKeys)
+
+    const [url, setUrl] = useState()
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -35,7 +20,7 @@ function Form() {
         }))
     }
 
-    console.log(JSON.stringify(formData, null, 2));
+    // console.log(JSON.stringify(formData, null, 2));
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -52,7 +37,14 @@ function Form() {
 
             if (response.ok){
                 const blob = await response.blob()
-                console.log(blob)
+
+                setUrl(window.URL.createObjectURL(blob))
+                
+                const link = document.createElement('a')
+                link.href = url
+                link.download = 'rene.pdf'
+                link.click()
+                link.remove()
 
             } else {
                 console.log("Failed to download file.", response.statusText)
