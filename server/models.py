@@ -2,6 +2,8 @@ import requests
 from io import BytesIO
 from fillpdf import fillpdfs
 from prompts import person_attributes, attribute_keys
+from flask import send_file
+import os
 import ipdb
 
 
@@ -14,6 +16,7 @@ class PdfDoc:
     def request(self):
 
         try:
+            
             response = requests.get(self.url)
             response.raise_for_status()      
             pdf_doc = response.content
@@ -42,8 +45,6 @@ class PdfDoc:
         if not isinstance(person, Person):
             raise ValueError("The 'person' argument must be an instance of the Person class.")
         
-        
-
         for key, field in zip(attribute_keys, self.form_fields[0:]):
             if key in person._attributes and person._attributes[key] is not None:
                 data[field] = person._attributes[key]
@@ -62,12 +63,12 @@ class PdfDoc:
                         data[field] = 'Yes'
                     if person._attributes[key].lower() in ['n', 'no']:
                         data[field] = 'No'    
-                
+                #need to fix this
                 if key == 'gender':
                     if person._attributes[key].lower() in ['m', 'male']:
                         data[field] = 'Yes'
                     if person._attributes[key].lower() in ['f', 'female']:
-                        data[field] = 'No'
+                        data[field] = 'female'
                 
                 if key == 'no_id':
                      if person._attributes[key].lower() in ['n', 'no']:
@@ -75,21 +76,27 @@ class PdfDoc:
 
                 if key == 'why':
                     try:
+                        
                         if person._attributes[key] == "1":
                             data[field] = 'New Application'
                         if person._attributes[key] == "2":
                             data[field] = 'Change of Address, Name, or Other Information'
                         if person._attributes[key] == "3":
                             data[field] = 'Request for a Replacement Card'
+                            
+
                     except Exception as e:
                         print('something wrong with why', e)
+                
 
         return data
         
     def write_pdf(self, person, save_to_file=False):
         self.request()
+
         input_pdf_path = self.pdf
         output_pdf = BytesIO()
+
         data_dict = self.data_dict(person)
 
         output_pdf_path = f"{person._attributes['first_name']}_{person._attributes['last_name']}_TX_voter_reg.pdf"
@@ -114,7 +121,6 @@ class Person:
                 raise AttributeError(f'Invalid attribute: {key}')
             
         
-            
     def __repr__(self):
         output = f"""
         First name: {self._attributes['first_name']}

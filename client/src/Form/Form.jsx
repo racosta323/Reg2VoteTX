@@ -10,7 +10,7 @@ import dataKeys from "./dataKeys"
 function Form() {
 
     const [formData, setFormData] = useState(dataKeys)
-    const [url, setUrl] = useState('')
+    // const [url, setUrl] = useState('')
     const [isChecked, setIsChecked] = useState(false)
 
 
@@ -18,7 +18,7 @@ function Form() {
         setIsChecked(e.target.checked)
     }
 
-    function willBe18(dob){
+    function willBe18(dob) {
         const birthDate = new Date(dob)
         const targetDate = new Date('2024-10-07')
 
@@ -26,7 +26,7 @@ function Form() {
         const monthDiff = targetDate.getMonth() - birthDate.getMonth()
 
         if (monthDiff < 0 || (monthDiff === 0 && targetDate.getDate() < birthDate.getDate())) {
-            ageOnTarget --
+            ageOnTarget--
         }
         return ageOnTarget >= 18 ? "yes" : "no"
     }
@@ -38,8 +38,8 @@ function Form() {
             const [year, month, day] = value.split('-')
 
             const is18 = willBe18(value)
-            
-            
+
+
             setFormData(prevData => ({
                 ...prevData,
                 'birth_month': month,
@@ -60,11 +60,11 @@ function Form() {
     }
 
     function checkboxHandler(e) {
-        let value = ''
-        let citizen = ''
-        let id = ''
-        let election = ''
-        let gender = ''
+        let value = formData.why || ''
+        let citizen = formData.citizenship || ''
+        let id = formData.no_id || ''
+        let election = formData.election_worker || ''
+        let gender = formData.gender || ''
 
         if (e.target.checked) {
             if (e.target.id == 'new-application') {
@@ -85,16 +85,32 @@ function Form() {
             if (e.target.id == 'no_id') {
                 id = 'no'
             }
-            if (e.target.id == 'election_worker'){
+            if (e.target.id == 'election_worker') {
                 election = 'yes'
             }
-            if (e.target.id == 'male'){
+            if (e.target.id == 'male') {
                 gender = 'male'
             }
-            if (e.target.id == 'female'){
+            if (e.target.id == 'female') {
                 gender = 'female'
             }
 
+        } else {
+            if (e.target.id === 'new-application' || e.target.id === 'change-address' || e.target.id === 'replacement-card') {
+                value = '';
+            }
+            if (e.target.id === 'citizen-yes' || e.target.id === 'citizen_no') {
+                citizen = '';
+            }
+            if (e.target.id === 'no_id') {
+                id = '';
+            }
+            if (e.target.id === 'election_worker') {
+                election = '';
+            }
+            if (e.target.id === 'male' || e.target.id === 'female') {
+                gender = '';
+            }
         }
 
         setFormData(prevData => ({
@@ -114,7 +130,7 @@ function Form() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        console.log(formData)
         try {
             const response = await fetch('http://127.0.0.1:8000/generate_pdf', {
                 method: 'POST',
@@ -126,13 +142,14 @@ function Form() {
             })
 
             if (response.ok) {
+                
                 const blob = await response.blob()
-
-                setUrl(window.URL.createObjectURL(blob))
-
+                console.log(blob)
+                const url = window.URL.createObjectURL(blob)
+                console.log(url)
                 const link = document.createElement('a')
                 link.href = url
-                console.log(formData)
+                
                 link.download = `${formData.last_name}, ${formData.first_name} - voter registration form.pdf`
                 link.click()
                 link.remove()
@@ -153,10 +170,10 @@ function Form() {
             <div class='p-4 space-y-12 max-w-fit'>
                 <Purpose formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
                 <Profile formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
-                <Address formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} handleCheckboxChange={handleCheckboxChange} isChecked={isChecked}/>
+                <Address formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} handleCheckboxChange={handleCheckboxChange} isChecked={isChecked} />
                 {isChecked && (
-                    <Mailing formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler}/>
-                    )}
+                    <Mailing formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
+                )}
                 <Personal formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
                 <div class='pr-24'>
                     <Buttons type='submit' />
