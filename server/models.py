@@ -66,11 +66,11 @@ class PdfDoc:
                         data[field] = 'No'    
                 #need to fix this
                 if key == 'gender':
-                    new_key = "'Gender \\\\(Optional\\\\)'"
+                    new_key = "Gender \\(Optional\\)"
                     if person._attributes[key].lower() in ['m', 'male']:
-                        data[new_key] = 'Yes'
+                        data[new_key] = 'Male'
                     elif person._attributes[key].lower() in ['f', 'female']:
-                        data[new_key] = 'female'
+                        data[new_key] = 'Female'
                    
                     if field in data:
                         del data[field]
@@ -94,7 +94,7 @@ class PdfDoc:
                     except Exception as e:
                         print('something wrong with why', e)
                 
-        ipdb.set_trace()
+        # ipdb.set_trace()
         return data
         
     def write_pdf(self, person, save_to_file=False):
@@ -104,7 +104,6 @@ class PdfDoc:
         output_pdf = BytesIO()
 
         data_dict = self.data_dict(person)
-        ipdb.set_trace()
 
         output_pdf_path = f"{person._attributes['first_name']}_{person._attributes['last_name']}_TX_voter_reg.pdf"
         
