@@ -64,7 +64,7 @@ class PdfDoc:
                         data[field] = 'Yes'
                     if person._attributes[key].lower() in ['n', 'no']:
                         data[field] = 'No'    
-                #need to fix this
+
                 if key == 'gender':
                     new_key = "Gender \\(Optional\\)"
                     if person._attributes[key].lower() in ['m', 'male']:
@@ -74,11 +74,11 @@ class PdfDoc:
                    
                     if field in data:
                         del data[field]
-                    # ipdb.set_trace()
                 
+                #need to work on this
                 if key == 'no_id':
                      if person._attributes[key].lower() in ['n', 'no']:
-                        data[field] = 'Yes'
+                        data[field] = 'True'
 
                 if key == 'why':
                     try:
