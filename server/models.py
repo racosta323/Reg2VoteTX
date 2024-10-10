@@ -48,13 +48,14 @@ class PdfDoc:
         for key, field in zip(attribute_keys, self.form_fields[0:]):
             if key in person._attributes and person._attributes[key] is not None:
                 data[field] = person._attributes[key]
+
                 if key == 'phone':
                     try:
                         data['Telephone Number Optional'] = person._attributes[key][0:3]
                         data['Telephone Number Optional 2'] = person._attributes[key][3:6]
                         data['Telephone Number Optional 3'] = person._attributes[key][6:10]
                     except Exception as e:
-                        print("not enought nubmers", e)
+                        print("not enough nubmers", e)
                
                
                     
@@ -65,10 +66,15 @@ class PdfDoc:
                         data[field] = 'No'    
                 #need to fix this
                 if key == 'gender':
+                    new_key = "'Gender \\\\(Optional\\\\)'"
                     if person._attributes[key].lower() in ['m', 'male']:
-                        data[field] = 'Yes'
-                    if person._attributes[key].lower() in ['f', 'female']:
-                        data[field] = 'female'
+                        data[new_key] = 'Yes'
+                    elif person._attributes[key].lower() in ['f', 'female']:
+                        data[new_key] = 'female'
+                   
+                    if field in data:
+                        del data[field]
+                    # ipdb.set_trace()
                 
                 if key == 'no_id':
                      if person._attributes[key].lower() in ['n', 'no']:
@@ -88,7 +94,7 @@ class PdfDoc:
                     except Exception as e:
                         print('something wrong with why', e)
                 
-
+        ipdb.set_trace()
         return data
         
     def write_pdf(self, person, save_to_file=False):
@@ -98,6 +104,7 @@ class PdfDoc:
         output_pdf = BytesIO()
 
         data_dict = self.data_dict(person)
+        ipdb.set_trace()
 
         output_pdf_path = f"{person._attributes['first_name']}_{person._attributes['last_name']}_TX_voter_reg.pdf"
         
