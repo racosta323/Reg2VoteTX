@@ -75,18 +75,17 @@ class PdfDoc:
                     if field in data:
                         del data[field]
                 
-                #need to work on this
                 if key == 'no_id':
                      if person._attributes[key].lower() in ['n', 'no']:
                         data[field] = 'True'
 
                 if key == 'why':
                     try:
-                        
                         if person._attributes[key] == "1":
                             data[field] = 'New Application'
                         if person._attributes[key] == "2":
                             data[field] = 'Change of Address, Name, or Other Information'
+                        #this one's not working -- need to troubleshoot    
                         if person._attributes[key] == "3":
                             data[field] = 'Request for a Replacement Card'
                             

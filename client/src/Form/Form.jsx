@@ -12,9 +12,9 @@ function Form() {
     const [formData, setFormData] = useState(dataKeys)
     // const [url, setUrl] = useState('')
     const [isChecked, setIsChecked] = useState(false)
-
-
-    const handleCheckboxChange = (e) => {
+    const [ selectedCheckbox, setSelectedCheckbox ] = useState(null)
+    
+    const handleMailingCheckboxChange = (e) => {
         setIsChecked(e.target.checked)
     }
 
@@ -39,7 +39,6 @@ function Form() {
 
             const is18 = willBe18(value)
 
-
             setFormData(prevData => ({
                 ...prevData,
                 'birth_month': month,
@@ -55,77 +54,41 @@ function Form() {
             }))
 
         }
-
-
     }
 
-    function checkboxHandler(e) {
-        let value = formData.why || ''
-        let citizen = formData.citizenship || ''
-        let id = formData.no_id || ''
-        let election = formData.election_worker || ''
-        let gender = formData.gender || ''
+    function checkboxHandler(e){
+        const { id, checked } = e.target
 
-        if (e.target.checked) {
-            if (e.target.id == 'new-application') {
-                value = "1"
-            }
-            if (e.target.id == 'change-address') {
-                value = "2"
-            }
-            if (e.target.id == 'replacement-card') {
-                value = "3"
-            }
-            if (e.target.id == 'citizen-yes') {
-                citizen = 'yes'
-            }
-            if (e.target.id == 'citizen_no') {
-                citizen = 'no'
-            }
-            if (e.target.id == 'no_id') {
-                id = 'no'
-            }
-            if (e.target.id == 'election_worker') {
-                election = 'yes'
-            }
-            if (e.target.id == 'male') {
-                gender = 'male'
-            }
-            if (e.target.id == 'female') {
-                gender = 'female'
-            }
-
-        } else {
-            if (e.target.id === 'new-application' || e.target.id === 'change-address' || e.target.id === 'replacement-card') {
-                value = '';
-            }
-            if (e.target.id === 'citizen-yes' || e.target.id === 'citizen_no') {
-                citizen = '';
-            }
-            if (e.target.id === 'no_id') {
-                id = '';
-            }
-            if (e.target.id === 'election_worker') {
-                election = '';
-            }
-            if (e.target.id === 'male' || e.target.id === 'female') {
-                gender = '';
-            }
+        const mapping = {
+            'new-application': {key: 'why', value: '1'},
+            'change-address' : {key: 'why', value: '2'}, 
+            'replacement-card': {key: 'why', value: '3'},
+            'citizen-yes': {key: 'citizenship', value: 'yes'},
+            'citizen-no': {key: "citizenship", value: "no"},
+            "no_id": {key: 'no_id', value: 'no'},
+            'election_worker': { key: "election_worker", value: 'yes'},
+            'male': {key: 'gender', value: 'male'},
+            'female': {key: 'gender', value: 'female'}
         }
 
-        setFormData(prevData => ({
-            ...prevData,
-            'why': value,
-            'citizenship': citizen,
-            'no_id': id,
-            'election_worker': election,
-            'gender': gender
-        }))
+        const field = mapping[id]
+        console.log(e.target)
 
+        if (checked){
+            setSelectedCheckbox(id)
+        } else {
+            setSelectedCheckbox(null)
+        }
+
+        if (field){
+            setFormData(prevData => ({
+                ...prevData,
+                [field.key] : checked ? field.value : ''
+            }))
+        }
     }
 
-
-
+    
     // console.log(JSON.stringify(formData, null, 2));
 
     const handleSubmit = async (e) => {
@@ -144,9 +107,8 @@ function Form() {
             if (response.ok) {
                 
                 const blob = await response.blob()
-                console.log(blob)
+                // console.log(blob)
                 const url = window.URL.createObjectURL(blob)
-                console.log(url)
                 const link = document.createElement('a')
                 link.href = url
                 
@@ -166,16 +128,22 @@ function Form() {
 
 
     return (
-        <form class='max-w-fit' onSubmit={handleSubmit}>
-            <div class='p-4 space-y-12 max-w-fit'>
-                <Purpose formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
+        <form className='max-w-fit' onSubmit={handleSubmit}>
+            <div className='p-4 space-y-12 max-w-fit'>
+                <Purpose formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} selectedCheckbox ={selectedCheckbox}/>
                 <Profile formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
-                <Address formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} handleCheckboxChange={handleCheckboxChange} isChecked={isChecked} />
+                <Address 
+                    formData={formData} 
+                    handleChange={handleInputChange} 
+                    checkboxHandler={checkboxHandler} 
+                    handleCheckboxChange={handleMailingCheckboxChange} 
+                    isChecked={isChecked} 
+                    />
                 {isChecked && (
                     <Mailing formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
                 )}
                 <Personal formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
-                <div class='pr-24'>
+                <div className='pr-24'>
                     <Buttons type='submit' />
                 </div>
             </div>
