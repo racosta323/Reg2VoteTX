@@ -13,6 +13,7 @@ function Form() {
     // const [url, setUrl] = useState('')
     const [isChecked, setIsChecked] = useState(false)
     const [ selectedCheckbox, setSelectedCheckbox ] = useState(null)
+    const [checkboxClass, setChecboxClass ] = useState('')
     
     const handleMailingCheckboxChange = (e) => {
         setIsChecked(e.target.checked)
@@ -72,10 +73,10 @@ function Form() {
         }
 
         const field = mapping[id]
-        console.log(e.target)
 
         if (checked){
             setSelectedCheckbox(id)
+            // setChecboxClass("appearance-none h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer")
         } else {
             setSelectedCheckbox(null)
         }
@@ -130,7 +131,12 @@ function Form() {
     return (
         <form className='max-w-fit' onSubmit={handleSubmit}>
             <div className='p-4 space-y-12 max-w-fit'>
-                <Purpose formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} selectedCheckbox ={selectedCheckbox}/>
+                <Purpose 
+                    formData={formData} 
+                    handleChange={handleInputChange} 
+                    checkboxHandler={checkboxHandler} 
+                    selectedCheckbox={selectedCheckbox}
+                />
                 <Profile formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
                 <Address 
                     formData={formData} 
