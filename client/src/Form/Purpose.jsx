@@ -4,7 +4,7 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled }) {
 
     
 
-    const checkboxClass = "h-4 rounded border-gray-300 cursor-pointer"
+    const checkboxClass = "custom-checkbox cursor-pointer"
     const labelClass = 'font-medium text-gray-900 cursor-pointer'
 
     return (
@@ -25,10 +25,10 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled }) {
                                     id="new-application"
                                     name="new-application"
                                     type="checkbox"
-                                    className={selectedCheckbox === 'new-application' ? checkboxClass : checkboxClass}
+                                    className='custom-checkbox'
                                     onChange={(e) => checkboxHandler(e)}
                                     disabled = {isDisabled('new-application')}
-                                    // disabled={selectedCheckbox && selectedCheckbox !== 'new-application'}
+                                    style={{cursor: isDisabled("new-application") ? 'not-allowed' : 'pointer'}}
                                 />
                             </div>
                             <div className="text-sm leading-6">
@@ -55,10 +55,10 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled }) {
                                     id="change-address"
                                     name="change-address"
                                     type="checkbox"
-                                    className={checkboxClass}
+                                    className="custom-checkbox"
                                     onChange={(e) => checkboxHandler(e)}
                                     disabled = {isDisabled('change-address')}
-                                    // disabled={selectedCheckbox && selectedCheckbox !== 'change-address'}
+                                    style={{cursor: isDisabled("change-address") ? 'not-allowed' : 'pointer'}}
                                 />
                             </div>
                             <div className="text-sm leading-6">
@@ -84,9 +84,10 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled }) {
                                     id="replacement-card"
                                     name="replacement-card"
                                     type="checkbox"
-                                    className={checkboxClass}
+                                    className="custom-checkbox"
                                     disabled = {isDisabled('replacement-card')}
                                     onChange={(e) => checkboxHandler(e)}
+                                    style={{cursor: isDisabled("replacement-card") ? 'not-allowed' : 'pointer'}}
                                 />
                             </div>
                             <div className="text-sm leading-6">
