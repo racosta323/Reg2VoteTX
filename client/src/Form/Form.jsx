@@ -13,7 +13,6 @@ function Form() {
     // const [url, setUrl] = useState('')
     const [isChecked, setIsChecked] = useState(false)
     const [ selectedCheckbox, setSelectedCheckbox ] = useState(null)
-    const [checkboxClass, setChecboxClass ] = useState('')
     
     const handleMailingCheckboxChange = (e) => {
         setIsChecked(e.target.checked)
@@ -77,18 +76,13 @@ function Form() {
         if(id == 'new-application' || id == 'change-address' || id == 'replacement-card'){
             if (checked){
                 setSelectedCheckbox(id)
-                setChecboxClass("appearance-none h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer")
+                // setChecboxClass("appearance-none h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer")
             } else {
                 setSelectedCheckbox(null)
+                
             }
         }
 
-        // if (checked && id == 'new-application' || id == 'change-address' || id == 'replacement-card') {
-        //     setSelectedCheckbox(id)
-        //     // setChecboxClass("appearance-none h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer")
-        // } else {
-        //     setSelectedCheckbox(null)
-        // }
 
         if (field){
             setFormData(prevData => ({
@@ -96,6 +90,10 @@ function Form() {
                 [field.key] : checked ? field.value : ''
             }))
         }
+    }
+
+    const isDisabled = (id) => {
+        return selectedCheckbox !== null && selectedCheckbox !== id
     }
 
     
@@ -145,6 +143,7 @@ function Form() {
                     handleChange={handleInputChange} 
                     checkboxHandler={checkboxHandler} 
                     selectedCheckbox={selectedCheckbox}
+                    isDisabled={isDisabled}
                 />
                 <Profile formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
                 <Address 
