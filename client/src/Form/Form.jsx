@@ -74,12 +74,21 @@ function Form() {
 
         const field = mapping[id]
 
-        if (checked){
-            setSelectedCheckbox(id)
-            // setChecboxClass("appearance-none h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer")
-        } else {
-            setSelectedCheckbox(null)
+        if(id == 'new-application' || id == 'change-address' || id == 'replacement-card'){
+            if (checked){
+                setSelectedCheckbox(id)
+                setChecboxClass("appearance-none h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer")
+            } else {
+                setSelectedCheckbox(null)
+            }
         }
+
+        // if (checked && id == 'new-application' || id == 'change-address' || id == 'replacement-card') {
+        //     setSelectedCheckbox(id)
+        //     // setChecboxClass("appearance-none h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer")
+        // } else {
+        //     setSelectedCheckbox(null)
+        // }
 
         if (field){
             setFormData(prevData => ({
@@ -129,7 +138,7 @@ function Form() {
 
 
     return (
-        <form className='max-w-fit' onSubmit={handleSubmit}>
+        <form className="w-full max-w-4xl bg-white shadow-md md:max-w-7xl md:flex rounded ">
             <div className='p-4 space-y-12 max-w-fit'>
                 <Purpose 
                     formData={formData} 
