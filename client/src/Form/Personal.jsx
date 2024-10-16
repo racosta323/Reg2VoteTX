@@ -1,27 +1,25 @@
 import { useState } from 'react'
 
-function Personal({ formData, handleChange, checkboxHandler }) {
+function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled }) {
 
-    const [ phoneValue, setPhoneValue ] = useState('')
+    const [phoneValue, setPhoneValue] = useState('')
 
-    function phoneFormat(value){
+    function phoneFormat(value) {
         const cleanedValue = value.replace(/\D/g, '')
 
         const formattedValue = cleanedValue
             .replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3')
-            .replace(/(\(\d{3}\))(\d{0,3})(\d{0,4})/, (_, area, firstPart, secondPart) =>{
+            .replace(/(\(\d{3}\))(\d{0,3})(\d{0,4})/, (_, area, firstPart, secondPart) => {
                 if (secondPart) return `(${area} ${firstPart} - ${secondPart})`
                 if (firstPart) return `${area} ${firstPart}`
                 return `${area}`
             })
-
         return formattedValue
-
     }
 
-    
 
-    const  handlePhoneChange = (e) => {
+
+    const handlePhoneChange = (e) => {
         const value = e.target.value
         const formattedValue = phoneFormat(value)
         setPhoneValue(formattedValue)
@@ -43,7 +41,7 @@ function Personal({ formData, handleChange, checkboxHandler }) {
                             <p className='text-gray-700 text-xs font-normal'>(xxx)-xxx-xxxx</p>
                             <div className='mt-2'>
                                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input type="tel" name="phone" id="phone" autoComplete="tel" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="(xxx)-xxx-xxxx" onChange = {handlePhoneChange} value ={phoneValue}/>
+                                    <input type="tel" name="phone" id="phone" autoComplete="tel" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="(xxx)-xxx-xxxx" onChange={handlePhoneChange} value={phoneValue} />
                                 </div>
                             </div>
                         </div>
@@ -54,7 +52,7 @@ function Personal({ formData, handleChange, checkboxHandler }) {
                             </label>
                             <div className='mt-2'>
                                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input type="date" name="dob" id="dob" autoComplete="date" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange = {handleChange}/>
+                                    <input type="date" name="dob" id="dob" autoComplete="date" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={handleChange} />
                                 </div>
                             </div>
                         </div>
@@ -65,7 +63,7 @@ function Personal({ formData, handleChange, checkboxHandler }) {
                             </label>
                             <div className='mt-2'>
                                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input type="text" name="license" id="license" autoComplete="given-name" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange = {handleChange}/>
+                                    <input type="text" name="license" id="license" autoComplete="given-name" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={handleChange} />
                                 </div>
 
                                 <label htmlFor="ssn" className="block text-sm font-medium leading-6 text-gray-900 mt-6">SSN</label>
@@ -73,7 +71,7 @@ function Personal({ formData, handleChange, checkboxHandler }) {
                                     (If no TX driver's license or personal identification. Last 4 digits only.)
                                 </p>
                                 <div className="mt-2">
-                                    <input id="ssn" name="ssn" type="text" autoComplete="ssn" className="block w-11/12 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" placeholder="xxxx" onChange = {handleChange}/>
+                                    <input id="ssn" name="ssn" type="text" autoComplete="ssn" className="block w-11/12 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" placeholder="xxxx" onChange={handleChange} />
                                 </div>
                             </div>
                         </div>
@@ -84,20 +82,40 @@ function Personal({ formData, handleChange, checkboxHandler }) {
                             <div className="mt-6 space-y-6">
                                 <div className="relative flex gap-x-3">
                                     <div className="flex h-6 items-center">
-                                        <input id="citizen-yes" name="citizen-yes" type="checkbox" className="custom-checkbox" onChange={(e) => checkboxHandler(e)}/>
+                                        <input 
+                                            id="citizen-yes" 
+                                            name="citizen-yes" 
+                                            type="checkbox" className="custom-checkbox" 
+                                            onChange={(e) => checkboxHandler(e)}
+                                            disabled={isCitizenDisabled('citizen-yes')}
+                                            style = {{cursor: isCitizenDisabled('citizen-yes')? 'not-allowed' : "pointer"}}
+                                        />
                                     </div>
                                     <div className="text-sm leading-6">
-                                        <label htmlFor="citizen-yes" className="font-medium text-gray-900 cursor-pointer">
+                                        <label htmlFor="citizen-yes" className="font-medium text-gray-900 cursor-pointer"
+                                         style = {{
+                                            color: isCitizenDisabled("citizen-yes") ? "grey" : "black", 
+                                            cursor: isCitizenDisabled("citizen-yes") ? 'not-allowed' : 'pointer'
+                                        }}
+                                        >
                                             Yes
                                         </label>
                                     </div>
                                 </div>
                                 <div className="relative flex gap-x-3">
                                     <div className="flex h-6 items-center">
-                                        <input id="citizen_no" name="citizen_no" type="checkbox" className="custom-checkbox" onChange={(e) => checkboxHandler(e)}/>
+                                        <input id="citizen-no" name="citizen-no" type="checkbox" className="custom-checkbox" onChange={(e) => checkboxHandler(e)}
+                                            disabled={isCitizenDisabled("citizen-no")}
+                                            style = {{cursor: isCitizenDisabled('citizen-no')? 'not-allowed' : "pointer"}}
+                                        />
                                     </div>
                                     <div className="text-sm leading-6">
-                                        <label htmlFor="citizen_no" className="font-medium text-gray-900 cursor-pointer">
+                                        <label htmlFor="citizen-no" className="font-medium text-gray-900 cursor-pointer"
+                                        style = {{
+                                            color: isCitizenDisabled("citizen-no") ? "grey" : "black", 
+                                            cursor: isCitizenDisabled("citizen-no") ? 'not-allowed' : 'pointer'
+                                        }}
+                                        >
                                             No
                                         </label>
                                     </div>
@@ -109,10 +127,11 @@ function Personal({ formData, handleChange, checkboxHandler }) {
                             <div className="mt-6 space-y-6">
                                 <div className="relative flex gap-x-3">
                                     <div className="flex h-6 items-center">
-                                        <input id="no_id" name="no_id" type="checkbox" className="custom-checkbox" onChange={(e) => checkboxHandler(e)}/>
+                                        <input id="no_id" name="no_id" type="checkbox" className="custom-checkbox" onChange={(e) => checkboxHandler(e)} />
                                     </div>
                                     <div className="text-sm leading-6">
-                                        <label htmlFor="no_id" className="font-medium text-gray-900 cursor-pointer">
+                                        <label htmlFor="no_id" className="font-medium text-gray-900 cursor-pointer"
+                                        >
                                             I have not been issued a Texas Driver's License/Personal Identification Number or Social Security Number.
                                         </label>
                                     </div>

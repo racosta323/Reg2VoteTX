@@ -17,6 +17,10 @@ function Form() {
         male: false,
         female: false
     })
+    const [ citizenCheckbox, setCitizenCheckbox ] = useState({
+        yes: false,
+        no: false
+    })
 
     const handleMailingCheckboxChange = (e) => {
         setIsChecked(e.target.checked)
@@ -74,6 +78,13 @@ function Form() {
                 female: name === 'female' ? checked : false
            })
         }
+
+        if (name == 'citizen-yes' || name == 'citizen-no'){
+            setCitizenCheckbox({
+                yes: name == 'citizen-yes' ? checked : false,
+                no: name == 'citizen-no' ? checked : false
+            })
+        }
     }
 
     function checkboxHandler(e) {
@@ -110,12 +121,20 @@ function Form() {
 
     const isGenderDisabled = (id) => {
         if (id === 'male') {
-            return genderCheckbox.female; // Disable male if female is checked
+            return genderCheckbox.female 
         }
         if (id === 'female') {
-            return genderCheckbox.male; // Disable female if male is checked
+            return genderCheckbox.male
         }
         return false
+    }
+
+    const isCitizenDisabled = (id) => {
+        if (id == 'citizen-yes'){
+            return citizenCheckbox.no
+        } else if (id == 'citizen-no'){
+            return citizenCheckbox.yes
+        }
     }
 
 
@@ -183,7 +202,7 @@ function Form() {
                 {isChecked && (
                     <Mailing formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
                 )}
-                <Personal formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
+                <Personal formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} isCitizenDisabled={isCitizenDisabled}/>
                 <div className='pr-24'>
                     <Buttons type='submit' />
                 </div>
