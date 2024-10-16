@@ -13,7 +13,7 @@ function App() {
             <p className='text-gray-500 font-bold mb-10'>Offering a simple way to register to vote in Texas</p>
             <p className='text-gray-900'>
               In the year 2024, the State of Texas requires "that a person submit an application either in person or by mail to the county voter registrar in the county in which the voter resides. The application must be in writing and signed by the applicant." (https://www.sos.state.tx.us/elections/vr/index.shtml).
-
+              https://www.sos.state.tx.us/elections/
 
             </p>
           </div>

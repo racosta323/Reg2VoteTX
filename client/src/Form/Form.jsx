@@ -1,9 +1,9 @@
-import Buttons from "../Buttons"
 import Profile from "./Profile"
 import Address from "./Address"
 import Personal from "./Personal"
 import Purpose from "./Purpose"
 import Mailing from "./Mailing"
+import Confirmation from "../Confirmation"
 import { useState } from 'react'
 import dataKeys from "./dataKeys"
 
@@ -17,7 +17,7 @@ function Form() {
         male: false,
         female: false
     })
-    const [ citizenCheckbox, setCitizenCheckbox ] = useState({
+    const [citizenCheckbox, setCitizenCheckbox] = useState({
         yes: false,
         no: false
     })
@@ -68,18 +68,18 @@ function Form() {
         const { id, name, checked } = e.target
         const validIds = ['new-application', 'change-address', 'replacement-card']
 
-        if (validIds.includes(id)){
+        if (validIds.includes(id)) {
             setSelectedCheckbox(checked ? id : null)
         }
 
-        if (name == 'male' || name == 'female'){
+        if (name == 'male' || name == 'female') {
             setGenderCheckbox({
                 male: name === 'male' ? checked : false,
                 female: name === 'female' ? checked : false
-           })
+            })
         }
 
-        if (name == 'citizen-yes' || name == 'citizen-no'){
+        if (name == 'citizen-yes' || name == 'citizen-no') {
             setCitizenCheckbox({
                 yes: name == 'citizen-yes' ? checked : false,
                 no: name == 'citizen-no' ? checked : false
@@ -102,6 +102,10 @@ function Form() {
             'female': { key: 'gender', value: 'female' }
         }
 
+        if (id == 'citizen-no') {
+            alert("You must be a citizen of the United States to register. Please do not complete if you are not a citizen.")
+        }
+
         const field = mapping[id]
 
         setCheckBox(e)
@@ -121,7 +125,7 @@ function Form() {
 
     const isGenderDisabled = (id) => {
         if (id === 'male') {
-            return genderCheckbox.female 
+            return genderCheckbox.female
         }
         if (id === 'female') {
             return genderCheckbox.male
@@ -130,9 +134,9 @@ function Form() {
     }
 
     const isCitizenDisabled = (id) => {
-        if (id == 'citizen-yes'){
+        if (id == 'citizen-yes') {
             return citizenCheckbox.no
-        } else if (id == 'citizen-no'){
+        } else if (id == 'citizen-no') {
             return citizenCheckbox.yes
         }
     }
@@ -202,10 +206,13 @@ function Form() {
                 {isChecked && (
                     <Mailing formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
                 )}
-                <Personal formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} isCitizenDisabled={isCitizenDisabled}/>
+                <Personal formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} isCitizenDisabled={isCitizenDisabled} />
                 <div className='pr-24'>
-                    <Buttons type='submit' />
+                    <div className="mt-6 flex items-center justify-end gap-x-6">
+                        <button type="submit" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
+                    </div>
                 </div>
+                <Confirmation formData={formData} />
             </div>
 
         </form>
