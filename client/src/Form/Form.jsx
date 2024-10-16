@@ -12,8 +12,12 @@ function Form() {
     const [formData, setFormData] = useState(dataKeys)
     // const [url, setUrl] = useState('')
     const [isChecked, setIsChecked] = useState(false)
-    const [ selectedCheckbox, setSelectedCheckbox ] = useState(null)
-    
+    const [selectedCheckbox, setSelectedCheckbox] = useState(null)
+    const [genderCheckbox, setGenderCheckbox] = useState({
+        male: false,
+        female: false
+    })
+
     const handleMailingCheckboxChange = (e) => {
         setIsChecked(e.target.checked)
     }
@@ -56,48 +60,64 @@ function Form() {
         }
     }
 
-    function checkboxHandler(e){
+    function setCheckBox(e) {
+        const { id, name, checked } = e.target
+        const validIds = ['new-application', 'change-address', 'replacement-card']
+
+        if (validIds.includes(id)){
+            setSelectedCheckbox(checked ? id : null)
+        }
+
+        if (name == 'male' || name == 'female'){
+            setGenderCheckbox({
+                male: name === 'male' ? checked : false,
+                female: name === 'female' ? checked : false
+           })
+        }
+    }
+
+    function checkboxHandler(e) {
         const { id, checked } = e.target
 
         const mapping = {
-            'new-application': {key: 'why', value: '1'},
-            'change-address' : {key: 'why', value: '2'}, 
-            'replacement-card': {key: 'why', value: '3'},
-            'citizen-yes': {key: 'citizenship', value: 'yes'},
-            'citizen-no': {key: "citizenship", value: "no"},
-            "no_id": {key: 'no_id', value: 'no'},
-            'election_worker': { key: "election_worker", value: 'yes'},
-            'male': {key: 'gender', value: 'male'},
-            'female': {key: 'gender', value: 'female'}
+            'new-application': { key: 'why', value: '1' },
+            'change-address': { key: 'why', value: '2' },
+            'replacement-card': { key: 'why', value: '3' },
+            'citizen-yes': { key: 'citizenship', value: 'yes' },
+            'citizen-no': { key: "citizenship", value: "no" },
+            "no_id": { key: 'no_id', value: 'no' },
+            'election_worker': { key: "election_worker", value: 'yes' },
+            'male': { key: 'gender', value: 'male' },
+            'female': { key: 'gender', value: 'female' }
         }
 
         const field = mapping[id]
 
-        if(id == 'new-application' || id == 'change-address' || id == 'replacement-card'){
-            if (checked){
-                setSelectedCheckbox(id)
-                // setChecboxClass("appearance-none h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer")
-            } else {
-                setSelectedCheckbox(null)
-                
-            }
-        }
+        setCheckBox(e)
 
-
-        if (field){
+        if (field) {
             setFormData(prevData => ({
                 ...prevData,
-                [field.key] : checked ? field.value : ''
+                [field.key]: checked ? field.value : ''
             }))
         }
     }
+
 
     const isDisabled = (id) => {
         return selectedCheckbox !== null && selectedCheckbox !== id
     }
 
-    
-    // console.log(JSON.stringify(formData, null, 2));
+    const isGenderDisabled = (id) => {
+        if (id === 'male') {
+            return genderCheckbox.female; // Disable male if female is checked
+        }
+        if (id === 'female') {
+            return genderCheckbox.male; // Disable female if male is checked
+        }
+        return false
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -113,13 +133,13 @@ function Form() {
             })
 
             if (response.ok) {
-                
+
                 const blob = await response.blob()
                 // console.log(blob)
                 const url = window.URL.createObjectURL(blob)
                 const link = document.createElement('a')
                 link.href = url
-                
+
                 link.download = `${formData.last_name}, ${formData.first_name} - voter registration form.pdf`
                 link.click()
                 link.remove()
@@ -138,21 +158,28 @@ function Form() {
     return (
         <form className="w-full max-w-4xl bg-white shadow-md md:max-w-7xl md:flex rounded ">
             <div className='p-4 space-y-12 max-w-fit'>
-                <Purpose 
-                    formData={formData} 
-                    handleChange={handleInputChange} 
-                    checkboxHandler={checkboxHandler} 
+                <Purpose
+                    formData={formData}
+                    handleChange={handleInputChange}
+                    checkboxHandler={checkboxHandler}
                     selectedCheckbox={selectedCheckbox}
                     isDisabled={isDisabled}
                 />
-                <Profile formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
-                <Address 
-                    formData={formData} 
-                    handleChange={handleInputChange} 
-                    checkboxHandler={checkboxHandler} 
-                    handleCheckboxChange={handleMailingCheckboxChange} 
-                    isChecked={isChecked} 
-                    />
+                <Profile
+                    formData={formData}
+                    handleChange={handleInputChange}
+                    checkboxHandler={checkboxHandler}
+                    isDisabled={isDisabled}
+                    isGenderDisabled={isGenderDisabled}
+                />
+                <Address
+                    formData={formData}
+                    handleChange={handleInputChange}
+                    checkboxHandler={checkboxHandler}
+                    handleCheckboxChange={handleMailingCheckboxChange}
+                    isChecked={isChecked}
+                    isDisabled={isDisabled}
+                />
                 {isChecked && (
                     <Mailing formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
                 )}

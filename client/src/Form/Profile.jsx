@@ -1,4 +1,4 @@
-function Profile({ formData, handleChange, checkboxHandler }) {
+function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGenderDisabled }) {
     return (
         <div className='border-b border-gray-900/10 pb-12 w-5/6 flex space-x-20'>
             <div className='flex-initial w-1/3'></div>
@@ -53,20 +53,50 @@ function Profile({ formData, handleChange, checkboxHandler }) {
                     <div className="mt-6 space-y-6">
                         <div className="relative flex gap-x-3">
                             <div className="flex h-6 items-center">
-                                <input id="male" name="male" type="checkbox" className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" onChange={(e) => checkboxHandler(e)} />
+                                <input 
+                                    id="male" 
+                                    name="male" 
+                                    type="checkbox" 
+                                    className="custom-checkbox" 
+                                    onChange={(e) => checkboxHandler(e)} 
+                                    disabled = {isGenderDisabled('male')}
+                                    style={{cursor: isGenderDisabled("male") ? 'not-allowed' : 'pointer'}}
+                                />
                             </div>
                             <div className="text-sm leading-6">
-                                <label htmlFor="male" className="font-medium text-gray-900 cursor-pointer">
+                                <label 
+                                    htmlFor="male" 
+                                    className="font-medium text-gray-900"
+                                    style = {{
+                                        color: isGenderDisabled("male") ? "grey" : "black", 
+                                        cursor: isGenderDisabled("male") ? 'not-allowed' : 'pointer'
+                                    }}
+                                >
                                     Male
                                 </label>
                             </div>
                         </div>
                         <div className="relative flex gap-x-3">
                             <div className="flex h-6 items-center">
-                                <input id="female" name="female" type="checkbox" className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" onChange={(e) => checkboxHandler(e)} />
+                                <input 
+                                    id="female" 
+                                    name="female" 
+                                    type="checkbox" 
+                                    className="custom-checkbox" 
+                                    onChange={(e) => checkboxHandler(e)} 
+                                    disabled = {isGenderDisabled('female')}
+                                    style={{cursor: isGenderDisabled("female") ? 'not-allowed' : 'pointer'}}
+                                />
                             </div>
                             <div className="text-sm leading-6">
-                                <label htmlFor="female" className="font-medium text-gray-900 cursor-pointer">
+                                <label 
+                                    htmlFor="female" 
+                                    className="font-medium text-gray-900 cursor-pointer"
+                                    style = {{
+                                        color: isGenderDisabled("female") ? "grey" : "black", 
+                                        cursor: isGenderDisabled("female") ? 'not-allowed' : 'pointer'
+                                    }}
+                                >
                                     Female
                                 </label>
                             </div>

@@ -68,7 +68,8 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled }) {
                                     style = {{
                                         color: isDisabled("change-address") ? "grey" : "black", 
                                         cursor: isDisabled("change-address") ? 'not-allowed' : 'pointer'
-                                    }}>
+                                    }}
+                                >
                                     Change of Address, Name, or Other Information
                                 </label>
                             </div>
@@ -120,10 +121,11 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled }) {
                                     name="election_worker"
                                     type="checkbox"
                                     className={checkboxClass}
-                                    onChange={(e) => checkboxHandler(e)} />
+                                    onChange={(e) => checkboxHandler(e)} 
+                                />
                             </div>
                             <div className="text-sm leading-6">
-                                <label htmlFor="election_worker" className="font-bold text-gray-900 cursor-pointer">
+                                <label htmlFor="election_worker" className="font-bold text-gray-900 cursor-pointer" >
                                     Check here if you would like to volunteer to be an election worker
                                 </label>
                             </div>
