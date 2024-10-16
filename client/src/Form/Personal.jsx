@@ -1,10 +1,38 @@
+import { useState } from 'react'
+
 function Personal({ formData, handleChange, checkboxHandler }) {
+
+    const [ phoneValue, setPhoneValue ] = useState('')
+
+    function phoneFormat(value){
+        const cleanedValue = value.replace(/\D/g, '')
+
+        const formattedValue = cleanedValue
+            .replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3')
+            .replace(/(\(\d{3}\))(\d{0,3})(\d{0,4})/, (_, area, firstPart, secondPart) =>{
+                if (secondPart) return `(${area} ${firstPart} - ${secondPart})`
+                if (firstPart) return `${area} ${firstPart}`
+                return `${area}`
+            })
+
+        return formattedValue
+
+    }
+
+    
+
+    const  handlePhoneChange = (e) => {
+        const value = e.target.value
+        const formattedValue = phoneFormat(value)
+        setPhoneValue(formattedValue)
+        handleChange(e)
+    }
+
+
     return (
         <div className='p-4 space-y-12'>
             <div className='border-b border-gray-900/10 pb-12 w-5/6 flex space-x-20'>
                 <div className='flex-initial w-1/3'> </div>
-
-
 
                 <div className='w-full'>
                     <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-3">
@@ -15,7 +43,7 @@ function Personal({ formData, handleChange, checkboxHandler }) {
                             <p className='text-gray-700 text-xs font-normal'>(xxx)-xxx-xxxx</p>
                             <div className='mt-2'>
                                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input type="tel" name="phone" id="phone" autoComplete="tel" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="(xxx)-xxx-xxxx" onChange = {handleChange} value = {formData.phone}/>
+                                    <input type="tel" name="phone" id="phone" autoComplete="tel" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="(xxx)-xxx-xxxx" onChange = {handlePhoneChange} value ={phoneValue}/>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +70,7 @@ function Personal({ formData, handleChange, checkboxHandler }) {
 
                                 <label htmlFor="ssn" className="block text-sm font-medium leading-6 text-gray-900 mt-6">SSN</label>
                                 <p className='text-gray-700 text-xs font-normal'>
-                                    last 4 digits only
+                                    (If no TX driver's license or personal identification. Last 4 digits only.)
                                 </p>
                                 <div className="mt-2">
                                     <input id="ssn" name="ssn" type="text" autoComplete="ssn" className="block w-11/12 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" placeholder="xxxx" onChange = {handleChange}/>
@@ -56,7 +84,7 @@ function Personal({ formData, handleChange, checkboxHandler }) {
                             <div className="mt-6 space-y-6">
                                 <div className="relative flex gap-x-3">
                                     <div className="flex h-6 items-center">
-                                        <input id="citizen-yes" name="citizen-yes" type="checkbox" className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" onChange={(e) => checkboxHandler(e)}/>
+                                        <input id="citizen-yes" name="citizen-yes" type="checkbox" className="custom-checkbox" onChange={(e) => checkboxHandler(e)}/>
                                     </div>
                                     <div className="text-sm leading-6">
                                         <label htmlFor="citizen-yes" className="font-medium text-gray-900 cursor-pointer">
@@ -66,7 +94,7 @@ function Personal({ formData, handleChange, checkboxHandler }) {
                                 </div>
                                 <div className="relative flex gap-x-3">
                                     <div className="flex h-6 items-center">
-                                        <input id="citizen_no" name="citizen_no" type="checkbox" className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" onChange={(e) => checkboxHandler(e)}/>
+                                        <input id="citizen_no" name="citizen_no" type="checkbox" className="custom-checkbox" onChange={(e) => checkboxHandler(e)}/>
                                     </div>
                                     <div className="text-sm leading-6">
                                         <label htmlFor="citizen_no" className="font-medium text-gray-900 cursor-pointer">
@@ -81,7 +109,7 @@ function Personal({ formData, handleChange, checkboxHandler }) {
                             <div className="mt-6 space-y-6">
                                 <div className="relative flex gap-x-3">
                                     <div className="flex h-6 items-center">
-                                        <input id="no_id" name="no_id" type="checkbox" className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer" onChange={(e) => checkboxHandler(e)}/>
+                                        <input id="no_id" name="no_id" type="checkbox" className="custom-checkbox" onChange={(e) => checkboxHandler(e)}/>
                                     </div>
                                     <div className="text-sm leading-6">
                                         <label htmlFor="no_id" className="font-medium text-gray-900 cursor-pointer">
