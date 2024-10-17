@@ -11,6 +11,9 @@ function App() {
   const [formData, setFormData] = useState(dataKeys)
   const [click, setClick] = useState(false)
 
+  const [isChecked, setIsChecked] = useState(false)
+
+
 
   return (
     <div className='flex flex-col justify-center items-center min-h-screen '>
@@ -29,9 +32,9 @@ function App() {
           
         </div>
       </header>
-      <Form formData={formData} setFormData={setFormData} setClick={setClick} click={click}/>
-      <Confirmation formData={formData}/>
-      {/* {click ? <Confirmation formData={formData} /> : <Form formData={formData} setFormData={setFormData} setClick={setClick} click={click} />} */}
+      {/* <Form formData={formData} setFormData={setFormData} setClick={setClick} click={click}/>
+      <Confirmation formData={formData}/> */}
+      {click ? <Confirmation formData={formData} click={click} setClick={setClick} isChecked={isChecked} setIsChecked = {setIsChecked}/> : <Form formData={formData} setFormData={setFormData} setClick={setClick} click={click} isChecked={isChecked} setIsChecked = {setIsChecked}/>}
     </div>
   )
 }

@@ -3,15 +3,14 @@ import Address from "./Address"
 import Personal from "./Personal"
 import Purpose from "./Purpose"
 import Mailing from "./Mailing"
-import Confirmation from "../Confirmation"
+
 import { useState } from 'react'
 import dataKeys from "./dataKeys"
 
-function Form({ formData, setFormData, setClick, click }) {
+function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked }) {
 
     // const [formData, setFormData] = useState(dataKeys)
     // const [url, setUrl] = useState('')
-    const [isChecked, setIsChecked] = useState(false)
     const [selectedCheckbox, setSelectedCheckbox] = useState(null)
     const [genderCheckbox, setGenderCheckbox] = useState({
         male: false,
@@ -141,9 +140,7 @@ function Form({ formData, setFormData, setClick, click }) {
         }
     }
 
-    function handleClick(){
-        setClick(!click)
-    }
+    
 
 
     const handleSubmit = async (e) => {
@@ -213,7 +210,7 @@ function Form({ formData, setFormData, setClick, click }) {
                 <Personal formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} isCitizenDisabled={isCitizenDisabled} />
                 <div className='pr-24'>
                     <div className="mt-6 flex items-center justify-end gap-x-6">
-                        <button type="button" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={handleClick}>Review Options</button>
+                        <button type="button" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={()=>setClick(!click)}>Review Options</button>
                     </div>
                 </div>
                 

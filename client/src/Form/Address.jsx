@@ -52,12 +52,18 @@ function Address({ formData, handleChange, handleCheckboxChange, isChecked }) {
 
                     </div>
 
-                    {/* add conditionals here */}
+                    <div className="sm:col-span-1 mt-10">
+                        <label htmlFor="former_res" className="block text-sm font-medium leading-6 text-gray-900">City and County of Former Residence in Texas</label>
+                        <div className="mt-2">
+                            <input id="former_res" name="former_res" type="text" autoComplete="given_name" className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" onChange={handleChange} />
+                        </div>
+                    </div>
+
                     <fieldset className='mt-4'>
                         <div className="mt-6 space-y-6">
                             <div className="relative flex gap-x-3">
                                 <div className="flex h-6 items-center">
-                                    <input id="mailing" name="mailing" type="checkbox" checked={isChecked} className="custom-checkbox" onChange={handleCheckboxChange} />
+                                    <input id="mailing" name="mailing" type="checkbox" checked = {isChecked || formData.street_address_2} className="custom-checkbox" onChange={handleCheckboxChange} />
                                 </div>
                                 <div className="text-sm leading-6">
                                     <label htmlFor="mailing" className="font-medium text-gray-900 cursor-pointer">
@@ -67,13 +73,6 @@ function Address({ formData, handleChange, handleCheckboxChange, isChecked }) {
                             </div>
                         </div>
                     </fieldset>
-
-                    <div className="sm:col-span-1 mt-10">
-                        <label htmlFor="former_res" className="block text-sm font-medium leading-6 text-gray-900">City and County of Former Residence in Texas</label>
-                        <div className="mt-2">
-                            <input id="former_res" name="former_res" type="text" autoComplete="given_name" className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" onChange={handleChange} />
-                        </div>
-                    </div>
 
                 </div>
                 

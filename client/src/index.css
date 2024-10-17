@@ -28,6 +28,7 @@
   height: 1.5rem;
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
 
 .custom-checkbox:checked {

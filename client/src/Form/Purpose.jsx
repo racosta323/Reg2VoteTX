@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import Form from './Form'
 
-function Purpose({ checkboxHandler, selectedCheckbox, isDisabled }) {
+function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData }) {
 
-    
+    console.log(formData)
 
     const checkboxClass = "custom-checkbox cursor-pointer"
     const labelClass = 'font-medium text-gray-900 cursor-pointer'
@@ -25,7 +26,9 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled }) {
                                     id="new-application"
                                     name="new-application"
                                     type="checkbox"
+                                    checked={formData.why == '1'}
                                     className='custom-checkbox'
+                                    value={formData.value}
                                     onChange={(e) => checkboxHandler(e)}
                                     disabled = {isDisabled('new-application')}
                                     style={{cursor: isDisabled("new-application") ? 'not-allowed' : 'pointer'}}
@@ -54,6 +57,7 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled }) {
                                 <input
                                     id="change-address"
                                     name="change-address"
+                                    checked={formData.why == '2'}
                                     type="checkbox"
                                     className="custom-checkbox"
                                     onChange={(e) => checkboxHandler(e)}
@@ -85,6 +89,7 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled }) {
                                     id="replacement-card"
                                     name="replacement-card"
                                     type="checkbox"
+                                    checked={formData.why == '3'}
                                     className="custom-checkbox"
                                     disabled = {isDisabled('replacement-card')}
                                     onChange={(e) => checkboxHandler(e)}
@@ -120,6 +125,7 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled }) {
                                     id="election_worker"
                                     name="election_worker"
                                     type="checkbox"
+                                    checked={formData.election_worker == 'yes'}
                                     className={checkboxClass}
                                     onChange={(e) => checkboxHandler(e)} 
                                 />
