@@ -183,7 +183,7 @@ function Form({ formData, setFormData, setClick, click }) {
 
 
     return (
-        <form className="w-full max-w-4xl bg-white shadow-md md:max-w-7xl md:flex rounded ">
+        <form className="w-full max-w-4xl bg-white md:max-w-7xl md:flex rounded ">
             <div className='p-4 space-y-12 max-w-fit'>
                 <Purpose
                     formData={formData}

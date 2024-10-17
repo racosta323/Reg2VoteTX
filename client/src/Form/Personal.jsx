@@ -29,8 +29,7 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled }
 
     return (
         <div className='p-4 space-y-12'>
-            <div className='border-b border-gray-900/10 pb-12 w-5/6 flex space-x-20'>
-                <div className='flex-initial w-1/3'> </div>
+            <div className='border-b border-gray-900/10 pb-12 w-1/2 flex space-x-20 mx-auto'>
 
                 <div className='w-full'>
                     <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-3">
@@ -141,7 +140,7 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled }
 
                     </div>
                 </div>
-
+                
             </div>
         </div>
     )
