@@ -1,7 +1,16 @@
+import { useState } from 'react'
+
 import Form from './Form/Form'
+import Confirmation from './Confirmation'
+
+import dataKeys from './Form/dataKeys'
 
 
 function App() {
+
+  const [formData, setFormData] = useState(dataKeys)
+  const [ click, setClick ] = useState(false)
+  
 
   return (
     <div className='flex flex-col justify-center items-center min-h-screen bg-gray-100'>
@@ -19,7 +28,7 @@ function App() {
           </div>
         </div>
       </header>
-      <Form />
+      {click ? <Confirmation formData={formData}/> : <Form formData={formData} setFormData={setFormData} setClick={setClick} click={click}/>}     
     </div>
   )
 }

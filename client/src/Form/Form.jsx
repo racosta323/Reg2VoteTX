@@ -7,9 +7,9 @@ import Confirmation from "../Confirmation"
 import { useState } from 'react'
 import dataKeys from "./dataKeys"
 
-function Form() {
+function Form({ formData, setFormData, setClick, click }) {
 
-    const [formData, setFormData] = useState(dataKeys)
+    // const [formData, setFormData] = useState(dataKeys)
     // const [url, setUrl] = useState('')
     const [isChecked, setIsChecked] = useState(false)
     const [selectedCheckbox, setSelectedCheckbox] = useState(null)
@@ -26,18 +26,18 @@ function Form() {
         setIsChecked(e.target.checked)
     }
 
-    function willBe18(dob) {
-        const birthDate = new Date(dob)
-        const targetDate = new Date('2024-10-07')
+    // function willBe18(dob) {
+    //     const birthDate = new Date(dob)
+    //     const targetDate = new Date('2024-10-07')
 
-        let ageOnTarget = targetDate.getFullYear() - birthDate.getFullYear()
-        const monthDiff = targetDate.getMonth() - birthDate.getMonth()
+    //     let ageOnTarget = targetDate.getFullYear() - birthDate.getFullYear()
+    //     const monthDiff = targetDate.getMonth() - birthDate.getMonth()
 
-        if (monthDiff < 0 || (monthDiff === 0 && targetDate.getDate() < birthDate.getDate())) {
-            ageOnTarget--
-        }
-        return ageOnTarget >= 18 ? "yes" : "no"
-    }
+    //     if (monthDiff < 0 || (monthDiff === 0 && targetDate.getDate() < birthDate.getDate())) {
+    //         ageOnTarget--
+    //     }
+    //     return ageOnTarget >= 18 ? "yes" : "no"
+    // }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -45,14 +45,14 @@ function Form() {
         if (name == 'dob') {
             const [year, month, day] = value.split('-')
 
-            const is18 = willBe18(value)
+            // const is18 = willBe18(value)
 
             setFormData(prevData => ({
                 ...prevData,
                 'birth_month': month,
                 'birth_day': day,
                 'birth_year': year,
-                'voting_age': is18
+                // 'voting_age': is18
             }))
 
         } else if (name !== 'dob') {
@@ -141,6 +141,10 @@ function Form() {
         }
     }
 
+    function handleClick(){
+        setClick(!click)
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -209,10 +213,10 @@ function Form() {
                 <Personal formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} isCitizenDisabled={isCitizenDisabled} />
                 <div className='pr-24'>
                     <div className="mt-6 flex items-center justify-end gap-x-6">
-                        <button type="submit" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
+                        <button type="button" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={handleClick}>Review Options</button>
                     </div>
                 </div>
-                <Confirmation formData={formData} />
+                
             </div>
 
         </form>
