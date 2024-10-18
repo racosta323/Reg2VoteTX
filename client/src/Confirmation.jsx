@@ -1,4 +1,49 @@
-function Confirmation({ formData, click, setClick, isChecked, setIsChecked }) {
+import dataKeys from "./Form/dataKeys"
+import { useNavigate } from 'react-router-dom'
+import Success from "./Success"
+
+function Confirmation({ formData, click, setClick, isChecked, setIsChecked, setFormData }) {
+
+    const navigate = useNavigate()
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log(formData)
+        try {
+            const response = await fetch('http://127.0.0.1:8000/generate_pdf', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify(formData, null, 2)
+
+            })
+
+            if (response.ok) {
+
+                const blob = await response.blob()
+                // console.log(blob)
+                const url = window.URL.createObjectURL(blob)
+                const link = document.createElement('a')
+                link.href = url
+                
+                link.download = `${formData.last_name}, ${formData.first_name} - voter registration form.pdf`
+                // keep file somewhere so someone can donwload it?
+                link.click()
+                link.remove()
+                setFormData(dataKeys)
+                
+                
+            } else {
+                console.log("Failed to download file.", response.statusText)
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
 
     function reason(data) {
         if (data == '1') {
@@ -32,7 +77,11 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked }) {
     }
 
     function handleBirth(month, day, year){
-        return `${month} / ${day} / ${year}`
+        if (year){
+            return `${month} / ${day} / ${year}`
+        } else {
+            return ''
+        }
     }
 
     return (
@@ -114,7 +163,7 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked }) {
                         <button type="button" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={() => setClick(!click)}>Edit</button>
                     </div>
                     <div className="mt-6 flex items-center justify-end">
-                        <button type="submit" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
+                        <button type="submit" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={handleSubmit}>Submit</button>
                     </div>
                 </div>
             </div>

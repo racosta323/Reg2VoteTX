@@ -34,7 +34,7 @@ function App() {
       </header>
       {/* <Form formData={formData} setFormData={setFormData} setClick={setClick} click={click}/>
       <Confirmation formData={formData}/> */}
-      {click ? <Confirmation formData={formData} click={click} setClick={setClick} isChecked={isChecked} setIsChecked = {setIsChecked}/> : <Form formData={formData} setFormData={setFormData} setClick={setClick} click={click} isChecked={isChecked} setIsChecked = {setIsChecked}/>}
+      {click ? <Confirmation formData={formData} setFormData={setFormData} click={click} setClick={setClick} isChecked={isChecked} setIsChecked = {setIsChecked}/> : <Form formData={formData} setFormData={setFormData} setClick={setClick} click={click} isChecked={isChecked} setIsChecked = {setIsChecked}/>}
     </div>
   )
 }

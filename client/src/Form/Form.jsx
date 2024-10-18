@@ -9,8 +9,6 @@ import dataKeys from "./dataKeys"
 
 function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked }) {
 
-    // const [formData, setFormData] = useState(dataKeys)
-    // const [url, setUrl] = useState('')
     const [selectedCheckbox, setSelectedCheckbox] = useState(null)
     const [genderCheckbox, setGenderCheckbox] = useState({
         male: false,
@@ -25,33 +23,17 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
         setIsChecked(e.target.checked)
     }
 
-    // function willBe18(dob) {
-    //     const birthDate = new Date(dob)
-    //     const targetDate = new Date('2024-10-07')
-
-    //     let ageOnTarget = targetDate.getFullYear() - birthDate.getFullYear()
-    //     const monthDiff = targetDate.getMonth() - birthDate.getMonth()
-
-    //     if (monthDiff < 0 || (monthDiff === 0 && targetDate.getDate() < birthDate.getDate())) {
-    //         ageOnTarget--
-    //     }
-    //     return ageOnTarget >= 18 ? "yes" : "no"
-    // }
-
     const handleInputChange = (e) => {
         const { name, value } = e.target
 
         if (name == 'dob') {
             const [year, month, day] = value.split('-')
 
-            // const is18 = willBe18(value)
-
             setFormData(prevData => ({
                 ...prevData,
                 'birth_month': month,
                 'birth_day': day,
                 'birth_year': year,
-                // 'voting_age': is18
             }))
 
         } else if (name !== 'dob') {
@@ -139,44 +121,6 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
             return citizenCheckbox.yes
         }
     }
-
-    
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        console.log(formData)
-        try {
-            const response = await fetch('http://127.0.0.1:8000/generate_pdf', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": 'application/json'
-                },
-                body: JSON.stringify(formData, null, 2)
-
-            })
-
-            if (response.ok) {
-
-                const blob = await response.blob()
-                // console.log(blob)
-                const url = window.URL.createObjectURL(blob)
-                const link = document.createElement('a')
-                link.href = url
-
-                link.download = `${formData.last_name}, ${formData.first_name} - voter registration form.pdf`
-                link.click()
-                link.remove()
-
-            } else {
-                console.log("Failed to download file.", response.statusText)
-            }
-
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
 
 
     return (
