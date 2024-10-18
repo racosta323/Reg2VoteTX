@@ -28,7 +28,6 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData }) {
                                     type="checkbox"
                                     checked={formData.why == '1'}
                                     className='custom-checkbox'
-                                    value={formData.value}
                                     onChange={(e) => checkboxHandler(e)}
                                     disabled = {isDisabled('new-application')}
                                     style={{cursor: isDisabled("new-application") ? 'not-allowed' : 'pointer'}}

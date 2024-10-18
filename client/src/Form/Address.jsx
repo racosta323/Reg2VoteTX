@@ -63,7 +63,14 @@ function Address({ formData, handleChange, handleCheckboxChange, isChecked }) {
                         <div className="mt-6 space-y-6">
                             <div className="relative flex gap-x-3">
                                 <div className="flex h-6 items-center">
-                                    <input id="mailing" name="mailing" type="checkbox" checked = {isChecked || formData.street_address_2} className="custom-checkbox" onChange={handleCheckboxChange} />
+                                    <input 
+                                        id="mailing" 
+                                        name="mailing" 
+                                        type="checkbox" 
+                                        checked = {isChecked || formData.street_address_2} 
+                                        className="custom-checkbox" 
+                                        onChange={handleCheckboxChange} 
+                                    />
                                 </div>
                                 <div className="text-sm leading-6">
                                     <label htmlFor="mailing" className="font-medium text-gray-900 cursor-pointer">

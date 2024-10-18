@@ -79,7 +79,15 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked }) {
                             <td className="text-gray-700 pl-20">{formData.phone} </td>
                         </tr>
                         <tr>
-                            <td className="text-gray-700 pt-4">TX Driver's License / ID: </td>
+                            <td className="text-gray-700 pt-4">Date of Birth: </td>
+                            <td className="text-gray-700 pl-20 pt-4">{formData.birth_month} {formData.birth_day} {formData.birth_year} </td>
+                        </tr>
+                        <tr>
+                            <td className="text-gray-700">U.S. Citizen: </td>
+                            <td className="text-gray-700 pl-20 pt-4">{formData.citizenship.charAt(0).toUpperCase() + formData.citizenship.substr(1).toLowerCase()} </td>
+                        </tr>
+                        <tr>
+                            <td className="text-gray-700">TX Driver's License / ID: </td>
                             <td className="text-gray-700 pl-20 pt-4">{formData.license} </td>
                         </tr>
                         <tr>
@@ -88,11 +96,11 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked }) {
                         </tr>
                         <tr>
                             <td className="text-gray-700"></td>
-                            <td className="text-gray-700">{txdl(formData.no_id)}</td>
+                            <td className="text-gray-700 pl-20">{txdl(formData.no_id)}</td>
                         </tr>
                         <tr>
                             <td className="text-gray-700"></td>
-                            <td className="text-gray-700 py-5">{election(formData.election_worker)}</td>
+                            <td className="text-gray-700 py-5 pl-20">{election(formData.election_worker)}</td>
 
                         </tr>
                     </tbody>
