@@ -22,7 +22,7 @@ function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGender
                         </label>
                         <div className='mt-2'>
                             <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                <input type="text" name="middle_name" id="middle_name" autoComplete="given-name" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={handleChange} />
+                                <input type="text" name="middle_name" id="middle_name" autoComplete="given-name" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={handleChange} value={formData.middle_name}/>
                             </div>
                         </div>
                     </div>
@@ -33,7 +33,7 @@ function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGender
                         </label>
                         <div className='mt-2'>
                             <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                <input type="text" name="last_name" id="last_name" autoComplete="last_name" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={handleChange} />
+                                <input type="text" name="last_name" id="last_name" autoComplete="last_name" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={handleChange} value={formData.last_name}/>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@ function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGender
                     <div className="sm:col-span-4">
                         <label htmlFor="former_name" className="block text-sm font-medium leading-6 text-gray-900">Former name (if any)</label>
                         <div className="mt-2">
-                            <input id="former_name" name="former_name" type="text" autoComplete="given_name" className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" onChange={handleChange} />
+                            <input id="former_name" name="former_name" type="text" autoComplete="given_name" className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" onChange={handleChange} value={formData.former_name}/>
                         </div>
                     </div>
 
@@ -58,6 +58,7 @@ function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGender
                                     name="male" 
                                     type="checkbox" 
                                     className="custom-checkbox" 
+                                    checked={formData.gender == 'male'}
                                     onChange={(e) => checkboxHandler(e)} 
                                     disabled = {isGenderDisabled('male')}
                                     style={{cursor: isGenderDisabled("male") ? 'not-allowed' : 'pointer'}}
@@ -82,6 +83,7 @@ function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGender
                                     id="female" 
                                     name="female" 
                                     type="checkbox" 
+                                    checked={formData.gender == 'female'}
                                     className="custom-checkbox" 
                                     onChange={(e) => checkboxHandler(e)} 
                                     disabled = {isGenderDisabled('female')}

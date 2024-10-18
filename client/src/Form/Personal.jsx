@@ -40,7 +40,7 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled }
                             <p className='text-gray-700 text-xs font-normal'>(xxx)-xxx-xxxx</p>
                             <div className='mt-2'>
                                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input type="tel" name="phone" id="phone" autoComplete="tel" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="(xxx)-xxx-xxxx" onChange={handlePhoneChange} value={formData.phone} />
+                                    <input type="tel" name="phone" id="phone" autoComplete="tel" maxLength={10} className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="(xxx)-xxx-xxxx" onChange={handlePhoneChange}  value={phoneValue || formData.phone}/>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled }
                                     (If no TX driver's license or personal identification. Last 4 digits only.)
                                 </p>
                                 <div className="mt-2">
-                                    <input id="ssn" name="ssn" type="text" autoComplete="ssn" className="block w-11/12 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" placeholder="xxxx" onChange={handleChange} value={formData.ssn}/>
+                                    <input id="ssn" name="ssn" type="text" maxLength={4} autoComplete="ssn" className="block w-11/12 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" placeholder="xxxx" onChange={handleChange} value={formData.ssn}/>
                                 </div>
                             </div>
                         </div>

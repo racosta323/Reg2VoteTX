@@ -31,6 +31,10 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked }) {
         }
     }
 
+    function handleBirth(month, day, year){
+        return `${month} / ${day} / ${year}`
+    }
+
     return (
         <div className="max-w-4xl md:max-w-7xl w-full bg-white md:flex flex flex-col">
             <div className="md:mx-auto w-1/2">
@@ -44,43 +48,43 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked }) {
 
                         <tr>
                             <td className="text-gray-700 pt-4">First Name: </td>
-                            <td className="text-gray-700 pl-20">{formData.first_name} </td>
+                            <td className="text-gray-700 pl-20 pt-4">{formData.first_name} </td>
                         </tr>
                         <tr>
-                            <td className="text-gray-700">Middle Name: </td>
-                            <td className="text-gray-700 pl-20">{formData.middle_name} </td>
+                            <td className="text-gray-700 pt-4">Middle Name: </td>
+                            <td className="text-gray-700 pl-20 pt-4">{formData.middle_name} </td>
                         </tr>
                         <tr>
-                            <td className="text-gray-700">Last Name: </td>
-                            <td className="text-gray-700 pl-20">{formData.last_name} </td>
+                            <td className="text-gray-700 pt-4">Last Name: </td>
+                            <td className="text-gray-700 pl-20 pt-4">{formData.last_name} </td>
                         </tr>
                         <tr>
-                            <td className="text-gray-700">Former Name: </td>
-                            <td className="text-gray-700 pl-20">{formData.former_name} </td>
+                            <td className="text-gray-700 pt-4">Former Name: </td>
+                            <td className="text-gray-700 pl-20 pt-4">{formData.former_name} </td>
                         </tr>
                         <tr className="border-b-4">
-                            <td className="text-gray-700">Gender: </td>
-                            <td className="text-gray-700 pl-20">{formData.gender.charAt(0).toUpperCase() + formData.gender.substr(1).toLowerCase()} </td>
+                            <td className="text-gray-700 pt-4">Gender: </td>
+                            <td className="text-gray-700 pl-20 pt-4">{formData.gender.charAt(0).toUpperCase() + formData.gender.substr(1).toLowerCase()} </td>
                         </tr>
                         <tr>
-                            <td className="text-gray-700 pt-4">Residential Address: </td>
-                            <td className="text-gray-700 pl-20">{formData.street_address} {formData.city} {formData.county} {formData.zip_code} </td>
+                            <td className="text-gray-700">Residential Address: </td>
+                            <td className="text-gray-700 pl-20 pt-4">{formData.street_address} {formData.city} {formData.county} {formData.zip_code} </td>
                         </tr>
                         <tr>
-                            <td className="text-gray-700">Former City and County: </td>
-                            <td className="text-gray-700 pl-20">{formData.former_res} </td>
+                            <td className="text-gray-700 pt-4">Former City and County: </td>
+                            <td className="text-gray-700 pl-20 pt-4">{formData.former_res} </td>
                         </tr>
                         <tr>
                             <td className="text-gray-700">Mailing Address: </td>
-                            <td className="text-gray-700 pl-20">{formData.street_address_2} {formData.city_2} {formData.state} {formData.zip_code_2} </td>
+                            <td className="text-gray-700 pl-20 pt-4">{formData.street_address_2} {formData.city_2} {formData.state} {formData.zip_code_2} </td>
                         </tr>
                         <tr className="border-b-4">
-                            <td className="text-gray-700 ">Phone Number: </td>
-                            <td className="text-gray-700 pl-20">{formData.phone} </td>
+                            <td className="text-gray-700 pt-4">Phone Number: </td>
+                            <td className="text-gray-700 pl-20 pt-4">{formData.phone} </td>
                         </tr>
                         <tr>
                             <td className="text-gray-700 pt-4">Date of Birth: </td>
-                            <td className="text-gray-700 pl-20 pt-4">{formData.birth_month} {formData.birth_day} {formData.birth_year} </td>
+                            <td className="text-gray-700 pl-20 pt-4">{handleBirth(formData.birth_month, formData.birth_day, formData.birth_year)}</td>
                         </tr>
                         <tr>
                             <td className="text-gray-700">U.S. Citizen: </td>
@@ -91,12 +95,12 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked }) {
                             <td className="text-gray-700 pl-20 pt-4">{formData.license} </td>
                         </tr>
                         <tr>
-                            <td className="text-gray-700">SSN:</td>
-                            <td className="text-gray-700 pl-20">{formData.ssn} </td>
+                            <td className="text-gray-700 pt-4">SSN:</td>
+                            <td className="text-gray-700 pl-20 pt-4">{formData.ssn} </td>
                         </tr>
                         <tr>
                             <td className="text-gray-700"></td>
-                            <td className="text-gray-700 pl-20">{txdl(formData.no_id)}</td>
+                            <td className="text-gray-700 pl-20 pt-4">{txdl(formData.no_id)}</td>
                         </tr>
                         <tr>
                             <td className="text-gray-700"></td>
