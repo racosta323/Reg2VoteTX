@@ -22,15 +22,17 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked, setF
             if (response.ok) {
 
                 const blob = await response.blob()
-                // console.log(blob)
                 const url = window.URL.createObjectURL(blob)
-                const link = document.createElement('a')
-                link.href = url
+
+                navigate('/success', {state: { downloadUrl: url }})
+                // console.log(blob)
                 
-                link.download = `${formData.last_name}, ${formData.first_name} - voter registration form.pdf`
                 // keep file somewhere so someone can donwload it?
-                link.click()
-                link.remove()
+                // const link = document.createElement('a')
+                // link.href = url
+                // link.download = `${formData.last_name}, ${formData.first_name} - voter registration form.pdf`
+                // link.click()
+                // link.remove()
                 setFormData(dataKeys)
                 
                 
