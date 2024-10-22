@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import ShareButton from './ShareButton'
 
 import Form from './Form/Form'
 import Confirmation from './Confirmation'
 
 import dataKeys from './Form/dataKeys'
-
+import { FaFacebookSquare } from "react-icons/fa"
 
 function App() {
 
@@ -16,14 +17,21 @@ function App() {
 
 
   return (
-    <div className='flex justify-between min-h-screen'>
-      <div className='sticky top-0 w-1/3'>
+    <div className='flex flex-col md:flex-row justify-between min-h-screen bg-gray-100 shadow-xl'>
+      <div className='md:w-1/3 m-5'>
         <header className='sticky top-0'>
-          <div className='pb-12 w-5/6 flex space-x-20 mx-auto'>
+          <div className='lex flex-col md:flex-row pb-12 space-x-0 md:space-x-20 mx-auto'>
+            <div className='mt-10'>
+              <h1 className='text-4xl md:text-6xl text-gray-900 mb-5'>Reg2VoteTx</h1>
+              <p className='text-gray-500 font-bold'>Offering a simple way to register to vote in Texas</p>
+              <div className='mb-10 mt-2 flex flex-col'>
+                <div>
+                  <ShareButton type={"facebook"} />
+                  <ShareButton />
+                  <ShareButton />
+                </div>
+              </div>
 
-            <div className='w-full mt-10'>
-              <h1 className='text-6xl text-gray-900 mb-5'>Reg2VoteTx</h1>
-              <p className='text-gray-500 font-bold mb-10'>Offering a simple way to register to vote in Texas</p>
               <p className='text-gray-900'>
                 As of 2024, the State of Texas requires that eligible voters first register to vote in the county in which they reside. Eligible voters must submit a written and signed application "either in person or by mail to the county voter registrar in the county in which the voter resides." (https://www.sos.state.tx.us/elections/).
                 <br /><br />
@@ -39,11 +47,32 @@ function App() {
               </p>
             </div>
           </div>
+
         </header>
       </div>
       {/* <Form formData={formData} setFormData={setFormData} setClick={setClick} click={click}/>
       <Confirmation formData={formData}/> */}
-      {click ? <Confirmation formData={formData} setFormData={setFormData} click={click} setClick={setClick} isChecked={isChecked} setIsChecked={setIsChecked} /> : <Form formData={formData} setFormData={setFormData} setClick={setClick} click={click} isChecked={isChecked} setIsChecked={setIsChecked} />}
+      <div className='w-full md:w-2/3 m-5'>
+        {click ? (
+          <Confirmation 
+            formData={formData} 
+            setFormData={setFormData} 
+            click={click} 
+            setClick={setClick} 
+            isChecked={isChecked} 
+            etIsChecked={setIsChecked} 
+          />
+        ) : (
+          <Form 
+              formData={formData} 
+              setFormData={setFormData} 
+              setClick={setClick} 
+              click={click} 
+              isChecked={isChecked} 
+              setIsChecked={setIsChecked} 
+          />
+        )}
+      </div>
     </div>
   )
 }

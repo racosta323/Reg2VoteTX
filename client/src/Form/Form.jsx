@@ -124,43 +124,41 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
 
 
     return (
-        <form className="">
-            <div className="m-15 p-4 h-auto bg-white md:max-w-7xl md:flex flex-col rounded ">
-                <Purpose
-                    formData={formData}
-                    handleChange={handleInputChange}
-                    checkboxHandler={checkboxHandler}
-                    selectedCheckbox={selectedCheckbox}
-                    isDisabled={isDisabled}
-                />
-                <Profile
-                    formData={formData}
-                    handleChange={handleInputChange}
-                    checkboxHandler={checkboxHandler}
-                    isDisabled={isDisabled}
-                    isGenderDisabled={isGenderDisabled}
-                />
-                <Address
-                    formData={formData}
-                    handleChange={handleInputChange}
-                    checkboxHandler={checkboxHandler}
-                    handleCheckboxChange={handleMailingCheckboxChange}
-                    isChecked={isChecked}
-                    isDisabled={isDisabled}
-                />
-                {isChecked && (
-                    <Mailing formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
-                )}
-                <Personal formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} isCitizenDisabled={isCitizenDisabled} />
-                <div className='pr-24'>
-                    <div className="mt-6 flex items-center justify-end gap-x-6">
-                        <button type="button" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={()=>setClick(!click)}>Review Options</button>
-                    </div>
-                </div>
-                
-            </div>
 
-        </form>
+        <form className="m-2 p-4 h-auto bg-white rounded shadow-xl">
+            <Purpose
+                formData={formData}
+                handleChange={handleInputChange}
+                checkboxHandler={checkboxHandler}
+                selectedCheckbox={selectedCheckbox}
+                isDisabled={isDisabled}
+            />
+            <Profile
+                formData={formData}
+                handleChange={handleInputChange}
+                checkboxHandler={checkboxHandler}
+                isDisabled={isDisabled}
+                isGenderDisabled={isGenderDisabled}
+            />
+            <Address
+                formData={formData}
+                handleChange={handleInputChange}
+                checkboxHandler={checkboxHandler}
+                handleCheckboxChange={handleMailingCheckboxChange}
+                isChecked={isChecked}
+                isDisabled={isDisabled}
+            />
+            {isChecked && (
+                <Mailing formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
+            )}
+            <Personal formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} isCitizenDisabled={isCitizenDisabled} />
+            <div className='pr-24'>
+                <div className="mt-6 flex items-center justify-end gap-x-6">
+                    <button type="button" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={() => setClick(!click)}>Review Options</button>
+                </div>
+            </div>
+        </form >
+
     )
 }
 
