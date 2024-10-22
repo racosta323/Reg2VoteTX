@@ -124,8 +124,8 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
 
 
     return (
-        <form className="w-full max-w-4xl bg-white md:max-w-7xl md:flex rounded ">
-            <div className='p-4 space-y-12 max-w-fit'>
+        <form className="">
+            <div className="m-15 p-4 h-auto bg-white md:max-w-7xl md:flex flex-col rounded ">
                 <Purpose
                     formData={formData}
                     handleChange={handleInputChange}

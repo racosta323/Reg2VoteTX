@@ -87,7 +87,7 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked, setF
     }
 
     return (
-        <div className="max-w-4xl md:max-w-7xl w-full bg-white md:flex flex flex-col">
+        <div className="w-full bg-white md:max-w-7xl md:flex flex rounded">
             <div className="md:mx-auto w-1/2">
                 <h1 className="text-gray-700 pb-10 font-bold">REVIEW OPTIONS</h1>
                 <table className="table-auto">

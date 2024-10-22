@@ -1,7 +1,7 @@
 function Mailing({ htmlFormData, handleChange, formData }) {
     return (
         <div className='p-4 space-y-12'>
-            <div className='border-b border-gray-900/10 pb-12 w-1/2 flex space-x-20 mx-auto'>
+            <div className='border-b border-gray-900/10 pb-12 w-5/6 flex space-x-20 mx-auto'>
                 
 
                 <div className='w-full'>
