@@ -1,4 +1,19 @@
-function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGenderDisabled }) {
+import { useEffect } from 'react'
+
+function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGenderDisabled, genderCheckbox, setGenderCheckbox, handleKeyDown }) {
+
+    const isGenderDisabledMale = isGenderDisabled('male')
+    const isGenderDisabledFemale = isGenderDisabled('female')
+
+    useEffect(()=>{
+        setGenderCheckbox({
+            male: formData.gender == 'male',
+            female: formData.gender == 'female'
+        })
+    }, [formData])
+
+    
+
     return (
         <div className='border-b border-gray-900/10 pb-12 w-5/6 flex space-x-20 mx-auto'>
             <div className='w-full'>
@@ -56,10 +71,11 @@ function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGender
                                     name="male" 
                                     type="checkbox" 
                                     className="custom-checkbox" 
-                                    checked={formData.gender == 'male'}
+                                    checked={genderCheckbox['male']}
                                     onChange={(e) => checkboxHandler(e)} 
-                                    disabled = {isGenderDisabled('male')}
-                                    style={{cursor: isGenderDisabled("male") ? 'not-allowed' : 'pointer'}}
+                                    disabled = {isGenderDisabledMale}
+                                    style={{cursor: isGenderDisabledMale ? 'not-allowed' : 'pointer'}}
+                                    onKeyDown={handleKeyDown}
                                 />
                             </div>
                             <div className="text-sm leading-6">
@@ -67,8 +83,8 @@ function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGender
                                     htmlFor="male" 
                                     className="font-medium text-gray-900"
                                     style = {{
-                                        color: isGenderDisabled("male") ? "grey" : "black", 
-                                        cursor: isGenderDisabled("male") ? 'not-allowed' : 'pointer'
+                                        color: isGenderDisabledMale ? "grey" : "black", 
+                                        cursor: isGenderDisabledMale ? 'not-allowed' : 'pointer'
                                     }}
                                 >
                                     Male
@@ -81,11 +97,12 @@ function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGender
                                     id="female" 
                                     name="female" 
                                     type="checkbox" 
-                                    checked={formData.gender == 'female'}
+                                    checked={genderCheckbox['female']}
                                     className="custom-checkbox" 
                                     onChange={(e) => checkboxHandler(e)} 
-                                    disabled = {isGenderDisabled('female')}
-                                    style={{cursor: isGenderDisabled("female") ? 'not-allowed' : 'pointer'}}
+                                    disabled = {isGenderDisabledFemale}
+                                    style={{cursor: isGenderDisabledFemale ? 'not-allowed' : 'pointer'}}
+                                    onKeyDown={handleKeyDown}
                                 />
                             </div>
                             <div className="text-sm leading-6">
@@ -93,8 +110,8 @@ function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGender
                                     htmlFor="female" 
                                     className="font-medium text-gray-900 cursor-pointer"
                                     style = {{
-                                        color: isGenderDisabled("female") ? "grey" : "black", 
-                                        cursor: isGenderDisabled("female") ? 'not-allowed' : 'pointer'
+                                        color: isGenderDisabledFemale ? "grey" : "black", 
+                                        cursor: isGenderDisabledFemale ? 'not-allowed' : 'pointer'
                                     }}
                                 >
                                     Female

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Form from './Form'
 
-function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData }) {
+function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData, handleKeyDown }) {
 
     const [ checked, setChecked ] = useState({
         'new-application': false,
@@ -20,22 +20,12 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData }) {
         })
     }, [formData])
 
-    const handleKeyDown =(e) => {
-        let id = e.target.id
-        if (e.key == 'Enter'){
-            console.log(id)
-            setChecked(prevState => ({
-                ...prevState,
-                [id]: !prevState[id]
-            }))
-        }
-    }
 
     const checkboxClass = "custom-checkbox cursor-pointer"
     const labelClass = 'font-medium text-gray-900 cursor-pointer'
     const isNewDisabled = isDisabled('new-application')
     const isChangeDisabled = isDisabled('change-address')
-    const isReplacementDisabled = isDisabled('replaement-card')
+    const isReplacementDisabled = isDisabled('replacement-card')
 
 
 
@@ -45,7 +35,7 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData }) {
                 <p className="mt-1 text-md leading-6 text-gray-600">
                     Check off the most applicable reason why you're completing this application
                 </p>
-                <fieldset>
+                <fieldset>          
                     <div className="mt-6 space-y-6">
                         <div className="relative flex gap-x-3">
                             <div className="flex h-6 items-center">

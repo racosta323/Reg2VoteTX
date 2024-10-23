@@ -11,7 +11,6 @@ function App() {
 
   const [formData, setFormData] = useState(dataKeys)
   const [click, setClick] = useState(false)
-
   const [isChecked, setIsChecked] = useState(false)
 
   return (

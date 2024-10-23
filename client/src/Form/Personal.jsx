@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, setFormData, citizenCheckbox, setNoIdCheckbox, noIdCheckbox, setCitizenCheckbox }) {
+function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, setFormData, citizenCheckbox, setNoIdCheckbox, noIdCheckbox, setCitizenCheckbox, handleKeyDown }) {
 
     const [phoneValue, setPhoneValue] = useState('')
 
@@ -12,17 +12,6 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
         })
 
     },[formData])
-
-
-    function handleKeyDown(e){
-        let id = e.target.id
-        let value = e.target.value
-        
-        if (e.key == 'Enter'){
-            e.preventDefault(); 
-            e.target.click()
-        }
-    }
     
 
     function phoneFormat(value) {

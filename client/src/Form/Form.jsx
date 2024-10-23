@@ -9,8 +9,8 @@ import dataKeys from "./dataKeys"
 
 function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked }) {
 
-    const [selectedCheckbox, setSelectedCheckbox] = useState(null)
-    const [genderCheckbox, setGenderCheckbox] = useState({
+    const [ selectedCheckbox, setSelectedCheckbox ] = useState(null)
+    const [ genderCheckbox, setGenderCheckbox ] = useState({
         male: false,
         female: false
     })
@@ -21,9 +21,9 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
 
     const [ noIdCheckbox, setNoIdCheckbox ] = useState(false)
 
-    const handleMailingCheckboxChange = (e) => {
-        setIsChecked(e.target.checked)
-    }
+    // const handleMailingCheckboxChange = (e) => {
+    //     setIsChecked(e.target.checked)
+    // }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -131,6 +131,15 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
         }
     }
 
+    const handleKeyDown =(e) => {
+        let id = e.target.id
+        if (e.key == 'Enter'){
+            e.preventDefault()
+            e.target.click()
+            
+        }
+    }
+
 
     return (
 
@@ -141,6 +150,8 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
                 checkboxHandler={checkboxHandler}
                 selectedCheckbox={selectedCheckbox}
                 isDisabled={isDisabled}
+                handleKeyDown={handleKeyDown}
+                
             />
             <Profile
                 formData={formData}
@@ -148,12 +159,16 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
                 checkboxHandler={checkboxHandler}
                 isDisabled={isDisabled}
                 isGenderDisabled={isGenderDisabled}
+                genderCheckbox={genderCheckbox}
+                setGenderCheckbox={setGenderCheckbox}
+                handleKeyDown={handleKeyDown}
             />
             <Address
                 formData={formData}
+                setFormData={setFormData}
                 handleChange={handleInputChange}
                 checkboxHandler={checkboxHandler}
-                handleCheckboxChange={handleMailingCheckboxChange}
+                handleKeyDown={handleKeyDown}
                 isChecked={isChecked}
                 setIsChecked={setIsChecked}
                 isDisabled={isDisabled}
@@ -171,6 +186,7 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
                 citizenCheckbox={citizenCheckbox}
                 setNoIdCheckbox={setNoIdCheckbox}
                 noIdCheckbox={noIdCheckbox}
+                handleKeyDown={handleKeyDown}
             />
             <div className='pr-24'>
                 <div className="mt-6 flex items-center justify-end gap-x-6">
