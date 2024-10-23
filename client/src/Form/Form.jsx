@@ -146,6 +146,7 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
                 checkboxHandler={checkboxHandler}
                 handleCheckboxChange={handleMailingCheckboxChange}
                 isChecked={isChecked}
+                setIsChecked={setIsChecked}
                 isDisabled={isDisabled}
             />
             {isChecked && (

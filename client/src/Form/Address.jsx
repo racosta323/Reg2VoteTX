@@ -1,6 +1,6 @@
 import Mailing from "./Mailing"
 
-function Address({ formData, handleChange, handleCheckboxChange, isChecked }) {
+function Address({ formData, handleChange, handleCheckboxChange, isChecked, setIsChecked}) {
 
     return (
         <div className='p-4 space-y-12'>
@@ -70,6 +70,7 @@ function Address({ formData, handleChange, handleCheckboxChange, isChecked }) {
                                         checked = {isChecked || formData.street_address_2} 
                                         className="custom-checkbox" 
                                         onChange={handleCheckboxChange} 
+                                        onKeyDown={e=>{e.key == 'Enter' && setIsChecked(!isChecked)}}
                                     />
                                 </div>
                                 <div className="text-sm leading-6">

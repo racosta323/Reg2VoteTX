@@ -58,7 +58,7 @@ function App() {
                 </span>
               </span>
               <br /><br />
-              The following form was created to make it easier for eligible voters in Texas to register to vote. Eligible voters can complete the following form, review and submit their entries, then can download the completed form to either mail to or drop off to their 
+              The following form was created to make it easier for eligible voters in Texas to register to vote. Eligible voters can complete the following form, review and submit their entries, then can download and sign the completed form to either mail to or drop off to their 
               <a 
                 href='https://www.sos.state.tx.us/elections/voter/votregduties.shtml'
                 className='text-blue-600 font-bold hover:text-violet-600'
@@ -93,7 +93,7 @@ function App() {
               click={click}
               setClick={setClick}
               isChecked={isChecked}
-              etIsChecked={setIsChecked}
+              setIsChecked={setIsChecked}
             />
           ) : (
             <Form

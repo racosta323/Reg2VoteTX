@@ -1,8 +1,6 @@
 function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGenderDisabled }) {
     return (
         <div className='border-b border-gray-900/10 pb-12 w-5/6 flex space-x-20 mx-auto'>
-            
-
             <div className='w-full'>
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div className="sm:col-span-3">
