@@ -46,25 +46,25 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
     }
 
     function setCheckBox(e) {
+        console.log(e.target.checked)
         const { id, name, checked } = e.target
         const validIds = ['new-application', 'change-address', 'replacement-card']
-
         if (validIds.includes(id)) {
             setSelectedCheckbox(checked ? id : null)
         }
 
         if (name == 'male' || name == 'female') {
-            setGenderCheckbox({
-                male: name === 'male' ? checked : false,
-                female: name === 'female' ? checked : false
-            })
+            setGenderCheckbox(prevState=>({
+                ...prevState,
+                [name]: checked
+            }))
         }
 
         if (name == 'citizen-yes' || name == 'citizen-no') {
-            setCitizenCheckbox({
-                yes: name == 'citizen-yes' ? checked : false,
-                no: name == 'citizen-no' ? checked : false
-            })
+            setCitizenCheckbox(prevState =>({
+                ...prevState,
+                [(name == 'citizen-yes') ? 'yes' : 'no'] : !checked
+            }))
         }
     }
 
@@ -82,6 +82,7 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
             'male': { key: 'gender', value: 'male' },
             'female': { key: 'gender', value: 'female' }
         }
+        
 
         if (id == 'citizen-no') {
             alert("You must be a citizen of the United States to register. Please do not complete if you are not a citizen.")
@@ -152,7 +153,14 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
             {isChecked && (
                 <Mailing formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
             )}
-            <Personal formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} isCitizenDisabled={isCitizenDisabled} />
+            <Personal 
+                formData={formData} 
+                setFormData={setFormData}
+                handleChange={handleInputChange} 
+                checkboxHandler={checkboxHandler} 
+                isCitizenDisabled={isCitizenDisabled} 
+                citizenCheckbox={citizenCheckbox}
+            />
             <div className='pr-24'>
                 <div className="mt-6 flex items-center justify-end gap-x-6">
                     <button type="button" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={() => setClick(!click)}>Review Options</button>
