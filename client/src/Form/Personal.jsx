@@ -1,22 +1,18 @@
 import { useState, useEffect } from 'react'
 
-function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, setFormData, citizenCheckbox }) {
+function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, setFormData, citizenCheckbox, setNoIdCheckbox, noIdCheckbox, setCitizenCheckbox }) {
 
     const [phoneValue, setPhoneValue] = useState('')
-    const [ checked, setIsChecked ] = useState({
-        "citizen-yes": false,
-        "citizen-no": false,
-        "no_id": false
-    })
 
     useEffect(()=>{
-        
-        setIsChecked({
-            "citizen-yes": formData.citizenship == 'yes',
-            "citizen-no": formData.citizineship == 'no',
-            "no_id": formData.no_id
+        setNoIdCheckbox(formData.no_id)
+        setCitizenCheckbox({
+            yes: formData.citizenship == 'yes',
+            no: formData.citizenship == 'no'
         })
-    }, [formData])  
+
+    },[formData])
+
 
     function handleKeyDown(e){
         let id = e.target.id
@@ -24,24 +20,7 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
         
         if (e.key == 'Enter'){
             e.preventDefault(); 
-            checkboxHandler(e)
-            // let dataKey
-            
-            // if(id == 'citizen-yes' || id == 'citizen-no'){
-            //     dataKey = 'citizenship'
-            //     isCitizenDisabled(id)
-            // } else {
-            //     dataKey = id
-            // }
-
-            // setIsChecked(prevData =>({
-            //     ...prevData,
-            //     [id]: !prevData[id]
-            // }))
-            // setFormData(prevData =>({
-            //     ...prevData,
-            //      [dataKey]: value == 'on' ? 'yes' : 'no'
-            // }))
+            e.target.click()
         }
     }
     
@@ -56,17 +35,6 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
         } else {
             return `(${cleanedValue.slice(0, 3)}) ${cleanedValue.slice(3, 6)}-${cleanedValue.slice(6, 10)}`;
         }
-
-        // const cleanedValue = value.replace(/\D/g, '')
-
-        // const formattedValue = cleanedValue
-        //     .replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3')
-        //     .replace(/(\(\d{3}\))(\d{0,3})(\d{0,4})/, (_, area, firstPart, secondPart) => {
-        //         if (secondPart) return `(${area} ${firstPart} - ${secondPart})`
-        //         if (firstPart) return `${area} ${firstPart}`
-        //         return `${area}`
-        //     })
-        // return formattedValue
     }
     const citizenDisabledYes = isCitizenDisabled('citizen-yes') 
     const citizenDisabledNo = isCitizenDisabled('citizen-no') 
@@ -150,10 +118,10 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
                                             type="checkbox" 
                                             className="custom-checkbox"
                                             onChange={(e) => checkboxHandler(e)}
-                                            checked={citizenCheckbox.yes}
+                                            checked={citizenCheckbox['yes']}
                                             disabled={citizenDisabledYes}
                                             style={{ cursor: citizenDisabledYes ? 'not-allowed' : "pointer" }}
-                                            onKeyDown={(e)=>handleKeyDown(e)}
+                                            onKeyDown={handleKeyDown}
                                         />
                                     </div>
                                     <div className="text-sm leading-6">
@@ -177,8 +145,8 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
                                             onChange={(e) => checkboxHandler(e)}
                                             disabled={citizenDisabledNo}
                                             style={{ cursor: citizenDisabledNo ? 'not-allowed' : "pointer" }}
-                                            checked={citizenCheckbox.no}
-                                            onKeyDown={(e)=>handleKeyDown(e)}
+                                            checked={citizenCheckbox['no']}
+                                            onKeyDown={handleKeyDown}
                                         />
                                     </div>
                                     <div className="text-sm leading-6">
@@ -205,8 +173,8 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
                                             type="checkbox" 
                                             className="custom-checkbox" 
                                             onChange={(e) => checkboxHandler(e)} 
-                                            checked={checked["no_id"]} 
-                                            onKeyDown={(e)=>handleKeyDown(e)}
+                                            checked={noIdCheckbox} 
+                                            onKeyDown={handleKeyDown}
                                         />
                                     </div>
                                     <div className="text-sm leading-6">

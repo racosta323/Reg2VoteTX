@@ -19,6 +19,8 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
         no: false
     })
 
+    const [ noIdCheckbox, setNoIdCheckbox ] = useState(false)
+
     const handleMailingCheckboxChange = (e) => {
         setIsChecked(e.target.checked)
     }
@@ -46,25 +48,30 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
     }
 
     function setCheckBox(e) {
-        console.log(e.target.checked)
         const { id, name, checked } = e.target
         const validIds = ['new-application', 'change-address', 'replacement-card']
         if (validIds.includes(id)) {
             setSelectedCheckbox(checked ? id : null)
         }
-
+        
         if (name == 'male' || name == 'female') {
             setGenderCheckbox(prevState=>({
                 ...prevState,
                 [name]: checked
             }))
         }
-
+        
         if (name == 'citizen-yes' || name == 'citizen-no') {
-            setCitizenCheckbox(prevState =>({
-                ...prevState,
-                [(name == 'citizen-yes') ? 'yes' : 'no'] : !checked
-            }))
+            console.log('Checkbox clicked:', e.target.name, e); // Log for debugging
+            
+            setCitizenCheckbox({
+                yes: name == 'citizen-yes' ? checked : false,
+                no: name == 'citizen-no' ? checked : false
+            })
+        }
+
+        if (name == 'no_id'){
+            setNoIdCheckbox(!noIdCheckbox)
         }
     }
 
@@ -90,6 +97,7 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
 
         const field = mapping[id]
 
+        // calls function to return boolean val for checkboxes
         setCheckBox(e)
 
         if (field) {
@@ -126,7 +134,7 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
 
     return (
 
-        <form className="m-2 p-4 h-auto bg-white rounded shadow-xl">
+        <form className="m-2 p-4 h-auto bg-white rounded shadow-xl" onSubmit={(e)=>{e.preventDefault()}}>
             <Purpose
                 formData={formData}
                 handleChange={handleInputChange}
@@ -159,7 +167,10 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
                 handleChange={handleInputChange} 
                 checkboxHandler={checkboxHandler} 
                 isCitizenDisabled={isCitizenDisabled} 
+                setCitizenCheckbox={setCitizenCheckbox}
                 citizenCheckbox={citizenCheckbox}
+                setNoIdCheckbox={setNoIdCheckbox}
+                noIdCheckbox={noIdCheckbox}
             />
             <div className='pr-24'>
                 <div className="mt-6 flex items-center justify-end gap-x-6">
