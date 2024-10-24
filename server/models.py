@@ -89,8 +89,7 @@ class PdfDoc:
         output_pdf = BytesIO()
 
         data_dict = self.data_dict(person)
-        ipdb.set_trace()
-
+        
         output_pdf_path = f"{person._attributes['first_name']}_{person._attributes['last_name']}_TX_voter_reg.pdf"
         
         fillpdfs.write_fillable_pdf(input_pdf_path=input_pdf_path, output_pdf_path=output_pdf, data_dict=data_dict)

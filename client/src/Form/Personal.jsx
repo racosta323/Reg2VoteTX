@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, setFormData, citizenCheckbox, setNoIdCheckbox, noIdCheckbox, setCitizenCheckbox, handleKeyDown }) {
+function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, setFormData, citizenCheckbox, setNoIdCheckbox, noIdCheckbox, setCitizenCheckbox, handleKeyDown, handleNumberKeyDown }) {
 
     const [phoneValue, setPhoneValue] = useState('')
 
@@ -15,8 +15,10 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
     
 
     function phoneFormat(value) {
-        const cleanedValue = value.replace(/\D/g, '');
-
+        const cleanedValue = value.replace(/\D/g, '')
+        if (cleanedValue.length == 0){
+            return
+        }
         if (cleanedValue.length <= 3) {
             return `(${cleanedValue}`;
         } else if (cleanedValue.length <= 6) {
@@ -60,6 +62,7 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
                                         placeholder="(xxx)-xxx-xxxx" 
                                         onChange={handlePhoneChange} 
                                         value={phoneValue || formData.phone} 
+                                        onKeyDown={handleNumberKeyDown}
                                     />
                                 </div>
                             </div>
@@ -90,7 +93,7 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
                                     (If no TX driver's license or personal identification. Last 4 digits only.)
                                 </p>
                                 <div className="mt-2">
-                                    <input id="ssn" name="ssn" type="text" maxLength={4} autoComplete="ssn" className="block w-11/12 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" placeholder="xxxx" onChange={handleChange} value={formData.ssn} />
+                                    <input id="ssn" name="ssn" type="text" maxLength={4} autoComplete="ssn" className="block w-11/12 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" placeholder="xxxx" onChange={handleChange} value={formData.ssn} onKeyDown={handleNumberKeyDown}/>
                                 </div>
                             </div>
                         </div>

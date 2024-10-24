@@ -1,4 +1,4 @@
-function Mailing({ htmlFormData, handleChange, formData }) {
+function Mailing({ htmlFormData, handleChange, formData, handleNumberKeyDown }) {
     return (
         <div className='p-4 space-y-12'>
             <div className='border-b border-gray-900/10 pb-12 w-5/6 flex space-x-20 mx-auto'>
@@ -45,7 +45,7 @@ function Mailing({ htmlFormData, handleChange, formData }) {
                         <div className="sm:col-span-1">
                             <label htmlFor="zip_code_2" className="block text-sm font-medium leading-6 text-gray-900">Zip code</label>
                             <div className="mt-2">
-                                <input id="zip_code_2" name="zip_code_2" type="text" autoComplete="given_name" className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" onChange={handleChange} value={formData.zip_code_2}/>
+                                <input id="zip_code_2" name="zip_code_2" type="text" autoComplete="given_name" className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" onChange={handleChange} value={formData.zip_code_2} onKeyDown={handleNumberKeyDown} maxLength={5}/>
                             </div>
                         </div>
                     </div>

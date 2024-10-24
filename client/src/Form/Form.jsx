@@ -137,6 +137,14 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
         }
     }
 
+    const handleNumberKeyDown = (e) => {
+        const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab']
+        const isDigit = /^\d$/.test(e.key)
+        if (!allowedKeys.includes(e.key) && !isDigit) {
+            e.preventDefault()
+        }
+    }
+
 
     return (
 
@@ -148,7 +156,6 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
                 selectedCheckbox={selectedCheckbox}
                 isDisabled={isDisabled}
                 handleKeyDown={handleKeyDown}
-                
             />
             <Profile
                 formData={formData}
@@ -169,9 +176,10 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
                 isChecked={isChecked}
                 setIsChecked={setIsChecked}
                 isDisabled={isDisabled}
+                handleNumberKeyDown={handleNumberKeyDown}
             />
             {isChecked && (
-                <Mailing formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} />
+                <Mailing formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} handleNumberKeyDown={handleNumberKeyDown}/>
             )}
             <Personal 
                 formData={formData} 
@@ -184,6 +192,7 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
                 setNoIdCheckbox={setNoIdCheckbox}
                 noIdCheckbox={noIdCheckbox}
                 handleKeyDown={handleKeyDown}
+                handleNumberKeyDown={handleNumberKeyDown}
             />
             <div className='pr-24'>
                 <div className="mt-6 flex items-center justify-end gap-x-6">
