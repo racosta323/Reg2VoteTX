@@ -3,6 +3,7 @@ import ShareButton from './ShareButton'
 
 import Form from './Form/Form'
 import Confirmation from './Confirmation'
+import Modal from './Modal'
 
 import dataKeys from './Form/dataKeys'
 import { FaFacebookSquare } from "react-icons/fa"
@@ -68,6 +69,7 @@ function App() {
               <br /><br />
               Please be aware that browser PDF readers may not display certain completed areas, such as checkboxes. To ensure accuracy, please review your PDF using a separate reader like Adobe. This will also allow you to make any necessary updates directly to the document before printing it.
             </p>
+            <p className='text-gray-900'>I CANNOT HELP YOU WITH THE FORM.</p>
           </div>
 
           <div className=' flex gap-3 p-3 pt-52'>

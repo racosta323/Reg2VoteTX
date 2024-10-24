@@ -1,11 +1,20 @@
 import dataKeys from "./Form/dataKeys"
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import Modal from './Modal'
 import Success from "./Success"
 
 function Confirmation({ formData, click, setClick, isChecked, setIsChecked, setFormData }) {
 
     const navigate = useNavigate()
 
+    const [ showModal, setShowModal ] = useState(false)
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []); 
+ 
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(formData)
@@ -25,14 +34,7 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked, setF
                 const url = window.URL.createObjectURL(blob)
 
                 navigate('/success', {state: { downloadUrl: url }})
-                // console.log(blob)
-                
-                // keep file somewhere so someone can donwload it?
-                // const link = document.createElement('a')
-                // link.href = url
-                // link.download = `${formData.last_name}, ${formData.first_name} - voter registration form.pdf`
-                // link.click()
-                // link.remove()
+        
                 setFormData(dataKeys)
                 
                 
@@ -88,8 +90,8 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked, setF
 
     return (
         <div className="w-full bg-white md:max-w-7xl md:flex flex rounded">
-            <div className="md:mx-auto w-1/2">
-                <h1 className="text-gray-700 pb-10 font-bold">REVIEW OPTIONS</h1>
+            <div className="md:mx-auto w-1/2 mt-20">
+                <h1 className="text-gray-700 pb-10 font-bold text-2xl">REVIEW OPTIONS</h1>
                 <table className="table-auto">
                     <tbody>
                         <tr className="border-b-4">
@@ -162,11 +164,26 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked, setF
                 </table>
                 <div className='pr-24 pb-24 flex gap-3 justify-end items-center'>
                     <div className="mt-6 items-center">
-                        <button type="button" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={() => setClick(!click)}>Edit</button>
+                        <button 
+                            type="button" 
+                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" 
+                            onClick={() => setClick(!click)}
+                        >
+                            Edit
+                        </button>
                     </div>
                     <div className="mt-6 flex items-center justify-end">
-                        <button type="submit" className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={handleSubmit}>Submit</button>
+                        <button 
+                            type="button" 
+                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" 
+                            onClick={()=>setShowModal(true)}
+                        >
+                            Submit
+                        </button>
                     </div>
+                    {showModal && (
+                        <Modal setShowModal={setShowModal} formData={formData} setFormData={setFormData}/>
+                    )}
                 </div>
             </div>
         </div>
