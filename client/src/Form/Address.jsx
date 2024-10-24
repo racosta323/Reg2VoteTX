@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
-
 import Mailing from "./Mailing"
-
 
 function Address({ formData, handleChange, isChecked, setIsChecked, handleKeyDown, setFormData }) {
 
@@ -21,7 +19,6 @@ function Address({ formData, handleChange, isChecked, setIsChecked, handleKeyDow
         }
 
     }
-
 
     return (
         <div className='p-4 space-y-12'>

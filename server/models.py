@@ -5,6 +5,7 @@ from prompts import person_attributes, attribute_keys
 from flask import send_file
 import os
 import ipdb
+import re
 
 
 class PdfDoc:
@@ -16,7 +17,6 @@ class PdfDoc:
     def request(self):
 
         try:
-            
             response = requests.get(self.url)
             response.raise_for_status()      
             pdf_doc = response.content
@@ -48,17 +48,7 @@ class PdfDoc:
         for key, field in zip(attribute_keys, self.form_fields[0:]):
             if key in person._attributes and person._attributes[key] is not None:
                 data[field] = person._attributes[key]
-
-                if key == 'phone':
-                    try:
-                        data['Telephone Number Optional'] = person._attributes[key][0:3]
-                        data['Telephone Number Optional 2'] = person._attributes[key][3:6]
-                        data['Telephone Number Optional 3'] = person._attributes[key][6:10]
-                    except Exception as e:
-                        print("not enough nubmers", e)
-               
-               
-                    
+        
                 if key in ['citizenship', 'voting_age', 'election_worker']:
                     if person._attributes[key].lower() in ['y', 'yes']:
                         data[field] = 'Yes'
@@ -85,15 +75,11 @@ class PdfDoc:
                             data[field] = 'New Application'
                         if person._attributes[key] == "2":
                             data[field] = 'Change of Address, Name, or Other Information'
-                        #this one's not working -- need to troubleshoot    
                         if person._attributes[key] == "3":
                             data[field] = 'Request for a Replacement Card'
-                            
-
                     except Exception as e:
-                        print('something wrong with why', e)
-                
-        # ipdb.set_trace()
+                        print('something wrong with why', e)                
+        
         return data
         
     def write_pdf(self, person, save_to_file=False):
@@ -103,6 +89,7 @@ class PdfDoc:
         output_pdf = BytesIO()
 
         data_dict = self.data_dict(person)
+        ipdb.set_trace()
 
         output_pdf_path = f"{person._attributes['first_name']}_{person._attributes['last_name']}_TX_voter_reg.pdf"
         
@@ -125,6 +112,15 @@ class Person:
             else:
                 raise AttributeError(f'Invalid attribute: {key}')
             
+        cleaned_phone = re.sub(r'\D', '', person_attributes['phone'])
+        
+        if len(cleaned_phone) >= 10:
+            person_attributes['phone'] = cleaned_phone[0:3]
+            person_attributes['phone_2'] = cleaned_phone[3:6]
+            person_attributes['phone_3'] = cleaned_phone[6:10]
+        else:
+            print("Not enough numbers") 
+
         
     def __repr__(self):
         output = f"""

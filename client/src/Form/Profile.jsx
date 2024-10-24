@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-function Profile({ formData, handleChange, checkboxHandler, isDisabled, isGenderDisabled, genderCheckbox, setGenderCheckbox, handleKeyDown }) {
+function Profile({ formData, handleChange, checkboxHandler, isGenderDisabled, genderCheckbox, setGenderCheckbox, handleKeyDown }) {
 
     const isGenderDisabledMale = isGenderDisabled('male')
     const isGenderDisabledFemale = isGenderDisabled('female')

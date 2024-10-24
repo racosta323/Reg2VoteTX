@@ -21,9 +21,6 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
 
     const [ noIdCheckbox, setNoIdCheckbox ] = useState(false)
 
-    // const handleMailingCheckboxChange = (e) => {
-    //     setIsChecked(e.target.checked)
-    // }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
