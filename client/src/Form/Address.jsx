@@ -3,7 +3,6 @@ import Mailing from "./Mailing"
 
 function Address({ formData, handleChange, isChecked, setIsChecked, handleKeyDown, setFormData, handleNumberKeyDown }) {
 
-
     const handleCheck = (e) => {
         if (isChecked) {
             setFormData(prevData => ({
@@ -19,7 +18,6 @@ function Address({ formData, handleChange, isChecked, setIsChecked, handleKeyDow
         }
 
     }
-
 
     return (
         <div className='p-4 space-y-12'>
@@ -65,7 +63,7 @@ function Address({ formData, handleChange, isChecked, setIsChecked, handleKeyDow
                         <div className="sm:col-span-1">
                             <label htmlFor="zip_code" className="block text-sm font-medium leading-6 text-gray-900">Zip code</label>
                             <div className="mt-2">
-                                <input id="zip_code" name="zip_code" type="text" autoComplete="given_name" className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" onChange={handleChange} value={formData.zip_code} maxLength={5} onKeyDown={handleNumberKeyDown}/>
+                                <input id="zip_code" name="zip_code" type="text" autoComplete="given_name" className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" onChange={handleChange} value={formData.zip_code} maxLength={5} onKeyDown={handleNumberKeyDown} />
                             </div>
                         </div>
 

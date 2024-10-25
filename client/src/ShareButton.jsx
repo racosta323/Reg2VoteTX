@@ -4,10 +4,10 @@ import { FaLinkedin } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 
 
-function ShareButton({type}){
+function ShareButton({ type }){
 
     const url = encodeURIComponent(window.location.href)
-    const text = encodeURIComponent("A simple way to register to vote in Texas")
+    const text = encodeURIComponent("Texas Voter Registration: Form Completion Made Easy!")
 
     const shareLinks = {
         "facebook": `https://www.facebook.com/sharer/sharer.php?u=${url}`,
@@ -29,9 +29,9 @@ function ShareButton({type}){
 
 
     return(
-        <button className='text-black text-4xl me-2' onClick={()=> openShareWindow(shareLinks[type])}>
+        <button className='text-blue-700 text-4xl me-2 hover:text-red-700' onClick={()=> openShareWindow(shareLinks[type])}>
             {socials[type]}
-        </button>
+        </button> 
     )
 }
 

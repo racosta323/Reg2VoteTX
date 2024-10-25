@@ -9,8 +9,8 @@ import dataKeys from "./dataKeys"
 
 function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked }) {
 
-    const [ selectedCheckbox, setSelectedCheckbox ] = useState(null)
-    const [ genderCheckbox, setGenderCheckbox ] = useState({
+    const [selectedCheckbox, setSelectedCheckbox] = useState(null)
+    const [genderCheckbox, setGenderCheckbox] = useState({
         male: false,
         female: false
     })
@@ -19,7 +19,7 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
         no: false
     })
 
-    const [ noIdCheckbox, setNoIdCheckbox ] = useState(false)
+    const [noIdCheckbox, setNoIdCheckbox] = useState(false)
 
 
     const handleInputChange = (e) => {
@@ -50,24 +50,24 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
         if (validIds.includes(id)) {
             setSelectedCheckbox(checked ? id : null)
         }
-        
+
         if (name == 'male' || name == 'female') {
-            setGenderCheckbox(prevState=>({
+            setGenderCheckbox(prevState => ({
                 ...prevState,
                 [name]: checked
             }))
         }
-        
+
         if (name == 'citizen-yes' || name == 'citizen-no') {
             console.log('Checkbox clicked:', e.target.name, e); // Log for debugging
-            
+
             setCitizenCheckbox({
                 yes: name == 'citizen-yes' ? checked : false,
                 no: name == 'citizen-no' ? checked : false
             })
         }
 
-        if (name == 'no_id'){
+        if (name == 'no_id') {
             setNoIdCheckbox(!noIdCheckbox)
         }
     }
@@ -86,7 +86,6 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
             'male': { key: 'gender', value: 'male' },
             'female': { key: 'gender', value: 'female' }
         }
-        
 
         if (id == 'citizen-no') {
             alert("You must be a citizen of the United States to register. Please do not complete if you are not a citizen.")
@@ -128,12 +127,12 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
         }
     }
 
-    const handleKeyDown =(e) => {
+    const handleKeyDown = (e) => {
         let id = e.target.id
-        if (e.key == 'Enter'){
+        if (e.key == 'Enter') {
             e.preventDefault()
             e.target.click()
-            
+
         }
     }
 
@@ -145,10 +144,9 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
         }
     }
 
-
     return (
 
-        <form className="m-2 p-4 h-auto bg-white rounded shadow-xl" onSubmit={(e)=>{e.preventDefault()}}>
+        <form className="m-2 p-4 h-auto bg-white rounded shadow-xl" onSubmit={(e) => { e.preventDefault() }}>
             <Purpose
                 formData={formData}
                 handleChange={handleInputChange}
@@ -179,14 +177,14 @@ function Form({ formData, setFormData, setClick, click, isChecked, setIsChecked 
                 handleNumberKeyDown={handleNumberKeyDown}
             />
             {isChecked && (
-                <Mailing formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} handleNumberKeyDown={handleNumberKeyDown}/>
+                <Mailing formData={formData} handleChange={handleInputChange} checkboxHandler={checkboxHandler} handleNumberKeyDown={handleNumberKeyDown} />
             )}
-            <Personal 
-                formData={formData} 
+            <Personal
+                formData={formData}
                 setFormData={setFormData}
-                handleChange={handleInputChange} 
-                checkboxHandler={checkboxHandler} 
-                isCitizenDisabled={isCitizenDisabled} 
+                handleChange={handleInputChange}
+                checkboxHandler={checkboxHandler}
+                isCitizenDisabled={isCitizenDisabled}
                 setCitizenCheckbox={setCitizenCheckbox}
                 citizenCheckbox={citizenCheckbox}
                 setNoIdCheckbox={setNoIdCheckbox}

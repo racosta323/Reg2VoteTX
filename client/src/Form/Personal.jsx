@@ -1,22 +1,21 @@
 import { useState, useEffect } from 'react'
 
-function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, setFormData, citizenCheckbox, setNoIdCheckbox, noIdCheckbox, setCitizenCheckbox, handleKeyDown, handleNumberKeyDown }) {
+function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, citizenCheckbox, setNoIdCheckbox, noIdCheckbox, setCitizenCheckbox, handleKeyDown, handleNumberKeyDown }) {
 
     const [phoneValue, setPhoneValue] = useState('')
 
-    useEffect(()=>{
+    useEffect(() => {
         setNoIdCheckbox(formData.no_id)
         setCitizenCheckbox({
             yes: formData.citizenship == 'yes',
             no: formData.citizenship == 'no'
         })
 
-    },[formData])
-    
+    }, [formData])
 
     function phoneFormat(value) {
         const cleanedValue = value.replace(/\D/g, '')
-        if (cleanedValue.length == 0){
+        if (cleanedValue.length == 0) {
             return
         }
         if (cleanedValue.length <= 3) {
@@ -27,9 +26,8 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
             return `(${cleanedValue.slice(0, 3)}) ${cleanedValue.slice(3, 6)}-${cleanedValue.slice(6, 10)}`;
         }
     }
-    const citizenDisabledYes = isCitizenDisabled('citizen-yes') 
-    const citizenDisabledNo = isCitizenDisabled('citizen-no') 
-   
+    const citizenDisabledYes = isCitizenDisabled('citizen-yes')
+    const citizenDisabledNo = isCitizenDisabled('citizen-no')
 
     const handlePhoneChange = (e) => {
         const value = e.target.value
@@ -38,11 +36,9 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
         handleChange(e)
     }
 
-
     return (
         <div className='p-4 space-y-12'>
             <div className='border-b border-gray-900/10 pb-12 w-5/6 flex space-x-20 mx-auto'>
-
                 <div className='w-full'>
                     <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-3">
                         <div className="sm:col-span-2">
@@ -53,15 +49,15 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
                             <div className='mt-2'>
                                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                     <input
-                                        type="tel" 
-                                        name="phone" 
-                                        id="phone" 
-                                        autoComplete="tel" 
-                                        maxLength={15} 
-                                        className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
-                                        placeholder="(xxx)-xxx-xxxx" 
-                                        onChange={handlePhoneChange} 
-                                        value={phoneValue || formData.phone} 
+                                        type="tel"
+                                        name="phone"
+                                        id="phone"
+                                        autoComplete="tel"
+                                        maxLength={15}
+                                        className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        placeholder="(xxx)-xxx-xxxx"
+                                        onChange={handlePhoneChange}
+                                        value={phoneValue || formData.phone}
                                         onKeyDown={handleNumberKeyDown}
                                     />
                                 </div>
@@ -93,11 +89,11 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
                                     (If no TX driver's license or personal identification. Last 4 digits only.)
                                 </p>
                                 <div className="mt-2">
-                                    <input id="ssn" name="ssn" type="text" maxLength={4} autoComplete="ssn" className="block w-11/12 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" placeholder="xxxx" onChange={handleChange} value={formData.ssn} onKeyDown={handleNumberKeyDown}/>
+                                    <input id="ssn" name="ssn" type="text" maxLength={4} autoComplete="ssn" className="block w-11/12 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-transparent" placeholder="xxxx" onChange={handleChange} value={formData.ssn} onKeyDown={handleNumberKeyDown} />
                                 </div>
                             </div>
                         </div>
-{/* here */}
+
                         <fieldset>
                             <legend className="text-sm font-semibold leading-6 text-gray-900">Are you a United States Citizen?
                             </legend>
@@ -107,7 +103,7 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
                                         <input
                                             id="citizen-yes"
                                             name="citizen-yes"
-                                            type="checkbox" 
+                                            type="checkbox"
                                             className="custom-checkbox"
                                             onChange={(e) => checkboxHandler(e)}
                                             checked={citizenCheckbox['yes']}
@@ -129,11 +125,11 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
                                 </div>
                                 <div className="relative flex gap-x-3">
                                     <div className="flex h-6 items-center">
-                                        <input 
-                                            id="citizen-no" 
-                                            name="citizen-no" 
-                                            type="checkbox" 
-                                            className="custom-checkbox" 
+                                        <input
+                                            id="citizen-no"
+                                            name="citizen-no"
+                                            type="checkbox"
+                                            className="custom-checkbox"
                                             onChange={(e) => checkboxHandler(e)}
                                             disabled={citizenDisabledNo}
                                             style={{ cursor: citizenDisabledNo ? 'not-allowed' : "pointer" }}
@@ -159,13 +155,13 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
                             <div className="mt-6 space-y-6">
                                 <div className="relative flex gap-x-3">
                                     <div className="flex h-6 items-center">
-                                        <input 
-                                            id="no_id" 
-                                            name="no_id" 
-                                            type="checkbox" 
-                                            className="custom-checkbox" 
-                                            onChange={(e) => checkboxHandler(e)} 
-                                            checked={noIdCheckbox} 
+                                        <input
+                                            id="no_id"
+                                            name="no_id"
+                                            type="checkbox"
+                                            className="custom-checkbox"
+                                            onChange={(e) => checkboxHandler(e)}
+                                            checked={noIdCheckbox}
                                             onKeyDown={handleKeyDown}
                                         />
                                     </div>

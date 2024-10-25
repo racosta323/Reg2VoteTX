@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import Form from './Form'
 
-function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData, handleKeyDown }) {
+function Purpose({ checkboxHandler, isDisabled, formData, handleKeyDown }) {
 
-    const [ checked, setChecked ] = useState({
+    const [checked, setChecked] = useState({
         'new-application': false,
         'change-address': false,
         'replacement-card': false,
@@ -11,7 +11,7 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData, hand
     })
 
 
-    useEffect(()=>{
+    useEffect(() => {
         setChecked({
             'new-application': formData.why === '1',
             'change-address': formData.why === '2',
@@ -27,15 +27,13 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData, hand
     const isChangeDisabled = isDisabled('change-address')
     const isReplacementDisabled = isDisabled('replacement-card')
 
-
-
     return (
         <div className='border-b border-gray-900/10 pb-12 w-5/6 flex space-x-20 mx-auto'>
             <div className='w-full mt-10'>
                 <p className="mt-1 text-md leading-6 text-gray-600">
                     Check off the most applicable reason why you're completing this application
                 </p>
-                <fieldset>          
+                <fieldset>
                     <div className="mt-6 space-y-6">
                         <div className="relative flex gap-x-3">
                             <div className="flex h-6 items-center">
@@ -46,17 +44,17 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData, hand
                                     checked={checked["new-application"]}
                                     className='custom-checkbox'
                                     onChange={(e) => checkboxHandler(e)}
-                                    disabled = {isNewDisabled}
-                                    style={{cursor: isNewDisabled ? 'not-allowed' : 'pointer'}}
+                                    disabled={isNewDisabled}
+                                    style={{ cursor: isNewDisabled ? 'not-allowed' : 'pointer' }}
                                     onKeyDown={handleKeyDown}
                                 />
                             </div>
                             <div className="text-sm leading-6">
-                                <label 
-                                    htmlFor="new-application" 
+                                <label
+                                    htmlFor="new-application"
                                     className={labelClass}
-                                    style = {{
-                                        color: isNewDisabled ? "grey" : "black", 
+                                    style={{
+                                        color: isNewDisabled ? "grey" : "black",
                                         cursor: isNewDisabled ? 'not-allowed' : 'pointer'
                                     }}
                                 >
@@ -78,16 +76,16 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData, hand
                                     type="checkbox"
                                     className="custom-checkbox"
                                     onChange={(e) => checkboxHandler(e)}
-                                    disabled = {isChangeDisabled}
-                                    style={{cursor: isChangeDisabled ? 'not-allowed' : 'pointer'}}
-                                    onKeyDown={handleKeyDown}                                />
+                                    disabled={isChangeDisabled}
+                                    style={{ cursor: isChangeDisabled ? 'not-allowed' : 'pointer' }}
+                                    onKeyDown={handleKeyDown} />
                             </div>
                             <div className="text-sm leading-6">
-                                <label 
-                                    htmlFor="change-address" 
-                                    className={labelClass}  
-                                    style = {{
-                                        color: isChangeDisabled ? "grey" : "black", 
+                                <label
+                                    htmlFor="change-address"
+                                    className={labelClass}
+                                    style={{
+                                        color: isChangeDisabled ? "grey" : "black",
                                         cursor: isChangeDisabled ? 'not-allowed' : 'pointer'
                                     }}
                                 >
@@ -108,16 +106,16 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData, hand
                                     type="checkbox"
                                     checked={checked["replacement-card"]}
                                     className="custom-checkbox"
-                                    disabled = {isReplacementDisabled}
+                                    disabled={isReplacementDisabled}
                                     onChange={(e) => checkboxHandler(e)}
-                                    style={{cursor: isReplacementDisabled ? 'not-allowed' : 'pointer'}}
-                                    onKeyDown={handleKeyDown}                                />
+                                    style={{ cursor: isReplacementDisabled ? 'not-allowed' : 'pointer' }}
+                                    onKeyDown={handleKeyDown} />
                             </div>
                             <div className="text-sm leading-6">
-                                <label 
-                                    htmlFor="replacement-card" 
-                                    className={labelClass}  
-                                    style = {{
+                                <label
+                                    htmlFor="replacement-card"
+                                    className={labelClass}
+                                    style={{
                                         color: isReplacementDisabled ? "grey" : "black",
                                         cursor: isReplacementDisabled ? 'not-allowed' : 'pointer'
                                     }}
@@ -129,13 +127,8 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData, hand
                     </div>
                 </fieldset>
 
-                <p className="mt-14 text-sm leading-6 text-gray-600">
-
-                </p>
-
-
                 <fieldset>
-                    <div className="mt-6 space-y-6">
+                    <div className="mt-24 space-y-6">
                         <div className="relative flex gap-x-3">
                             <div className="flex h-6 items-center">
                                 <input
@@ -144,8 +137,8 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData, hand
                                     type="checkbox"
                                     checked={checked["election_worker"]}
                                     className={checkboxClass}
-                                    onChange={(e) => checkboxHandler(e)} 
-                                    onKeyDown={handleKeyDown}                                />
+                                    onChange={(e) => checkboxHandler(e)}
+                                    onKeyDown={handleKeyDown} />
                             </div>
                             <div className="text-sm leading-6">
                                 <label htmlFor="election_worker" className="font-bold text-gray-900 cursor-pointer" >
@@ -155,10 +148,7 @@ function Purpose({ checkboxHandler, selectedCheckbox, isDisabled, formData, hand
                         </div>
                     </div>
                 </fieldset>
-
-
             </div>
-            
         </div>
     )
 }

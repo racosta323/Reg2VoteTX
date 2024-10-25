@@ -121,7 +121,6 @@ function Profile({ formData, handleChange, checkboxHandler, isGenderDisabled, ge
                     </div>
                 </fieldset>
             </div>
-            
         </div>
     )
 }

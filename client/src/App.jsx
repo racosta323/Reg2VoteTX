@@ -3,10 +3,10 @@ import ShareButton from './ShareButton'
 
 import Form from './Form/Form'
 import Confirmation from './Confirmation'
-import Modal from './Modal'
 
 import dataKeys from './Form/dataKeys'
-import { FaFacebookSquare } from "react-icons/fa"
+import { TbCircleNumber1Filled, TbCircleNumber2Filled, TbCircleNumber3Filled, TbCircleNumber4Filled } from "react-icons/tb";
+
 
 function App() {
 
@@ -16,14 +16,15 @@ function App() {
 
   return (
     <div className='flex flex-col md:flex-row justify-between min-h-screen shadow-xl'>
-      <header className='relative md:w-1/4 m-5'>
+      <header className='relative md:w-1/3 m-5'>
         <div className='flex flex-col mx-auto md:sticky md:top-0'>
           <div className='m-10'>
-            <h1 className='text-4xl md:text-6xl text-gray-900 mb-5'>Reg2VoteTx</h1>
-            <p className='text-gray-500 font-bold'>Offering a simple way to register to vote in Texas</p>
-            <div className='mb-5 mt-2 flex flex-col'>
+            <h1 className='text-4xl md:text-6xl text-blue-900 mb-5 font-black'>Reg2VoteTx 🗳️</h1>
+            <p className='text-blue-900 font-extrabold'>Texas Voter Registration: Form Completion Made Easy!</p>
+            <hr className='mt-4' />
+            <div className='mb-5 mt-5 flex flex-col'>
               <div className='my-5'>
-                <p className='text-gray-500'>Share with your network!</p>
+                <p className='text-blue-700 font-bold hover:text-red-700'>Share with your network!</p>
                 <ShareButton type={"facebook"} />
                 <ShareButton type={"twitter"} />
                 <ShareButton type={"linkedIn"} />
@@ -31,50 +32,63 @@ function App() {
               </div>
             </div>
 
-            <p className='text-gray-900'>
-              As of 2024,
-              <a
-                href='https://www.sos.state.tx.us/elections/'
-                className='text-blue-600 font-bold hover:text-violet-600'
-                target='_blank'
-              >
-                &nbsp;the State of Texas requires&nbsp;
-              </a>
-              that eligible voters first register to vote in the county in which they reside. Eligible voters must submit a written and signed application "either in person or by mail to the county voter registrar in the county in which the voter resides."
-              <br /><br />
-              The State of Texas currently does not have an option to digitally register to vote and eligible voters must complete a
-              <a 
-                href='https://www.sos.state.tx.us/elections/vr/index.shtml'
-                className='text-blue-600 font-bold hover:text-violet-600'
-                target='_blank'
-              >
-                  &nbsp;PDF form
-              </a>.
-              <span className='font-bold'>
-              &nbsp;To participate in any upcoming elections, eligible voters MUST have successfully registered to vote (as outlined above) 30 days PRIOR to the date of the election.
-                <br/><br/>
-                <span className='text-red-500'>
-                Important: To be eligible to vote in the 2024 U.S. elections, voters must have registered by October 7, 2024.  
-                </span>
-              </span>
-              <br /><br />
-              The following form was created to make it easier for eligible voters in Texas to register to vote. Eligible voters can complete the following form, review and submit their entries, then can download and sign the completed form to either mail to or drop off to their 
-              <a 
-                href='https://www.sos.state.tx.us/elections/voter/votregduties.shtml'
-                className='text-blue-600 font-bold hover:text-violet-600'
-                target='_blank'
+            <div>
+              <h2 className='text-gray-900 text-lg'>
+                As of 2024,
+                <a
+                  href='https://www.sos.state.tx.us/elections/'
+                  className='text-blue-600 font-bold hover:text-violet-600'
+                  target='_blank'
                 >
-                  &nbsp;county's Voter Registrar
-              </a>.
-              <br /><br />
-              Please be aware that browser PDF readers may not display certain completed areas, such as checkboxes. To ensure accuracy, please review your PDF using a separate reader like Adobe. This will also allow you to make any necessary updates directly to the document before printing it.
-            </p>
-            <p className='text-gray-900'>I CANNOT HELP YOU WITH THE FORM.</p>
-          </div>
+                  &nbsp;the State of Texas requires&nbsp;
+                </a>
+                a written and signed application for voter registration. This app makes it easier for you to get it done! Simply follow the steps below to download a completed TX voter registration form that you can mail to the county to register to vote.
+              </h2>
+            </div>
+            <div className='mt-5 flex flex-col'>
+              <div className='text-blue-500 text-3xl flex m-3 p-2'>
+                <TbCircleNumber1Filled />
+                <h3 className='text-2xl font-black text-blue-500'>&nbsp;&nbsp;Complete the form to your right</h3>
+              </div>
 
-          <div className=' flex gap-3 p-3 pt-52'>
+              <div className='text-blue-500 text-3xl flex m-3 p-2'>
+                <TbCircleNumber2Filled />
+                <h3 className='text-2xl font-black text-blue-500'>&nbsp;&nbsp;Review your details</h3>
+
+              </div>
+              <div className='text-blue-500 text-3xl flex m-3 p-2'>
+                <TbCircleNumber3Filled />
+                <h3 className='text-2xl font-black text-blue-500'>&nbsp;&nbsp;Download your ready-to-sign application!</h3>
+              </div>
+              <div className='text-blue-500 text-3xl flex m-3 p-2'>
+                <TbCircleNumber4Filled />
+                <h3 className='text-2xl font-black text-blue-500'>&nbsp;&nbsp;Mail or drop off at your county registrar's office</h3>
+              </div>
+            </div>
+
+            <div className='border-4 border-yellow-100 rounded h-72 bg-yellow-100 p-6 mt-9 shadow-xl shadow-rose-100'>
+              <h1 className='text-xl text-gray-900'> Important Considerations</h1>
+              <hr />
+              <ul className='mt-5 list-disc px-5'>
+                <li className='text-rose-900 font-bold'>You must be registered by October 7, 2024 to vote in the 2024 U.S. elections.</li>
+                <li className='text-gray-900'>Some browsers may not display all completed fields correctly. For best results, review and update your PDF using a separate reader like Adobe before printing.</li>
+                <li className='text-gray-900'>This app is only meant to assist in completing the form. I cannot offer advice on what should be included or how it should be completed —- please refer to the
+                  <a
+                    href='https://www.sos.state.tx.us/elections/forms/vr-with-receipt.pdf'
+                    className='text-blue-600 font-bold hover:text-violet-600'
+                    target='_blank'
+                  >
+                    &nbsp;form itself&nbsp;
+                  </a>
+                  for guidance.</li>
+                <li className='text-gray-900'>The generated form remains editable, allowing you to make changes directly if needed.</li>
+              </ul>
+            </div>
+          </div>
+          <hr className='mt-4' />
+          <div className=' flex gap-3 p-3 pt-4'>
             <button type='button' className='rounded-md bg-green-300 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-10 ms-8' onClick={() => window.location.href = 'mailto:racosta323@gmail.com'}>
-            💌 
+              💌
             </button>
             <p className='text-gray-900'>
               Share your thoughts with the developer
@@ -82,9 +96,6 @@ function App() {
           </div>
         </div>
       </header>
-
-      {/* <Form formData={formData} setFormData={setFormData} setClick={setClick} click={click}/>
-      <Confirmation formData={formData}/> */}
       < div className='w-full md:w-2/3 m-5' >
         {
           click ? (

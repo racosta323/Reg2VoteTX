@@ -3,51 +3,14 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Modal from './Modal'
-import Success from "./Success"
 
-function Confirmation({ formData, click, setClick, isChecked, setIsChecked, setFormData }) {
+function Confirmation({ formData, click, setClick, setFormData }) {
 
-    const navigate = useNavigate()
-
-    const [ showModal, setShowModal ] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, []); 
- 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        console.log(formData)
-        try {
-            const response = await fetch('http://127.0.0.1:8000/generate_pdf', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": 'application/json'
-                },
-                body: JSON.stringify(formData, null, 2)
-
-            })
-
-            if (response.ok) {
-
-                const blob = await response.blob()
-                const url = window.URL.createObjectURL(blob)
-
-                navigate('/success', {state: { downloadUrl: url }})
-        
-                setFormData(dataKeys)
-                
-                
-            } else {
-                console.log("Failed to download file.", response.statusText)
-            }
-
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-
+    }, []);
 
     function reason(data) {
         if (data == '1') {
@@ -73,15 +36,8 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked, setF
         }
     }
 
-    function handleClick(){
-        setClick(!click)
-        if (formData.street_address_2){
-            setIsChecked(!isChecked)
-        }
-    }
-
-    function handleBirth(month, day, year){
-        if (year){
+    function handleBirth(month, day, year) {
+        if (year) {
             return `${month} / ${day} / ${year}`
         } else {
             return ''
@@ -164,25 +120,25 @@ function Confirmation({ formData, click, setClick, isChecked, setIsChecked, setF
                 </table>
                 <div className='pr-24 pb-24 flex gap-3 justify-end items-center'>
                     <div className="mt-6 items-center">
-                        <button 
-                            type="button" 
-                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" 
+                        <button
+                            type="button"
+                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             onClick={() => setClick(!click)}
                         >
                             Edit
                         </button>
                     </div>
                     <div className="mt-6 flex items-center justify-end">
-                        <button 
-                            type="button" 
-                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" 
-                            onClick={()=>setShowModal(true)}
+                        <button
+                            type="button"
+                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            onClick={() => setShowModal(true)}
                         >
                             Submit
                         </button>
                     </div>
                     {showModal && (
-                        <Modal setShowModal={setShowModal} formData={formData} setFormData={setFormData}/>
+                        <Modal setShowModal={setShowModal} formData={formData} setFormData={setFormData} />
                     )}
                 </div>
             </div>

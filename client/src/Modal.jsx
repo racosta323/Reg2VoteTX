@@ -36,8 +36,6 @@ function Modal({ setShowModal, formData, setFormData }) {
         }
     }
 
-
-
     return (
         <div class="relative z-10" aria-labelledby="not-registered" role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
@@ -62,7 +60,7 @@ function Modal({ setShowModal, formData, setFormData }) {
                                                 &nbsp;download a copy&nbsp;
                                             </span>
                                             of your completed voter registration form. You must still deliver to your county's Voting Registrar's office. <br /><br /> Learn more here:
-                                            <br/>
+                                            <br />
                                             <a
                                                 href="https://www.votetexas.gov/register-to-vote/update-voter-registration.html"
                                                 className='text-blue-600 font-bold hover:text-violet-600'
