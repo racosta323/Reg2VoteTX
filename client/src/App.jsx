@@ -33,7 +33,7 @@ function App() {
             </div>
 
             <div>
-              <h2 className='text-gray-900 text-lg'>
+              <h2 className='text-gray-900 text-lg md:text-base sm:text-sm'>
                 As of 2024,
                 <a
                   href='https://www.sos.state.tx.us/elections/'
@@ -45,31 +45,41 @@ function App() {
                 a written and signed application for voter registration. This app makes it easier for you to get it done! Simply follow the steps below to download a completed TX voter registration form that you can mail to the county to register to vote.
               </h2>
             </div>
-            <div className='mt-5 flex flex-col'>
-              <div className='text-blue-500 text-3xl flex m-3 p-2'>
-                <TbCircleNumber1Filled />
-                <h3 className='text-2xl font-black text-blue-500'>&nbsp;&nbsp;Complete the form to your right</h3>
-              </div>
 
-              <div className='text-blue-500 text-3xl flex m-3 p-2'>
-                <TbCircleNumber2Filled />
-                <h3 className='text-2xl font-black text-blue-500'>&nbsp;&nbsp;Review your details</h3>
+            <div className='text-blue-500 text-3xl mt-5'>
+              <ul className='relative list-none pl-4 w-fit'>
 
-              </div>
-              <div className='text-blue-500 text-3xl flex m-3 p-2'>
-                <TbCircleNumber3Filled />
-                <h3 className='text-2xl font-black text-blue-500'>&nbsp;&nbsp;Download your ready-to-sign application!</h3>
-              </div>
-              <div className='text-blue-500 text-3xl flex m-3 p-2'>
-                <TbCircleNumber4Filled />
-                <h3 className='text-2xl font-black text-blue-500'>&nbsp;&nbsp;Mail or drop off at your county registrar's office</h3>
-              </div>
+                <li className='flex items-center mb-3'>
+                  <TbCircleNumber1Filled className='absolute left-0 text-blue-500 ' />
+                  <span className='ml-6 font-black text-blue-500 text-xl md:text-lg sm:text-base'>Complete the form to your right</span>
+                </li>
+
+                <li className='flex items-center mb-3'>
+                  <TbCircleNumber2Filled className='absolute left-0 text-blue-500 ' />
+                  <span className='ml-6 font-black text-blue-500 text-xl md:text-lg sm:text-base'>Review your details</span>
+                </li>
+
+                <li className='flex items-center mb-3'>
+                  <TbCircleNumber3Filled className='absolute left-0 text-blue-500 ' />
+                  <span className='ml-6 font-black text-blue-500 text-xl md:text-lg sm:text-base'>Download your ready-to-sign application!</span>
+                </li>
+
+                <li className='flex items-center mb-3'>
+                  <TbCircleNumber4Filled className='absolute left-0 text-blue-500 ' />
+                  <span className='ml-6 font-black text-blue-500 text-xl md:text-lg sm:text-base'>Mail or drop off at your county registrar's office</span>
+                </li>
+              
+
+
+
+              </ul>
             </div>
 
-            <div className='border-4 border-yellow-100 rounded h-72 bg-yellow-100 p-6 mt-9 shadow-xl shadow-rose-100'>
-              <h1 className='text-xl text-gray-900'> Important Considerations</h1>
+
+            <div className=' border-4 border-yellow-100 rounded h-72 bg-yellow-100 p-6 mt-9 shadow-xl shadow-rose-100 box-border overflow-auto'>
+              <h1 className='text-lg md:text-md text-gray-900'> Important Considerations</h1>
               <hr />
-              <ul className='mt-5 list-disc px-5'>
+              <ul className='mt-5 list-disc text-sm sm:text-sm max-w-full'>
                 <li className='text-rose-900 font-bold'>You must be registered by October 7, 2024 to vote in the 2024 U.S. elections.</li>
                 <li className='text-gray-900'>Some browsers may not display all completed fields correctly. For best results, review and update your PDF using a separate reader like Adobe before printing.</li>
                 <li className='text-gray-900'>This app is only meant to assist in completing the form. I cannot offer advice on what should be included or how it should be completed —- please refer to the
