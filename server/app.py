@@ -28,7 +28,6 @@ def generate_pdf():
     
 @app.route('/hello', methods= ['GET'])
 def test():
-
     return jsonify('hello'), 200
 
     
