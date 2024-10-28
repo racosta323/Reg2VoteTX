@@ -29,7 +29,7 @@ def generate_pdf():
 @app.route('/hello', methods= ['GET'])
 def test():
 
-    return jsonify('hello'), 500
+    return jsonify('hello'), 200
 
     
 if __name__ == '__main__':
