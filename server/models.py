@@ -17,7 +17,7 @@ class PdfDoc:
        
     def request(self):
         try:
-            response = requests.get(self.url)
+            response = requests.get(self.url, timeout=30)
             response.raise_for_status()      
             pdf_doc = response.content
 
