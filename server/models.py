@@ -21,6 +21,7 @@ class PdfDoc:
             pdf_doc = response.content
 
             environment = os.getenv('VITE_ENVIRONMENT', 'development')
+            print('environment', environment)
             if environment == 'production':
                 pdf_doc = pdf_doc.replace(b'\x00', b'')
 
