@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import dataKeys from "./Form/dataKeys"
 
 
 function Modal({ setShowModal, formData, setFormData }) {
@@ -28,14 +29,20 @@ function Modal({ setShowModal, formData, setFormData }) {
                 navigate('/success', { state: { downloadUrl: url } })
 
                 setFormData(dataKeys)
-
+                console.log(dataKeys)
 
             } else {
                 console.log("Failed to download file.", response.statusText)
             }
 
         } catch (error) {
-            console.log(error)
+            if (error instanceof TypeError) {
+                console.error("Network error occurred:", error.message)
+            } else if (error instanceof SyntaxError) {
+                console.error("JSON parsing error:", error.message)
+            } else {
+                console.error("An unexpected error occurred:", error.message)
+            }
         }
     }
 
