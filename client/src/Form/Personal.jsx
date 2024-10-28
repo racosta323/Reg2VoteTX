@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, citizenCheckbox, setNoIdCheckbox, noIdCheckbox, setCitizenCheckbox, handleKeyDown, handleNumberKeyDown }) {
 
@@ -36,6 +37,9 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
         handleChange(e)
     }
 
+    const dateOfBirth = `${formData.birth_year}-${formData.birth_month}-${formData.birth_day}`
+
+    
     return (
         <div className='p-4 space-y-12'>
             <div className='border-b border-gray-900/10 pb-12 w-5/6 flex space-x-20 mx-auto'>
@@ -70,7 +74,15 @@ function Personal({ formData, handleChange, checkboxHandler, isCitizenDisabled, 
                             </label>
                             <div className='mt-2'>
                                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                    <input type="date" name="dob" id="dob" autoComplete="date" className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={handleChange} value={`${formData.birth_year}-${formData.birth_month}-${formData.birth_day}`} />
+                                    <input 
+                                        type="date" 
+                                        name="dob" 
+                                        id="dob" 
+                                        autoComplete="date" 
+                                        className="block w-full rounded-md border-0 bg-transparent p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                                        onChange={handleChange} 
+                                        value={(dateOfBirth == '--') ? '' : dateOfBirth} 
+                                        />
                                 </div>
                             </div>
                         </div>

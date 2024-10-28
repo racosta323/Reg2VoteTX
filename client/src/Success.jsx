@@ -16,7 +16,7 @@ function Success() {
                         <a
                             href={downloadUrl}
                             download
-                            className='text-blue-500 underline'
+                            className='font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline visited:text-purple-600'
                         >
                             Download PDF
                         </a>

@@ -3,15 +3,14 @@ import { useNavigate } from "react-router-dom"
 
 function Modal({ setShowModal, formData, setFormData }) {
 
-    const apiURL = import.meta.env.VITE_API_URL
-    console.log(import.meta.env)
-
+    
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         
         try {
+            const apiURL = import.meta.env.VITE_API_URL
             const response = await fetch(`${apiURL}/generate_pdf`, {
                 method: 'POST',
                 headers: {
