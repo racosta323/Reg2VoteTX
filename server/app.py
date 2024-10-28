@@ -4,7 +4,7 @@ from flask_cors import CORS
 import ipdb
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://reg2votetx-front-end.onrender.com"])
 
 @app.route('/generate_pdf', methods = ['POST'])
 def generate_pdf():
@@ -24,6 +24,7 @@ def generate_pdf():
             )
 
     except Exception as e:
+        print(str(e))
         return jsonify({"error": str(e)}), 500
     
 @app.route('/hello', methods= ['GET'])
