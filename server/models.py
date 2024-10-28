@@ -4,6 +4,7 @@ from fillpdf import fillpdfs
 from prompts import person_attributes, attribute_keys
 from flask import send_file
 import os
+from dotenv import load_dotenv
 import ipdb
 import re
 
@@ -19,6 +20,9 @@ class PdfDoc:
             response = requests.get(self.url)
             response.raise_for_status()      
             pdf_doc = response.content
+
+            with open('downloaded.pdf', 'wb') as f:
+                f.write(pdf_doc)
 
             environment = os.getenv('VITE_ENVIRONMENT', 'development')
             print('environment', environment)
