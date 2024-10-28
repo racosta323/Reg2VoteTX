@@ -19,9 +19,15 @@ class PdfDoc:
             response = requests.get(self.url)
             response.raise_for_status()      
             pdf_doc = response.content
-            
+
+            environment = os.getenv('VITE_ENVIRONMENT', 'development')
+            if environment == 'production':
+                pdf_doc = pdf_doc.replace(b'\x00', b'')
+
             self.pdf_content = BytesIO(pdf_doc)
             self.pdf = pdf_doc.decode('Latin-1')
+
+            print(f"PDF content size: {len(pdf_doc)} bytes")
             
         except requests.exceptions.HTTPError as http_err:
             print(f"HTTP error occurred: {http_err}") 
