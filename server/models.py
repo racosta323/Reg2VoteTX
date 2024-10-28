@@ -21,14 +21,6 @@ class PdfDoc:
             response.raise_for_status()      
             pdf_doc = response.content
 
-            with open('downloaded.pdf', 'wb') as f:
-                f.write(pdf_doc)
-
-            environment = os.getenv('VITE_ENVIRONMENT', 'development')
-            print('environment', environment)
-            if environment == 'production':
-                pdf_doc = pdf_doc.replace(b'\x00', b'')
-
             self.pdf_content = BytesIO(pdf_doc)
             self.pdf = pdf_doc.decode('Latin-1')
 
