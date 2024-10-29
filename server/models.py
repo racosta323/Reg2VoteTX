@@ -1,4 +1,5 @@
 import requests
+import tempfile
 from io import BytesIO
 from fillpdf import fillpdfs
 from prompts import person_attributes, attribute_keys
@@ -16,14 +17,23 @@ class PdfDoc:
         self.url = "https://www.sos.state.tx.us/elections/forms/vr-with-receipt.pdf"
        
     def request(self):
+        self.cleanup()
+        
         try:
             response = requests.get(self.url, timeout=30)
             response.raise_for_status()      
             pdf_doc = response.content
 
-            self.pdf_content = BytesIO(pdf_doc)
-            self.pdf = pdf_doc.decode('Latin-1')
+            pdf_doc = self.preprocess_pdf_content(pdf_doc)
 
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+                temp_file.write(pdf_doc)
+                temp_file_path = temp_file.name
+
+            # self.pdf_content = BytesIO(pdf_doc)
+            self.pdf_content = temp_file_path
+            self.pdf = pdf_doc.decode('Latin-1')
+            
             print(f"PDF content size: {len(pdf_doc)} bytes")
             
         except requests.exceptions.HTTPError as http_err:
@@ -33,16 +43,25 @@ class PdfDoc:
         except Exception as e:
             print(f"An error occurred: {e}")  
 
+    def preprocess_pdf_content(self, content):
+        if not content.startswith(b'%PDF-'):
+            startloc = content.find(b'%PDF-')
+            if startloc >= 0:
+                content = content[startloc:]
+            else:
+                raise ValueError("Invalid PDF header")
+        return content
+
     def get_fields(self):
         try:
-            self.form_fields = list(fillpdfs.get_form_fields(self.pdf_content).keys())
+            with open(self.pdf_content, 'rb') as file:
+                self.form_fields = list(fillpdfs.get_form_fields(file).keys())
         except Exception as e:
             print(f"Error getting form fields in data_dict: {e}")
             raise
 
     def data_dict(self, person, data=None): 
         self.get_fields()
-        
         if data is None:
             data = {}
         
@@ -83,7 +102,6 @@ class PdfDoc:
                             data[field] = 'Request for a Replacement Card'
                     except Exception as e:
                         print('something wrong with why', e) 
-                                   
         return data
         
     def write_pdf(self, person, save_to_file=False):
@@ -116,6 +134,11 @@ class PdfDoc:
         
         output_pdf.seek(0)
         return output_pdf
+    
+    def cleanup(self):
+        if self.pdf_content and os.path.exists(self.pdf_content):
+            os.remove(self.pdf_content)
+
         
 class Person:
     def __init__(self,**kwargs):        

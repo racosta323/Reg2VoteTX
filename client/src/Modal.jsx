@@ -29,7 +29,6 @@ function Modal({ setShowModal, formData, setFormData }) {
                 navigate('/success', { state: { downloadUrl: url } })
 
                 setFormData(dataKeys)
-                console.log(dataKeys)
 
             } else {
                 console.log("Failed to download file.", response.statusText)
