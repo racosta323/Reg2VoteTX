@@ -5,7 +5,6 @@ from fillpdf import fillpdfs
 from prompts import person_attributes, attribute_keys
 from flask import send_file
 import os
-# from dotenv import load_dotenv
 import ipdb
 import re
 
@@ -27,12 +26,8 @@ class PdfDoc:
 
             pdf_doc = self.preprocess_pdf_content(pdf_doc)
 
-            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
-                temp_file.write(pdf_doc)
-                self.pdf_content = temp_file.name
-
-            # self.pdf_content = BytesIO(pdf_doc)
-            self.pdf = pdf_doc
+            self.pdf_content = BytesIO(pdf_doc)
+            self.pdf = BytesIO(pdf_doc)
 
             # self.pdf = pdf_doc.decode('Latin-1')
             
@@ -56,8 +51,7 @@ class PdfDoc:
 
     def get_fields(self):
         try:
-            with open(self.pdf_content, 'rb') as file:
-                self.form_fields = list(fillpdfs.get_form_fields(file).keys())
+            self.form_fields = list(fillpdfs.get_form_fields(self.pdf_content).keys())
         except Exception as e:
             print(f"Error getting form fields in data_dict: {e}")
             raise
@@ -105,6 +99,12 @@ class PdfDoc:
                     except Exception as e:
                         print('something wrong with why', e) 
         return data
+    
+    # def ensure_pdf_header(self, content):
+    #     if not content.startswith(b'%PDF-'):
+    #         header = b'%PDF-1.4\n'
+    #         content = header + content
+    #     return content
         
     def write_pdf(self, person, save_to_file=False):
         try:
@@ -126,9 +126,11 @@ class PdfDoc:
         
         try:
             fillpdfs.write_fillable_pdf(input_pdf_path=input_pdf_path, output_pdf_path=output_pdf, data_dict=data_dict)
+
         except Exception as e:
             print(f"Error writing fillable PDF: {e}")
-            raise        
+            raise
+  
 
         if save_to_file:
             with open(output_pdf_path, 'wb') as f:
