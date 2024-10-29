@@ -18,21 +18,23 @@ class PdfDoc:
        
     def request(self):
         self.cleanup()
-        
+
         try:
             response = requests.get(self.url, timeout=30)
             response.raise_for_status()      
             pdf_doc = response.content
+            print(f'Initial 20 bytes of PDF content: {pdf_doc[:20]}')
 
             pdf_doc = self.preprocess_pdf_content(pdf_doc)
 
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
                 temp_file.write(pdf_doc)
-                temp_file_path = temp_file.name
+                self.pdf_content = temp_file.name
 
             # self.pdf_content = BytesIO(pdf_doc)
-            self.pdf_content = temp_file_path
-            self.pdf = pdf_doc.decode('Latin-1')
+            self.pdf = pdf_doc
+
+            # self.pdf = pdf_doc.decode('Latin-1')
             
             print(f"PDF content size: {len(pdf_doc)} bytes")
             
