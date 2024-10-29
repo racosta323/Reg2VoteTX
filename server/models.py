@@ -16,7 +16,6 @@ class PdfDoc:
         self.url = "https://www.sos.state.tx.us/elections/forms/vr-with-receipt.pdf"
        
     def request(self):
-        self.cleanup()
 
         try:
             response = requests.get(self.url, timeout=30)
@@ -139,10 +138,6 @@ class PdfDoc:
         output_pdf.seek(0)
         return output_pdf
     
-    def cleanup(self):
-        if self.pdf_content and os.path.exists(self.pdf_content):
-            os.remove(self.pdf_content)
-
         
 class Person:
     def __init__(self,**kwargs):        
