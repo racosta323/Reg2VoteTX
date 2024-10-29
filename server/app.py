@@ -5,7 +5,7 @@ import uuid
 import ipdb
 
 app = Flask(__name__)
-CORS(app, origins=["https://reg2votetx-front-end.onrender.com", 'http://localhost:5173', 'https://www.reg2votetx.com/'])
+CORS(app, origins=["https://reg2votetx-front-end.onrender.com", 'http://localhost:5173', 'https://www.reg2votetx.com'])
 
 @app.route('/generate_pdf', methods = ['POST'])
 def generate_pdf():
