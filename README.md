@@ -1,42 +1,44 @@
 
-# PDF Generation API
+# Reg2VoteTX
 
 ## Overview
 
-This project provides a Flask-based API for generating PDF forms using user data. It specifically fills out a Texas voter registration form based on the information provided by the user. The API retrieves the PDF template from a specified URL, populates the fields with the provided user data, and returns the filled PDF as a downloadable file.
+This project offers a Flask-based API designed to generate PDF forms using user data collected through a user-friendly, controlled form input on the front end. Specifically, it fills out a Texas voter registration form based on the information provided by the user. The API fetches the PDF template from a specified URL, populates the fields with the user data, and returns the completed PDF as a downloadable file.
 
 ## Motivation
 
-The main goal of this project is to make it easier for users to complete voter registration forms, which can often be time-consuming and confusing. I learned that voters in Texas must complete this form to register to vote, and the deadline to register is October 7. By automating the process of filling out PDF forms, this project simplifies the experience for users, allowing them to focus on providing the necessary information without worrying about the formatting.
+The main goal of this project is to make the action of registering to vote more user-friendly and accessible to all. Voter registration forms can often be time-consuming and confusing, and I learned that voters in Texas must complete this form to register to vote. By automating the process of filling out PDF forms, this project simplifies the experience for users, allowing them to focus on providing the necessary information without worrying about the formatting.
 
 Additionally, I wanted to use this project as a learning experience to deepen my understanding of how to programmatically fill out PDF forms. It provided an opportunity to apply my skills in real-world problem-solving, combining technical growth with a practical solution that can be helpful to others.
 
 ## Features
 
-- Retrieve and fill the [Texas Voter Registration form](https://www.sos.state.tx.us/elections/forms/vr-with-receipt.pdf) dynamically.
-- Supports various user attributes like name, phone, citizenship status, etc.
-- Returns the filled PDF as an attachment (or within the project directory if using CLI)
+- Dynamically retrieves and fills out the Texas Voter Registration form.
+- Supports various user attributes such as name, phone, citizenship status, and more.
+- Collects user information on the front end and allows users to review their inputs before generating a completed, ready-to-print PDF.
 
 ## Prerequisites
 
+### Backend
 - Python 3.6 or higher
 - Flask
 - fillpdf library
 - requests
 - Flask-CORS
 
+### Frontend
+- Vite
+- React
+- Tailwind CSS
+
 ## Installation
 
-1. Clone the repository:
+## Backend
+
+1. CD into 'server' directory. Create a virtual environment (optional but recommended):
 
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
-   ```
-
-2. Create a virtual environment (optional but recommended):
-
-   ```bash
+   cd server/
    python -m venv venv
    ```
 
@@ -60,7 +62,41 @@ Additionally, I wanted to use this project as a learning experience to deepen my
    pip install -r requirements.txt
    ```
 
+
+5. Start the development server by running app.py script. 
+
+   ```bash
+   python app.py
+   ```
+
+## Frontend
+
+1. CD into 'client' directory.
+
+   ```bash
+   cd client/
+   ```
+
+2. Start the development server using npm. 
+
+   ```bash
+   npm run dev
+   ```
+
 ## Usage
+
+### Using the Web App
+
+To use the web app to generate your PDF form, follow these steps:
+
+1. **Access the App:** Open the deployed front end of the project at [www.reg2votetx.com/](https://www.reg2votetx.com/).
+
+2. **Fill Out the Form:** Enter the requested information, such as your name, contact details, and other eligibility details required for the voter registration form in Texas.
+
+3. **Submit:** Once submitted, the app will process your data and provide a downloadable, pre-filled PDF in a separate download page.
+
+4. **Download Your PDF:** After submission, a link to download the filled-out PDF form will be provided.
+
 
 ### Using the CLI
 
@@ -78,9 +114,6 @@ python cliApp.py
 
 
 ### Sending Requests to the API
-
-> **Note:** This section is still a work in progress. See [Upcoming Features](#upcoming-features) section.
-
 
 1. Start the Flask application:
 
@@ -122,29 +155,33 @@ python cliApp.py
 
 ## API Endpoints
 
+### `POST /hello`
+
+- **Description:** Used for testing
+- **Response:** 200
+
 ### `POST /generate_pdf`
 
 - **Description:** Generates a filled PDF based on user data.
 - **Request Body:** JSON object containing user attributes.
 - **Response:** Filled PDF file as an attachment.
 
-## Upcoming Features
-
-I plan to implement a user-friendly frontend form that will allow users to input their information directly, making it easier to complete the voter registration form. This feature will streamline the process of filling out the PDF and enhance the overall user experience.
-
-**Key features of the upcoming frontend form:**
-- Easy-to-use input fields for personal information
-- Validation for required fields
-- Dynamic form submission to populate the PDF
-- Preview of the filled-out PDF before download
-
-Stay tuned for this feature in future updates!
 
 ## Acknowledgements
 
-- Flask documentation: [Flask](https://flask.palletsprojects.com/)
-- fillpdf library: [fillpdf](https://github.com/FlorianFuchs/fillpdf)
+- [Flask documentation](https://flask.palletsprojects.com/)
+- [fillpdf library](https://github.com/FlorianFuchs/fillpdf)
+- [Tailwind CSS documentation](https://tailwindui.com/documentation)
 
 ## Contributing
 
 If you'd like to contribute to this project, please fork the repository and submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
+
+
+## Contact
+
+For questions, feedback, or collaboration opportunities, feel free to reach out!
+
+- **Email**: racosta323@gmail.com
+- **LinkedIn**: https://www.linkedin.com/in/acostarene
+- **GitHub**: https://github.com/racosta323/
