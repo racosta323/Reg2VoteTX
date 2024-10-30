@@ -77,7 +77,7 @@ function App() {
 
 
             <div className=' border-4 border-yellow-100 rounded h-72 bg-yellow-100 p-6 mt-9 shadow-xl shadow-rose-100 box-border overflow-auto'>
-              <h1 className='text-lg md:text-md text-gray-900'> Important Considerations</h1>
+              <h1 className='text-lg md:text-sm text-gray-900'> Important Considerations</h1>
               <hr />
               <ul className='mt-5 list-disc text-sm sm:text-sm max-w-full'>
                 <li className='text-rose-900 font-bold'>You must be registered by October 7, 2024 to vote in the 2024 U.S. elections.</li>
