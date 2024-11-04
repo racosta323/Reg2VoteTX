@@ -1,0 +1,13 @@
+Notes:
+- Naming things is important. It makes it clear to the reader what they're looking at
+
+React:
+- Manage as little state as possible
+- Think about the interface of a component
+- Responsibility of state. Who should own the state
+- You can compose and share state/logic using a hook
+
+Insights:
+
+TODO:
+- Validation
