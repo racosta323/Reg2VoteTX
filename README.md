@@ -77,7 +77,13 @@ Additionally, I wanted to use this project as a learning experience to deepen my
    cd client/
    ```
 
-2. Start the development server using npm. 
+2. Install packages using npm
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server using npm. 
 
    ```bash
    npm run dev
